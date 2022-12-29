@@ -1,5 +1,12 @@
-export const login = () => {
-  return (
+import { NavLink } from "react-router-dom";
+
+export const Login = () => {
+  
+    const handleSubmit = () => {
+        console.log("Handle Submit");
+    };
+  
+    return (
     <div className="flex items-center justify-center min-h-screen bg-slate-300">
         {/* Card Container */}
         <div className=" flex flex-col m-6 space-y-10 bg-slate-200 shadow-2xl rounded-2xl md:flex-row md:space-y-0 md:m-0">
@@ -15,14 +22,14 @@ export const login = () => {
                     type="text" 
                     className="block w-full p-6 border border-gray-300 rounded-md placeholder:font-sans placeholder:font-light" 
                     placeholder="Ingresa tu correo eléctronico"
-                    value={ email }
+                    // value={ email }
                     // onChange={ e => setEmail(e.target.value)}
                 />
                 <input 
                     type="password" 
                     className="block w-full mt-2 p-6 border border-gray-300 rounded-md placeholder:font-sans placeholder:font-light" 
                     placeholder="Ingresa tu contraseña"
-                    value={ password }
+                    // value={ password }
                     // onChange={ e => setPassword(e.target.value)}
                 />
                 {/* Middle Content */}
