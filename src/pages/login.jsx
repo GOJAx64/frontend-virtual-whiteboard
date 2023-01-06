@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom';
+import { useForm } from '../hooks/useForm';
 
 export const Login = () => {
     
-    const handleSubmit = async e => {
+    const { email, password, onInputChange } = useForm({
+        email: '',
+        password: '',
+    });
+    
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log("En handleSubmit ")
+        console.log("En handleSubmit " + email + " " + password)
     }
 
     return (
@@ -22,8 +28,9 @@ export const Login = () => {
                         type="email"
                         placeholder="Email de Registro"
                         className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
-                        // value={ email }
-                        // onChange={ e => setEmail(e.target.value)}
+                        name='email'
+                        value={ email }
+                        onChange={ onInputChange }
                     />
                 </div>
                 <div className="my-5">
@@ -33,8 +40,9 @@ export const Login = () => {
                         type="password"
                         placeholder="Password de Registro"
                         className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
-                        // value={ password }
-                        // onChange={ e => setPassword(e.target.value)}
+                        name='password'
+                        value={ password }
+                        onChange={ onInputChange }
                     />
                 </div>
 
