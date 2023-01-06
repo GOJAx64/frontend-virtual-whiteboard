@@ -1,16 +1,42 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from '../hooks/useForm';
 
+const formData = {
+    email: '',
+    password: '',
+}
+
+const formValidations = {
+    email: [ (value) => value.includes('@'), 'El correo debe incluir @'],
+    password: [ (value) => value.length > 5, 'La contraseña debe contener al menos 6 caracteres']
+}
+
 export const Login = () => {
     
-    const { email, password, onInputChange } = useForm({
-        email: '',
-        password: '',
-    });
-    
+    const { email, password, isFormValid, onInputChange } = useForm(formData, formValidations);
+    const [alert, setAlert] = useState({});
+
     const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log("En handleSubmit " + email + " " + password)
+
+        if( !isFormValid ) {
+            setAlert({
+                msg: 'Errores en los datos del formulario',
+                error: true
+            })
+            return;
+        }
+
+        try {
+            console.log('Peticion a la API: /register');
+            setAlert({})
+        } catch (error) {
+            setAlert({
+                msg: error.response.data.msg,
+                error: true           
+            });
+        }
     }
 
     return (
@@ -19,13 +45,14 @@ export const Login = () => {
                 <span className="text-slate-700">proyectos</span>
             </h1>
 
-        
-            <form className="my-10 bg-white shadow rounded-lg p-10" onSubmit={ handleSubmit } >
+            { alert.error && <h2>{ alert.msg }</h2> }
+            
+            <form className="my-10 bg-slate-200 border border-slate-300 shadow rounded-lg p-10" onSubmit={ handleSubmit } >
                 <div className="my-5">
                     <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Email</label>
                     <input
                         id="email"
-                        type="email"
+                        type="text"
                         placeholder="Email de Registro"
                         className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
                         name='email'
