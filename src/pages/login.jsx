@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useForm } from '../hooks/useForm';
+import { Alert } from '../components';
+import axiosClient from '../config/axiosClient';
+import { useForm } from '../hooks';
 
 const formData = {
     email: '',
@@ -29,8 +31,11 @@ export const Login = () => {
         }
 
         try {
-            console.log('Peticion a la API: /register');
-            setAlert({})
+            const { data } = await axiosClient.post('/auth/login', { email, password });
+            setAlert({});
+            console.log(data.token)
+            localStorage.setItem('token', data.token);
+            // setAuth(data);
         } catch (error) {
             setAlert({
                 msg: error.response.data.msg,
@@ -45,15 +50,15 @@ export const Login = () => {
                 <span className="text-slate-700">proyectos</span>
             </h1>
 
-            { alert.error && <h2>{ alert.msg }</h2> }
             
             <form className="my-10 bg-slate-200 border border-slate-300 shadow rounded-lg p-10" onSubmit={ handleSubmit } >
+                { alert.msg && <Alert alert={ alert }/>}
                 <div className="my-5">
-                    <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Email</label>
+                    <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Correo electrónico</label>
                     <input
                         id="email"
-                        type="text"
-                        placeholder="Email de Registro"
+                        type="email"
+                        placeholder="persona@mail.com"
                         className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
                         name='email'
                         value={ email }
@@ -61,11 +66,11 @@ export const Login = () => {
                     />
                 </div>
                 <div className="my-5">
-                    <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password">Password</label>
+                    <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password">Contraseña</label>
                     <input
                         id="password"
                         type="password"
-                        placeholder="Password de Registro"
+                        placeholder="Contraseña de Registro"
                         className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
                         name='password'
                         value={ password }
