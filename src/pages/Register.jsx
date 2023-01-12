@@ -34,6 +34,7 @@ export const Register = () => {
 
         try {
             const { data } = await axiosClient.post(`/auth/register`, { name, email, password });
+            console.log(data);
             setAlert({
                 msg: data.msg,
                 error: false           
