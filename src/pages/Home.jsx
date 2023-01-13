@@ -2,6 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Hero from '../assets/illustration-hero.svg';
 import Feature3 from '../assets/illustration-features-tab-3.svg'
+import ReactIcon from '../assets/react.svg';
+import NodeIcon from '../assets/node.svg';
+import MysqlIcon from '../assets/mysql.svg';
+
 export const Home = () => {
   return (
     <div className='overflow-x-hidden bg-slate-50'>
@@ -130,11 +134,10 @@ export const Home = () => {
               
               <div class="flex flex-col space-y-8 md:w-1/2">
                 <h3 class="mt-14 text-3xl font-semibold text-center md:mt-0 md:text-left" >
-                  Todo desde un lugar
+                  Recuerda lo anotado
                 </h3>
                 <p class="max-w-md text-center text-grayishBlue md:text-left">
-                  Our powerful search feature will help you find saved sites in no
-                  time at all. No need to trawl through all of your bookmarks.
+                  
                 </p>
                 <div class="mx-auto md:mx-0">
                   <a href="#" class="px-6 py-3 mt-4 font-semibold text-white border-2 border-white rounded-lg md:inline-flex bg-softBlue hover:bg-white hover:text-softBlue hover:border-softBlue hover:border-2">More Info</a >
@@ -165,6 +168,226 @@ export const Home = () => {
 
           </div>
 
+        </div>
+      </section>
+
+      <section id="download">
+        <div class="container mx-auto px-6">
+          <h2 class="mb-6 text-3xl font-semibold text-center md:text-4xl">
+            Con esto se construyo Pizarrones Virtuales
+          </h2>
+          <p class="max-w-lg mx-auto text-center text-grayishBlue">
+            We've got more browsers in the pipeline. Please do let us know if
+            you've got a favourite you'd like us to prioritize.
+          </p>
+        </div>
+      </section>
+
+      <section id="download-boxes" class="py-32">
+        <div class="relative flex flex-col items-center max-w-5xl mx-auto space-y-10 px-10 md:px-6 md:space-y-0 md:space-x-7 md:flex-row">
+
+          <div class="flex flex-col w-full py-6 space-y-4 text-center rounded-lg shadow-lg md:w-1/3 border border-slate-200">
+            <div class="flex justify-center">
+              <img src={ ReactIcon } alt="React JS" className='h-24'/>
+            </div>
+    
+            <h5 class="pt-6 text-xl font-bold">React JS</h5>
+            <p class="text-gray-400">Para la interfaz de la aplicación, el usuario interactura directamente</p>
+
+            <div class="bg-dots bg-repeat-x px-6 pt-6 capitalize">
+              <a href="#" class="block w-full py-3 text-white duration-200 border-2 rounded-lg bg-softBlue hover:text-softBlue hover:bg-white border-softBlue">Add & Install Extension</a>
+            </div>
+          </div>
+
+          <div class="w-full md:w-1/3 border border-slate-200 rounded-lg">
+            <div class="flex flex-col w-full py-6 space-y-4 text-center rounded-lg shadow-lg ">
+      
+              <div class="flex justify-center">
+                <img src={ NodeIcon } alt="Node JS" className='h-24'/>
+              </div>
+      
+              <h5 class="pt-6 text-xl font-bold">Node JS</h5>
+              <p class="text-gray-400">WebSocket Rest que expone los recursos para comunicarse con el frontend</p>
+
+              <div class="bg-dots bg-repeat-x px-6 pt-6 capitalize">
+                <a href="#" class="block w-full py-3 text-white duration-200 border-2 rounded-lg bg-softBlue hover:text-softBlue hover:bg-white border-softBlue">Add & Install Extension</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full md:w-1/3 border border-slate-200 rounded-lg">
+            <div class="flex flex-col w-full py-6 space-y-4 text-center rounded-lg shadow-lg">
+              
+              <div class="flex justify-center">
+                <img src={ MysqlIcon } alt="Tensorflow" className='h-24'/>
+              </div>
+
+              <h5 class="pt-6 text-xl font-bold">Tensorflow</h5>
+              <p class="text-gray-400">Para la detección de gestos en tiempo real</p>
+
+              <div class="bg-dots bg-repeat-x px-6 pt-6 capitalize">
+                <a href="#" class="block w-full py-3 text-white duration-200 border-2 rounded-lg bg-softBlue hover:text-softBlue hover:bg-white border-softBlue">Add & Install Extension</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="faq">
+        <div class="container mx-auto">
+          <h2 class="mb-6 text-3xl font-semibold text-center md:text-4xl">
+            Frequently Asked Questions
+          </h2>
+          <p class="max-w-lg px-6 mx-auto text-center text-graishBlue">
+            Here are some of our FAQs. If you have any other questions you'd like
+            answered please feel free to email us.
+          </p>
+        </div>
+      </section>
+      <section id="faq-accordion">
+        <div class="container mx-auto px-6 mb-32">
+          <div class="max-w-2xl m-8 mx-auto overflow-hidden">
+            <div class="py-1 border-b outline-none group" tabindex="1">
+              <div
+                class="flex items-center justify-between py-3 text-gray-500 transition duration-500 cursor-pointer group ease"
+              >
+                <div
+                  class="transition duration-500 ease group-hover:text-red-500"
+                >
+                  What is Bookmark?
+                </div>
+                <div
+                  class="transition duration-500 ease group-focus:-rotate-180 group-focus:text-red-500"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      d="M1 1l8 8 8-8"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <div
+                class="overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease"
+              >
+                <p class="py-2 text-justify text-gray-400">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
+                  repellat amet doloribus consequuntur eos similique provident
+                  tempora voluptates iure quia fuga dicta voluptatibus culpa
+                  mollitia recusandae delectus id suscipit labore?
+                </p>
+              </div>
+            </div>
+
+            <div class="py-1 border-b outline-none group" tabindex="2">
+              <div
+                class="flex items-center justify-between py-3 text-gray-500 transition duration-500 cursor-pointer group ease"
+              >
+                <div
+                  class="transition duration-500 ease group-hover:text-red-500"
+                >
+                  How can I request a new browser?
+                </div>
+                <div
+                  class="transition duration-500 ease group-focus:-rotate-180 group-focus:text-red-500"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      d="M1 1l8 8 8-8"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <div
+                class="overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease"
+              >
+                <p class="py-2 text-justify text-gray-400">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
+                  repellat amet doloribus consequuntur eos similique provident
+                  tempora voluptates iure quia fuga dicta voluptatibus culpa
+                  mollitia recusandae delectus id suscipit labore?
+                </p>
+              </div>
+            </div>
+
+            <div class="py-1 border-b outline-none group" tabindex="3">
+              <div
+                class="flex items-center justify-between py-3 text-gray-500 transition duration-500 cursor-pointer group ease"
+              >
+                <div
+                  class="transition duration-500 ease group-hover:text-red-500"
+                >
+                  Is ther a mobile app?
+                </div>
+                <div
+                  class="transition duration-500 ease group-focus:-rotate-180 group-focus:text-red-500"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      d="M1 1l8 8 8-8"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <div
+                class="overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease"
+              >
+                <p class="py-2 text-justify text-gray-400">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
+                  repellat amet doloribus consequuntur eos similique provident
+                  tempora voluptates iure quia fuga dicta voluptatibus culpa
+                  mollitia recusandae delectus id suscipit labore?
+                </p>
+              </div>
+            </div>
+
+            <div class="py-1 border-b outline-none group" tabindex="4">
+              <div
+                class="flex items-center justify-between py-3 text-gray-500 transition duration-500 cursor-pointer group ease"
+              >
+                <div
+                  class="transition duration-500 ease group-hover:text-red-500"
+                >
+                  What about other Chromium browsers
+                </div>
+                <div
+                  class="transition duration-500 ease group-focus:-rotate-180 group-focus:text-red-500"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      d="M1 1l8 8 8-8"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <div
+                class="overflow-hidden transition duration-500 group-focus:max-h-screen max-h-0 ease"
+              >
+                <p class="py-2 text-justify text-gray-400">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
+                  repellat amet doloribus consequuntur eos similique provident
+                  tempora voluptates iure quia fuga dicta voluptatibus culpa
+                  mollitia recusandae delectus id suscipit labore?
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
