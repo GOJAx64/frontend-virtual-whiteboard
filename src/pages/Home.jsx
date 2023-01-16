@@ -1,11 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
+import { Navbar } from '../components/Navbar';
+
 import Hero from '../assets/illustration-hero.svg';
-import Feature3 from '../assets/illustration-features-tab-3.svg'
+import Feature3 from '../assets/feature3.svg'
 import ReactIcon from '../assets/react.svg';
 import NodeIcon from '../assets/node.svg';
 import MysqlIcon from '../assets/mysql.svg';
-import { Navbar } from '../components/Navbar';
+
 
 export const Home = () => {
   return (
@@ -13,7 +15,7 @@ export const Home = () => {
       <Navbar/>
     
       <section id="hero">
-        <div className="container flex flex-col-reverse mx-auto p-6 lg:flex-row lg:mb-0">
+        <div className="container flex flex-col-reverse mx-auto mt-5 p-6 lg:flex-row lg:mb-0">
           <div className="flex flex-col space-y-10 lg:mt-16 lg:w-1/2">
             <h1 className="text-3xl font-semibold text-center lg:text-6xl lg:text-left">
               Un administrador de pizarrones
@@ -62,7 +64,7 @@ export const Home = () => {
 
             <div className="flex justify-center text-center cursor-pointer text-gray-600 border-b md:border-b-0 hover:text-softRed md:w-1/3 tab" data-target="panel-3" >
               <button className="py-5">
-                Acceso Sencillo
+                Formato digital
               </button>
             </div>
           </div>
@@ -148,7 +150,7 @@ export const Home = () => {
         </div>
       </section>
 
-      <section id="technologies-boxes" className="py-12">
+      <section id="technologies-boxes" className="py-12 mb-10">
         <div className="relative flex flex-col items-center max-w-5xl mx-auto space-y-10 px-10 md:px-6 md:space-y-0 md:space-x-7 md:flex-row">
 
           <div className="w-full md:w-1/3 border bg-slate-100 border-slate-300 rounded-lg shadow-lg flex flex-col py-6 space-y-4 text-center">
@@ -206,7 +208,7 @@ export const Home = () => {
       </section>
 
       <section id="faq-accordion">
-        <div className="container mx-auto px-6 mb-32">
+        <div className="container mx-auto px-6">
 
           <div className="max-w-2xl m-8 mx-auto overflow-hidden">
             <div className="py-1 border-b outline-none group" tabIndex="1">
@@ -292,6 +294,19 @@ export const Home = () => {
 
         </div>
       </section>
+            
+      <footer className="py-10 bg-veryDarkBlue mt-16">
+        <div className="container flex flex-col items-center justify-between mx-auto space-y-16 px-6 md:flex-row md:space-y-0" >
+          
+          <div className="flex flex-col items-center justify-between space-y-8 text-lg font-light md:flex-row md:space-y-0 md:space-x-14 text-grayishBlue" >
+            
+            <a href="#features" className="uppercase hover:text-softRed">Features</a>
+            <a href="#download" className="uppercase hover:text-softRed">Download</a>
+            <a href="#faq" className="uppercase hover:text-softRed">FAQ</a>
+          </div>
+          
+        </div>
+      </footer>
 
     </div>
   )
