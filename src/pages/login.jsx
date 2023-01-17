@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Alert } from '../components';
 import axiosClient from '../config/axiosClient';
-import { useForm } from '../hooks';
-import f1 from '../assets/feature1.svg';
+import { useAuth, useForm } from '../hooks';
 
 const formData = {
     email: '',
     password: '',
 }
 
-const formValidations = {
+//? Should we use regular expressions?
+const formValidations = { 
     email: [ (value) => value.includes('@'), 'El correo debe incluir @'],
     password: [ (value) => value.length > 5, 'La contraseña debe contener al menos 6 caracteres']
 }
@@ -19,6 +19,7 @@ export const Login = () => {
     
     const { email, password, isFormValid, onInputChange } = useForm(formData, formValidations);
     const [alert, setAlert] = useState({});
+    const { setAuth, loading } = useAuth();
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -34,9 +35,8 @@ export const Login = () => {
         try {
             const { data } = await axiosClient.post('/auth/login', { email, password });
             setAlert({});
-            console.log(data.token)
             localStorage.setItem('token', data.token);
-            // setAuth(data);
+            setAuth(data);
         } catch (error) {
             setAlert({
                 msg: error.response.data.msg,
@@ -47,13 +47,13 @@ export const Login = () => {
 
     return (
         <>
-            <h1 className="text-softRed font-black text-6xl capitalize">Inicia sesión
+            {/* <h1 className="text-veryDarkBlue font-black text-4xl mb-6 uppercase text-center">iniciar sesión
                 
-            </h1>
-            <form className="bg-slate-100 border border-slate-300 shadow rounded-lg p-10" onSubmit={ handleSubmit } >
+            </h1> */}
+            <form className="bg-slate-100 border border-slate-100 shadow rounded-lg p-10" onSubmit={ handleSubmit } >
                 { alert.msg && <Alert alert={ alert }/>}
                 <div className="my-5">
-                    <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Correo electrónico</label>
+                    <label className="uppercase text-slate-600 block text-xl font-bold" htmlFor="email">Correo electrónico</label>
                     <input
                         id="email"
                         type="email"
@@ -65,7 +65,7 @@ export const Login = () => {
                     />
                 </div>
                 <div className="my-5">
-                    <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password">Contraseña</label>
+                    <label className="uppercase text-slate-600 block text-xl font-bold" htmlFor="password">Contraseña</label>
                     <input
                         id="password"
                         type="password"
@@ -80,15 +80,15 @@ export const Login = () => {
                 <input 
                     type="submit"
                     value="Iniciar Sesión"
-                    className="bg-sky-700 mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-sky-800 transition-colors"
+                    className="bg-veryDarkBlue w-full py-3 mt-5 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-slate-700 transition-colors"
                 />
                     
             </form>
             <nav className="lg:flex lg:justify-between">
-                <Link className='block text-center my-5 text-slate-500 uppercase text-sm' to="/register">
+                <Link className='block text-center my-5 text-grayishBlue uppercase text-sm' to="/register">
                     ¿No tienes una cuenta? Regístrate
                 </Link>
-                <Link className='block text-center my-5 text-slate-500 uppercase text-sm' to="/forgot_password">
+                <Link className='block text-center my-5 text-grayishBlue uppercase text-sm' to="/forgot_password">
                     Olvidé mi contraseña
                 </Link>
             </nav>

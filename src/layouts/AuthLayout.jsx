@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
-const AuthLayout = () => {
+export const AuthLayout = () => {
   return (
     <>
         <div className="bg-veryDarkBlue px-6 py-8 w-full mr-6">
@@ -15,6 +15,4 @@ const AuthLayout = () => {
         </main>
     </>
   )
-}
-
-export default AuthLayout
+};
