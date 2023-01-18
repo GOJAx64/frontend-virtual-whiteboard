@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Alert } from '../components';
 import axiosClient from '../config/axiosClient';
 import { useAuth, useForm } from '../hooks';
@@ -19,7 +19,8 @@ export const Login = () => {
     
     const { email, password, isFormValid, onInputChange } = useForm(formData, formValidations);
     const [alert, setAlert] = useState({});
-    const { setAuth, loading } = useAuth();
+    const { setAuth } = useAuth();
+    const navigate = useNavigate();
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -37,6 +38,7 @@ export const Login = () => {
             setAlert({});
             localStorage.setItem('token', data.token);
             setAuth(data);
+            navigate('/dashboard');
         } catch (error) {
             setAlert({
                 msg: error.response.data.msg,

@@ -1,22 +1,29 @@
-import { Navigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
+import { Header, OptionsBar, Sidebar } from "../components";
 import { useAuth } from "../hooks";
 
 export const DashboardLayout = () => {
     const { auth, loading } = useAuth();
     
-    if( loading ) return ( 
-        <button type="button" classname="bg-indigo-500 ..." disabled>
-            <svg classname="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
-            </svg>
-            Processing...
-        </button>
-    )
+    if( loading ) return 'Loading...';
     
     return (
         <>
-            { auth.id ? 'Auth' : <Navigate to='/login'/>}
-            <div>Dashboard</div>
-            
+            { auth.id ? (
+                <div className='bg-slate-100'>
+                    <Header />
+
+                    <div className='md:flex md:min-h-screen'>
+                        <Sidebar />
+
+                        <main className='p-10 flex-1'>
+                            <Outlet />
+                        </main>
+
+                        <OptionsBar />
+                    </div>
+                </div>
+            ) : <Navigate to='/login'/>}  
         </>
     )
 }

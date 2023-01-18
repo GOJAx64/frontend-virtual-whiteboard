@@ -26,10 +26,11 @@ export const AuthProvider = ({ children }) => {
             }
 
             try {
+                console.log('ya entro en el useEffect')
                 const { data } = await axiosClient('/auth/profile', config);
                 setAuth(data);
-                navigate('/dashboard');
-                console.log('ya se uso el bavigate')
+                // navigate('/dashboard');
+                console.log('ya se uso el navigate')
             } catch (error) {
                 setAuth({});
             }
