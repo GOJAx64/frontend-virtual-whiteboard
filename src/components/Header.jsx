@@ -25,10 +25,10 @@ export const Header = () => {
 
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-veryDarkBlue mx-auto p-6 w-full">      
+    <nav className="flex items-center justify-between flex-wrap bg-black mx-auto px-6 py-5 w-full shadow-sm">      
         <div className="flex items-center flex-shrink-0 mr-6">
             <p className="uppercase text-grayishBlue text-lg md:text-xl tracking-widest ">
-                Pizarrones <span className='text-softRed'>Virtuales</span>
+                Aulas <span className='text-softRed'>Virtuales</span>
             </p>
         </div>
 
@@ -40,8 +40,7 @@ export const Header = () => {
 
         <div id='menuNavbar' className={ `w-full block flex-grow lg:flex lg:items-center lg:w-auto text-center lg:text-right uppercase text-grayishBlue ${ toggleMenu ? 'hidden' : '' }`}>
             <div className="lg:flex-grow lg:space-x-7">
-                <p className='lg:inline-block tracking-widest hover:text-softRed'>{ auth.name }</p>
-                <Link to="/dashboard" className="mt-4 lg:mt-0 tracking-widest hover:text-softRed block lg:inline-block">Mis Pizarrones</Link>                
+                <p className='lg:inline-block tracking-widest'>{ auth.name }</p>
                 <button onClick={ onClickButton } to="/login" className="uppercase w-full md:w-auto mt-4 lg:mt-0 px-8 py-2 text-white bg-softRed border-2 border-softRed rounded-lg shadow-md  hover:bg-red-400 block lg:inline-block">Cerrar Sesión</button>
             </div>
         </div>
