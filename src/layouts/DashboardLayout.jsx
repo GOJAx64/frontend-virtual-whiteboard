@@ -10,11 +10,11 @@ export const DashboardLayout = () => {
     return (
         <>
             { auth.id ? (
-                <div className='bg-slate-50'>
+                <div className='bg-slate-700'>
                     <Header />
                     <div className='md:flex md:min-h-screen'>
                         <Sidebar />
-                        <main className='m-4 border bg-slate-50 border-slate-300 flex-1 rounded-xl'>
+                        <main className='m-4 border bg-slate-600 border-slate-900 flex-1 rounded-xl shadow-md'>
                             <Outlet />
                         </main>
                         <OptionsBar />

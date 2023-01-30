@@ -25,7 +25,7 @@ export const Header = () => {
 
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-black mx-auto px-6 py-5 w-full shadow-sm">      
+    <nav className="flex items-center justify-between flex-wrap bg-slate-900 mx-auto px-6 py-3 w-full shadow-md">      
         <div className="flex items-center flex-shrink-0 mr-6">
             <p className="uppercase text-grayishBlue text-lg md:text-xl tracking-widest ">
                 Aulas <span className='text-softRed'>Virtuales</span>
@@ -41,7 +41,7 @@ export const Header = () => {
         <div id='menuNavbar' className={ `w-full block flex-grow lg:flex lg:items-center lg:w-auto text-center lg:text-right uppercase text-grayishBlue ${ toggleMenu ? 'hidden' : '' }`}>
             <div className="lg:flex-grow lg:space-x-7">
                 <p className='lg:inline-block tracking-widest'>{ auth.name }</p>
-                <button onClick={ onClickButton } to="/login" className="uppercase w-full md:w-auto mt-4 lg:mt-0 px-8 py-2 text-white bg-softRed border-2 border-softRed rounded-lg shadow-md  hover:bg-red-400 block lg:inline-block">Cerrar Sesión</button>
+                <button onClick={ onClickButton } to="/login" className="uppercase w-full md:w-auto mt-4 lg:mt-0 px-7 py-2 text-white bg-softRed border-2 border-softRed rounded-lg shadow-md  hover:bg-red-400 block lg:inline-block">Cerrar Sesión</button>
             </div>
         </div>
     </nav>

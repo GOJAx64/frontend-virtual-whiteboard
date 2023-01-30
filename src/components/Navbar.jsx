@@ -9,11 +9,11 @@ export const Navbar = () => {
     }
 
     return (
-        <nav className="flex items-center justify-between flex-wrap bg-veryDarkBlue mx-auto p-6 w-full">
+        <nav className="flex items-center justify-between flex-wrap  mx-auto p-6 w-full">
             
             <div className="flex items-center flex-shrink-0 mr-6">
                 <p className="uppercase text-grayishBlue text-lg md:text-xl tracking-widest ">
-                    Pizarrones <span className='text-softRed'>Virtuales</span>
+                    Aulas <span className='text-softRed'>Virtuales</span>
                 </p>
             </div>
 
