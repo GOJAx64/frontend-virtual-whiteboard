@@ -25,7 +25,8 @@ export const Header = () => {
 
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-slate-900 mx-auto px-6 py-3 w-full shadow-md">      
+    <nav className="flex items-center justify-between flex-wrap bg-slate-100 mx-auto px-6 py-3 w-full shadow-md "> 
+        {/*dark:bg-slate-900  */}
         <div className="flex items-center flex-shrink-0 mr-6">
             <p className="uppercase text-grayishBlue text-lg md:text-xl tracking-widest ">
                 Aulas <span className='text-softRed'>Virtuales</span>

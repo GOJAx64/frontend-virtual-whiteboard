@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Alert } from "../components";
-import axiosClient from "../config/axiosClient";
-import { useForm } from "../hooks";
+import { Alert } from "../../components";
+import axiosClient from "../../config/axiosClient";
+import { useForm } from "../../hooks";
 
 const formData = { password: '' }
 

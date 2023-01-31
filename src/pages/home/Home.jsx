@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { Navbar } from '../components/Navbar';
+import { Navbar } from '../../components/Navbar';
 
-import Hero from '../assets/illustration-hero.svg';
-import Feature3 from '../assets/feature3.svg'
-import ReactIcon from '../assets/react.svg';
-import NodeIcon from '../assets/node.svg';
-import MysqlIcon from '../assets/mysql.svg';
+import Hero from '../../assets/illustration-hero.svg';
+import Feature3 from '../../assets/feature3.svg'
+import ReactIcon from '../../assets/react.svg';
+import NodeIcon from '../../assets/node.svg';
+import MysqlIcon from '../../assets/mysql.svg';
 
 
 export const Home = () => {

@@ -1,5 +1,4 @@
 import { useEffect, useState, createContext } from "react"
-import { useNavigate } from "react-router-dom";
 import axiosClient from '../config/axiosClient';
 
 const AuthContext = createContext();
@@ -7,7 +6,6 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({});
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const authUser = async() => {
@@ -23,14 +21,11 @@ export const AuthProvider = ({ children }) => {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
                 }
-            }
+            };
 
             try {
-                console.log('ya entro en el useEffect')
                 const { data } = await axiosClient('/auth/profile', config);
                 setAuth(data);
-                // navigate('/dashboard');
-                console.log('ya se uso el navigate')
             } catch (error) {
                 setAuth({});
             }
