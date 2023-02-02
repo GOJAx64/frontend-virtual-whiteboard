@@ -7,7 +7,6 @@ export const DashboardLayout = () => {
     const { auth, setAuth, loading } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    if( loading ) return 'Loading...';
     
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -15,9 +14,12 @@ export const DashboardLayout = () => {
           setAuth({});
           navigate('/login');
         }
-        console.log('Hola')
     }, [location.pathname])
 
+    //? Quizas necesitemos un useEffect para cargar los proyectos del usuario cada que ingresa y se renderiza el DashboardLayout
+
+    if( loading ) return 'Loading...';
+    
     return (
         <>
             { auth.id ? (

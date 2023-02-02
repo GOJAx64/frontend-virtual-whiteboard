@@ -3,3 +3,4 @@ export * from './Gestures';
 export * from './Symbols';
 export * from './Profile';
 export * from './NewClassroom';
+export * from './Classroom';

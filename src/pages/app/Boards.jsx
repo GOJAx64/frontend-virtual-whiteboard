@@ -1,25 +1,9 @@
-// import { useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { useAuth } from '../../hooks';
-import { useClassrooms } from '../../hooks/useClassrooms'
-
 export const Boards = () => {
-  // const { setAuth } = useAuth();
-  const { classrooms } = useClassrooms();
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if(!token) {
-  //     setAuth({});
-  //     navigate('/login');
-  //   }
-  // }, [])
-  
   return (
-    <>
-      <div>Boards</div>
-    </>
-    
+    <div className='p-6'> 
+      {/* <p className='text-slate-400'>
+        Selecciona o crea una aula para comenzar a interactuar
+      </p> */}
+    </div>
   )
 }

@@ -5,7 +5,7 @@ import { AuthLayout, DashboardLayout } from "./layouts";
 
 import { Home } from './pages/home/Home';
 import { Login, Register, ForgotPassword, NewPassword, ConfirmAccount } from "./pages/auth";
-import { Boards, Gestures, Symbols, Profile, NewClassroom } from './pages/app';
+import { Boards, Gestures, Symbols, Profile, NewClassroom, Classroom } from './pages/app';
 
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
 
             <Route path="/dashboard" element={ <DashboardLayout /> }>
                 <Route index                element={ <Boards  />      } />
+                <Route path=":id"           element={ <Classroom/>     } />
                 <Route path="gestures"      element={ <Gestures/>      } />
                 <Route path="symbols"       element={ <Symbols />      } />
                 <Route path="profile"       element={ <Profile />      } />

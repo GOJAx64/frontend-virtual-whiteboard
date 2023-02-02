@@ -1,5 +1,5 @@
-import { Alert } from "../../components";
 import { useForm, useClassrooms } from "../../hooks";
+import { Alert } from "../../components";
 
 const formData = {
   name: '',
@@ -13,7 +13,7 @@ const formValidations = {
 }
 
 export const NewClassroom = () => {
-  const { name, description, isFormValid, onInputChange } = useForm(formData, formValidations);
+  const { name, description, isFormValid, onInputChange, onResetForm} = useForm(formData, formValidations);
   const { alert, showAlert, submitClassroom } = useClassrooms();
 
   const handleSubmit = async(e) => {
@@ -27,7 +27,8 @@ export const NewClassroom = () => {
       return;
     }
 
-    submitClassroom({ name, description });
+    await submitClassroom({ name, description });
+    onResetForm();
   }
   
   return (
