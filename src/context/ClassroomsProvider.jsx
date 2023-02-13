@@ -60,6 +60,32 @@ export const ClassroomsProvider = ({ children }) => {
         }
     }
 
+    const updateClassroom = async(classroom) => {
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
+            const { data } = await axiosClient.put(`/classrooms/${ classroom.id }`, classroom, config);
+            setClassrooms([...classrooms, data]) //TODO update state correctly
+            setAlert({
+                msg: "Aula creada correctamente",
+                error: false
+            });
+            setTimeout(() => {
+                setAlert({});
+            }, 5000);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const getClassroom = async(id) => {
         try {
             const token = localStorage.getItem('token');
@@ -86,6 +112,7 @@ export const ClassroomsProvider = ({ children }) => {
                 alert,
                 showAlert,
                 submitClassroom,
+                updateClassroom,
                 getClassroomsFromUser,
                 getClassroom,
                 classroom,
