@@ -56,7 +56,6 @@ export const ClassroomsProvider = ({ children }) => {
             });
             setTimeout(() => {
                 setAlert({});
-                navigate(`${id}`)
             }, 5000);
         } catch (error) {
             console.log(error);
@@ -76,8 +75,9 @@ export const ClassroomsProvider = ({ children }) => {
             };
 
             const { data } = await axiosClient.put(`/classrooms/${ classroom.id }`, classroom, config);
-            const updatedClassrooms = classrooms.map( classroom => classroom.id === data.id ? data : classroom );
-            setClassrooms(updatedClassrooms)
+            const updatedClassrooms = classrooms.map( classroomState => classroomState.id === data.id ? data : classroomState );
+            setClassrooms(updatedClassrooms);
+            setClassroom(data);
             setAlert({
                 msg: "Aula actualizada correctamente",
                 error: false

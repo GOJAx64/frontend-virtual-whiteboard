@@ -17,9 +17,16 @@ const formValidations = {
 
 export const ClassroomSettings = () => {
     const { alert, showAlert, updateClassroom, classroom } = useClassrooms();
-    //TODO Show data of classroom in the form
-    const { name, description, details, isFormValid, onInputChange, onResetForm} = useForm(formData. formValidations);
+    const { name, description, details, isFormValid, onInputChange, onResetForm, setFormState } = useForm(formData. formValidations);
 
+    useEffect(() => {
+        setFormState({ 
+            name: classroom.name,
+            description: classroom.description,
+            details: classroom.details,
+        });
+    }, [classroom])
+    
     const handleSubmit = async(e) => {
         e.preventDefault();
 
