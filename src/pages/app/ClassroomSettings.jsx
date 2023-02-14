@@ -58,7 +58,6 @@ export const ClassroomSettings = () => {
                     />
                 </div>    
             </div>
-            {/* <hr className='border border-slate-300 mt-4'/> */}
             <div className="my-5">
                 <label className="uppercase text-slate-500 block text-sm" htmlFor="name">Nombre del Aula</label>
                 <input

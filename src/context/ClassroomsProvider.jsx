@@ -1,4 +1,5 @@
 import { useState, createContext } from "react"
+import { useNavigate } from "react-router-dom";
 import axiosClient from '../config/axiosClient';
 
 const ClassroomsContext = createContext();
@@ -8,6 +9,7 @@ export const ClassroomsProvider = ({ children }) => {
     const [classrooms, setClassrooms] = useState([]);
     const [classroom, setClassroom] = useState({});
     const [alert, setAlert] = useState({});
+    const navigate = useNavigate();
 
     const getClassroomsFromUser = async() => {
         try {
@@ -54,6 +56,7 @@ export const ClassroomsProvider = ({ children }) => {
             });
             setTimeout(() => {
                 setAlert({});
+                navigate(`${id}`)
             }, 5000);
         } catch (error) {
             console.log(error);
@@ -73,9 +76,10 @@ export const ClassroomsProvider = ({ children }) => {
             };
 
             const { data } = await axiosClient.put(`/classrooms/${ classroom.id }`, classroom, config);
-            setClassrooms([...classrooms, data]) //TODO update state correctly
+            const updatedClassrooms = classrooms.map( classroom => classroom.id === data.id ? data : classroom );
+            setClassrooms(updatedClassrooms)
             setAlert({
-                msg: "Aula creada correctamente",
+                msg: "Aula actualizada correctamente",
                 error: false
             });
             setTimeout(() => {
