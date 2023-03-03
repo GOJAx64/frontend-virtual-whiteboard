@@ -109,6 +109,34 @@ export const ClassroomsProvider = ({ children }) => {
         }
     }
 
+    const deleteClassroom = async(id) => {
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
+            const { data } = await axiosClient.delete(`/classrooms/${id}`, config);
+            const updatedClassrooms = classrooms.filter(stateClassroom => stateClassroom.id !== id);
+            setClassrooms(updatedClassrooms);
+            setAlert({
+                msg: "Aula eliminada correctamente",
+                error: false
+            });
+            setTimeout(() => {
+                setAlert({});
+                navigate('dashboard')
+            }, 5000);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <ClassroomsContext.Provider 
             value={{
@@ -119,6 +147,7 @@ export const ClassroomsProvider = ({ children }) => {
                 updateClassroom,
                 getClassroomsFromUser,
                 getClassroom,
+                deleteClassroom,
                 classroom,
             }}
         >

@@ -30,7 +30,7 @@ export const NewClassroom = () => {
       return;
     }
 
-    await submitClassroom({ name, description });
+    await submitClassroom({ name, description, summary });
     onResetForm();
   }
   
