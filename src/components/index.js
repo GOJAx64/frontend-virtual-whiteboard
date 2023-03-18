@@ -4,3 +4,7 @@ export * from './Header';
 export * from './Sidebar';
 export * from './OptionsBar';
 export * from './Card';
+export * from './WhiteboardList';
+export * from './WhiteboardSearcher';
+export * from './ModalNewWhiteboard';
+export * from './CreateWhiteboardButton';
