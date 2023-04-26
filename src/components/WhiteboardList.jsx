@@ -15,7 +15,7 @@ export const WhiteboardList = () => {
             {/* dark:border-slate-700 */}
             {
             classrooms.length > 0 ? classrooms.map( classroom => <Card key={ classroom.id } classroom={ classroom }/> ) 
-                                    : <p>No hay aulas registradas</p>
+                                    : <p>No hay pizarrones registrados</p>
             }
         </div>
     )

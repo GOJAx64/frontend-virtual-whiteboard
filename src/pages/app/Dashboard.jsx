@@ -1,7 +1,9 @@
-import React from 'react'
-
 export const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div className='p-6'> 
+      <p className='text-slate-400'>
+        Selecciona o crea una aula para comenzar a interactuar
+      </p>
+    </div>
   )
 }

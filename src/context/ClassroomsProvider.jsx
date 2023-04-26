@@ -10,6 +10,7 @@ export const ClassroomsProvider = ({ children }) => {
     const [classroom, setClassroom] = useState({});
     const [alert, setAlert] = useState({});
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
 
     const getClassroomsFromUser = async() => {
         try {
@@ -149,6 +150,8 @@ export const ClassroomsProvider = ({ children }) => {
                 getClassroom,
                 deleteClassroom,
                 classroom,
+                showModal,
+                setShowModal,
             }}
         >
             { children }

@@ -6,5 +6,5 @@ export * from './OptionsBar';
 export * from './Card';
 export * from './WhiteboardList';
 export * from './WhiteboardSearcher';
-export * from './ModalNewWhiteboard';
+export * from './modals/ModalNewClassroom';
 export * from './CreateWhiteboardButton';

@@ -17,7 +17,7 @@ export const Whiteboards = () => {
         </div>
         <WhiteboardList/>
       </div>
-      
+      <p>Hola</p>
     </div>
   )
 }
