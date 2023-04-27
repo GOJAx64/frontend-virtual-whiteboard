@@ -5,7 +5,7 @@ import { ModalNewClassroom } from "./modals/ModalNewClassroom";
 
 
 export const CreateWhiteboardButton = () => {
-    const { showModal, setShowModal } = useClassrooms();
+    // const { showModal, setShowModal } = useClassrooms();
     
     useEffect(() => {
         console.log('entra en boton crear')
@@ -13,10 +13,10 @@ export const CreateWhiteboardButton = () => {
 
     return (
         <>
-        <button onClick={ () => setShowModal(true) } className="w-2/12 border border-slate-400 text-slate-600 font-bold bg-slate-300 ml-2 rounded-md hover:bg-slate-200 hover:border-slate-400">
+        <button className="w-2/12 border border-slate-400 text-slate-600 font-bold bg-slate-300 ml-2 rounded-md hover:bg-slate-200 hover:border-slate-400">
             +
         </button>
-        { showModal && createPortal( <ModalNewClassroom/>, document.body) }
+        {/* { showModal && createPortal( <ModalNewClassroom/>, document.body) } */}
         </>
     )
 }

@@ -10,7 +10,9 @@ export const ClassroomsProvider = ({ children }) => {
     const [classroom, setClassroom] = useState({});
     const [alert, setAlert] = useState({});
     const navigate = useNavigate();
-    const [showModal, setShowModal] = useState(false);
+    const [showModalGestures, setShowModalGestures] = useState(false);
+    const [showModalSymbols, setShowModalSymbols] = useState(false);
+    const [showModalProfile, setShowModalProfile] = useState(false);
 
     const getClassroomsFromUser = async() => {
         try {
@@ -150,8 +152,12 @@ export const ClassroomsProvider = ({ children }) => {
                 getClassroom,
                 deleteClassroom,
                 classroom,
-                showModal,
-                setShowModal,
+                showModalGestures,
+                showModalSymbols,
+                showModalProfile,
+                setShowModalGestures,
+                setShowModalSymbols,
+                setShowModalProfile,
             }}
         >
             { children }

@@ -1,7 +1,7 @@
 import { useClassrooms } from "../../hooks";
 
 export const ModalGestures = () => {
-  const { setShowModal } = useClassrooms();
+  const { setShowModalGestures } = useClassrooms();
 
   return (
    <>
@@ -15,7 +15,7 @@ export const ModalGestures = () => {
               <h3 className="text-2xl font-medium text-slate-400">
                   Gestos
               </h3>
-              <button className="p-1 ml-auto border-0 text-black  float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={ () => setShowModal(false) }>
+              <button className="p-1 ml-auto border-0 text-black  float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={ () => setShowModalGestures(false) }>
                   <span className=" text-slate-400 h-6 w-6 text-2xl block outline-none focus:outline-none">
                   x
                   </span>
@@ -33,7 +33,7 @@ export const ModalGestures = () => {
               <button
                   className="bg-blue-700 text-slate-300 active:bg-emerald-600 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="button"
-                  onClick={() => setShowModal(false)}
+                  onClick={() => setShowModalGestures(false)}
               >
                   OK
               </button>
