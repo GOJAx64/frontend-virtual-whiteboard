@@ -31,7 +31,7 @@ export const ModalProfile = () => {
               <div className="flex items-center justify-end p-6 border-t border-solid border-slate-400 rounded-b">
               
               <button
-                  className="bg-blue-700 text-slate-300 active:bg-emerald-600 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  className="bg-blue-700 text-slate-300 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                   type="button"
                   onClick={() => setShowModalProfile(false)}
               >

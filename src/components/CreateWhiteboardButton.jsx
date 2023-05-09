@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { createPortal } from 'react-dom';
 import { useClassrooms } from "../hooks";
-import { ModalNewClassroom } from "./modals/ModalNewClassroom";
 
 
 export const CreateWhiteboardButton = () => {

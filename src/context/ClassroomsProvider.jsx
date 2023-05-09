@@ -13,6 +13,7 @@ export const ClassroomsProvider = ({ children }) => {
     const [showModalGestures, setShowModalGestures] = useState(false);
     const [showModalSymbols, setShowModalSymbols] = useState(false);
     const [showModalProfile, setShowModalProfile] = useState(false);
+    const [showModalAddParticipants, setShowModalAddParticipants] = useState(false);
 
     const getClassroomsFromUser = async() => {
         try {
@@ -155,9 +156,11 @@ export const ClassroomsProvider = ({ children }) => {
                 showModalGestures,
                 showModalSymbols,
                 showModalProfile,
+                showModalAddParticipants,
                 setShowModalGestures,
                 setShowModalSymbols,
                 setShowModalProfile,
+                setShowModalAddParticipants,
             }}
         >
             { children }
