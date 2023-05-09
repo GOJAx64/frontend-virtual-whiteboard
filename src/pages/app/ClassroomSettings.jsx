@@ -50,19 +50,14 @@ export const ClassroomSettings = () => {
     return (
         <>
             <div className="flex items-center justify-between">
-                <h3 className="inline text-base text-slate-400 ">Realiza los cambios necesarios en esta aula</h3>
+                <h3 className="inline text-base text-slate-400 ">Realiza los cambios necesarios</h3>
                 { alert.msg && (
-                <div className="w-1/2">
+                <div className="w-1/3">
                     <Alert alert={ alert }/>
                 </div>
                 )}
                 <div>
-                    <button 
-                        onClick={ handleSubmit }
-                        className="bg-softBlue p-2 my-1 mx-2 text-white pointer text-sm uppercase font-bold rounded hover:cursor-pointer hover:bg-slate-700 transition-colors"
-                    >
-                        Guardar
-                    </button>
+                    
                     <button 
                         onClick={ handleDelete }
                         className="bg-softRed p-2 my-1 mx-2 text-white pointer text-sm uppercase font-bold rounded hover:cursor-pointer hover:bg-slate-700 transition-colors"
@@ -106,6 +101,24 @@ export const ClassroomSettings = () => {
                     value={ summary }
                     onChange={ onInputChange }
                 />
+            </div>
+            <div className="flex items-center justify-between">
+                
+                <div>
+                    <button 
+                        onClick={ handleSubmit }
+                        className="bg-softBlue p-2 my-1 mx-2 text-white pointer text-sm uppercase font-bold rounded hover:cursor-pointer hover:bg-slate-700 transition-colors"
+                    >
+                        Guardar
+                    </button>
+                
+                    <button 
+                        onClick={ handleDelete }
+                        className="bg-softRed p-2 my-1 mx-2 text-white pointer text-sm uppercase font-bold rounded hover:cursor-pointer hover:bg-slate-700 transition-colors"
+                    > 
+                        Añadir participantes 
+                    </button>
+                </div>    
             </div>
         </>
     )
