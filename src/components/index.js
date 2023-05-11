@@ -7,7 +7,7 @@ export * from './Card';
 export * from './WhiteboardList';
 export * from './WhiteboardSearcher';
 
-export * from './modals/ModalAddParticipants';
+export * from './modals/ModalMembers';
 export * from './modals/ModalGestures';
 export * from './modals/ModalProfile';
 export * from './modals/ModalSymbols';

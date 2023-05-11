@@ -13,7 +13,9 @@ export const ClassroomsProvider = ({ children }) => {
     const [showModalGestures, setShowModalGestures] = useState(false);
     const [showModalSymbols, setShowModalSymbols] = useState(false);
     const [showModalProfile, setShowModalProfile] = useState(false);
-    const [showModalAddParticipants, setShowModalAddParticipants] = useState(false);
+    const [showModalMembers, setShowModalMembers] = useState(false);
+    const [member, setMember] = useState({});
+    const [loading, setLoading] = useState(false);
 
     const getClassroomsFromUser = async() => {
         try {
@@ -29,7 +31,7 @@ export const ClassroomsProvider = ({ children }) => {
             const { data } = await axiosClient('/classrooms', config);
             setClassrooms(data)
         } catch (error) {
-            console.log(error);
+            console.log(error.response);
         }
     }
 
@@ -62,7 +64,7 @@ export const ClassroomsProvider = ({ children }) => {
                 setAlert({});
             }, 5000);
         } catch (error) {
-            console.log(error);
+            console.log(error.response);
         }
     }
 
@@ -90,7 +92,7 @@ export const ClassroomsProvider = ({ children }) => {
                 setAlert({});
             }, 5000);
         } catch (error) {
-            console.log(error);
+            console.log(error.response);
         }
     }
 
@@ -109,7 +111,7 @@ export const ClassroomsProvider = ({ children }) => {
             const { data } = await axiosClient(`/classrooms/${id}`, config)
             setClassroom(data);
         } catch (error) {
-            console.log(error);
+            console.log(error.response);
         }
     }
 
@@ -137,30 +139,64 @@ export const ClassroomsProvider = ({ children }) => {
                 navigate('dashboard')
             }, 5000);
         } catch (error) {
-            console.log(error);
+            console.log(error.response);
+        }
+    }
+
+    const submitMember = async(email) => {
+        setLoading(true);
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
+            const { data } = await axiosClient.post('/classrooms/member', { email }, config);
+            console.log(data);
+            setMember(data);
+            setAlert({});
+        } catch (error) {
+            showAlert({
+                msg: error.response.data.msg,
+                error: true
+            });
+        } finally {
+            setLoading(false);
         }
     }
 
     return (
         <ClassroomsContext.Provider 
             value={{
+                classroom,
                 classrooms,
-                alert,
-                showAlert,
                 submitClassroom,
                 updateClassroom,
                 getClassroomsFromUser,
                 getClassroom,
                 deleteClassroom,
-                classroom,
+                member,
+                
+                submitMember,
+                alert,
+                showAlert,
+                loading,
+                setLoading,
+
                 showModalGestures,
                 showModalSymbols,
                 showModalProfile,
-                showModalAddParticipants,
+                showModalMembers,
+
                 setShowModalGestures,
                 setShowModalSymbols,
                 setShowModalProfile,
-                setShowModalAddParticipants,
+                setShowModalMembers,
             }}
         >
             { children }

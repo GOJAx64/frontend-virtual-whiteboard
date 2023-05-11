@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useClassrooms, useForm } from "../../hooks";
 import { Alert } from "../../components";
-import { ModalAddParticipants } from '../../components';
+import { ModalMembers} from '../../components';
 
 const formData = {
     name: '',
@@ -18,7 +18,7 @@ const formValidations = {
 }
 
 export const ClassroomSettings = () => {
-    const { alert, showAlert, updateClassroom, deleteClassroom, classroom, showModalAddParticipants, setShowModalAddParticipants } = useClassrooms();
+    const { alert, showAlert, updateClassroom, deleteClassroom, classroom, showModalMembers, setShowModalMembers } = useClassrooms();
     const { name, description, summary, isFormValid, onInputChange, onResetForm, setFormState } = useForm(formData. formValidations);
     
     useEffect(() => {
@@ -115,12 +115,12 @@ export const ClassroomSettings = () => {
                     </button>
                 
                     <button 
-                        onClick={ () => setShowModalAddParticipants(true) }
+                        onClick={ () => setShowModalMembers(true) }
                         className="bg-softRed p-2 my-1 mx-2 text-white pointer text-sm uppercase font-bold rounded hover:cursor-pointer hover:bg-red-500 transition-colors"
                     > 
                         Administrar participantes 
                     </button>
-                    { showModalAddParticipants && createPortal( <ModalAddParticipants/>, document.body) }
+                    { showModalMembers && createPortal( <ModalMembers/>, document.body) }
                 </div>    
             </div>
         </>
