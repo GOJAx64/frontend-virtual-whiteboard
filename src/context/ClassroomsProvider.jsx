@@ -111,6 +111,11 @@ export const ClassroomsProvider = ({ children }) => {
             const { data } = await axiosClient(`/classrooms/${id}`, config)
             setClassroom(data);
         } catch (error) {
+            navigate('dashboard');
+            showAlert({
+                msg: error.response.data.msg,
+                error: true
+            });
             console.log(error.response);
         }
     }
@@ -157,7 +162,6 @@ export const ClassroomsProvider = ({ children }) => {
             };
 
             const { data } = await axiosClient.post('/classrooms/member', { email }, config);
-            console.log(data);
             setMember(data);
             setAlert({});
         } catch (error) {
@@ -167,6 +171,31 @@ export const ClassroomsProvider = ({ children }) => {
             });
         } finally {
             setLoading(false);
+        }
+    }
+
+    const addMember = async (email) => {
+        try {
+           const token = localStorage.getItem('token');
+            if(!token) return;
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            const { data } = await axiosClient.post(`/classrooms/member/${ classroom.id }`, { email }, config);
+            showAlert({
+                msg: data.msg,
+                error: false
+            });
+            setMember({});
+        } catch (error) {
+            showAlert({
+                msg: error.response.data.msg,
+                error: true
+            });
         }
     }
 
@@ -181,6 +210,8 @@ export const ClassroomsProvider = ({ children }) => {
                 getClassroom,
                 deleteClassroom,
                 member,
+                setMember,
+                addMember,
                 
                 submitMember,
                 alert,
