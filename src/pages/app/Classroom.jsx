@@ -17,9 +17,9 @@ export const Classroom = () => {
     const { name, description } = classroom;
 
     return (
-        <div className="p-6">
-            <h1 className="inline text-xl text-softBlue uppercase">{ name }</h1>
-            <h3 className="text-md text-slate-400">{ description }</h3>
+        <div className="p-6 max-h-full">
+            <h1 className="inline text-xl font-semibold text-slate-600 uppercase">{ name }</h1>
+            <h3 className="text-base text-slate-500">{ description }</h3>
 
             <div className="mt-2">
                 <Tabs>

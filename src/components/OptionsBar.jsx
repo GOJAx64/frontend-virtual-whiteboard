@@ -13,7 +13,7 @@ export const OptionsBar = () => {
   const { showModalGestures, setShowModalGestures, showModalSymbols, setShowModalSymbols, showModalProfile, setShowModalProfile } = useClassrooms();
 
   return (
-    <aside className=' h-screen bg-slate-200 border-l border-t border-slate-300 md:w-12 py-5 shadow-lg' >
+    <aside className='max-h-full bg-slate-300 border-l border-t border-b border-slate-400 md:w-12 py-5 shadow-lg' >
         {/* dark:bg-slate-800 dark:border-slate-800 */}
         <Link to="/dashboard">
           <img src={ Dashboard } alt='Dashboard' className='mx-auto mb-6 h-6'/>

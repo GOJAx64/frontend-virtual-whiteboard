@@ -23,12 +23,12 @@ export const DashboardLayout = () => {
     return (
         <>
             { auth.id ? (
-                <div className='bg-slate-50'>
+                <div className='bg-white h-full'>
                     {/* dark:bg-slate-700 */}
                     <Header />
-                    <div className='md:flex md:min-h-screen'>
+                    <div className='md:flex h-screen'>
                         <Sidebar />
-                        <main className='m-4 border bg-slate-50 border-slate-300 flex-1 rounded-xl shadow-md'>
+                        <main className='mx-3 my-2 border bg-slate-50 border-slate-300 flex-1 rounded-lg shadow-md'>
                             {/* dark:bg-slate-600 dark:border-slate-800*/}
                             <Outlet /> 
                         </main>

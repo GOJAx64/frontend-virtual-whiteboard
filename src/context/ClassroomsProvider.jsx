@@ -110,6 +110,7 @@ export const ClassroomsProvider = ({ children }) => {
 
             const { data } = await axiosClient(`/classrooms/${id}`, config)
             setClassroom(data);
+            console.log(data)
         } catch (error) {
             navigate('dashboard');
             showAlert({
