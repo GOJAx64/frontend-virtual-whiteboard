@@ -17,21 +17,21 @@ export const Classroom = () => {
     const { name, description } = classroom;
 
     return (
-        <div className="p-6 max-h-full">
+        <div className="p-6">
             <h1 className="inline text-xl font-semibold text-slate-600 uppercase">{ name }</h1>
-            <h3 className="text-base text-slate-500">{ description }</h3>
+            <h3 className="text-base text-slate-400">{ description }</h3>
 
             <div className="mt-2">
                 <Tabs>
                     <TabList className='text-slate-500'>
-                        <Tab>Resumen</Tab>
+                        <Tab>General</Tab>
                         <Tab>Pizarrones</Tab>
                         <Tab>Chat</Tab>
                         <Tab>Configuración</Tab>
                     </TabList>
-                    <hr className='border border-slate-300 mt-1 mb-3'/>
+                    <hr className='border border-slate-300 mb-3'/>
 
-                    <TabPanel>
+                    <TabPanel >
                         <Summary/>
                     </TabPanel>
                     <TabPanel>

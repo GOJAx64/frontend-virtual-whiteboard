@@ -13,6 +13,11 @@ module.exports = {
       fontFamily: {
         sans: ['Rubik', 'sans-serif'],
       },
+      height: {
+        app_screen: '91.2vh',//'43.9rem',
+        card: '34rem',
+        'fit-content': 'fit-content(20em)',
+      }
     },
   },
   plugins: [],

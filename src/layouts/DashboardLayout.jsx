@@ -16,20 +16,16 @@ export const DashboardLayout = () => {
         }
     }, [location.pathname])
 
-    //? Quizas necesitemos un useEffect para cargar los proyectos del usuario cada que ingresa y se renderiza el DashboardLayout
-
     if( loading ) return 'Loading...';
     
     return (
         <>
             { auth.id ? (
-                <div className='bg-white h-full'>
-                    {/* dark:bg-slate-700 */}
+                <div className='bg-white'>
                     <Header />
-                    <div className='md:flex h-screen'>
+                    <div className='md:flex h-app_screen'>
                         <Sidebar />
-                        <main className='mx-3 my-2 border bg-slate-50 border-slate-300 flex-1 rounded-lg shadow-md'>
-                            {/* dark:bg-slate-600 dark:border-slate-800*/}
+                        <main className='mx-3 mt-3 mb-2 border bg-slate-50 border-slate-400 flex-1 rounded-xl '>
                             <Outlet /> 
                         </main>
                         <OptionsBar />
