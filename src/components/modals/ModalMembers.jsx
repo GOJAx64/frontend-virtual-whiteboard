@@ -1,5 +1,5 @@
 import { useClassrooms, useForm } from '../../hooks';
-import { Alert } from "..";
+import { Alert, MemberCard } from "..";
 
 const formData = {
     email: ''
@@ -13,6 +13,7 @@ const formValidations = {
 export const ModalMembers = () => {
     const { email, isFormValid, onInputChange, onResetForm} = useForm(formData, formValidations);
     const { alert, showAlert, loading ,submitMember, classroom, setShowModalMembers, member, setMember, addMember} = useClassrooms();
+    const { members } = classroom;
 
     const handleSubmit = async(e) => {
         if( !isFormValid ) {
@@ -34,71 +35,83 @@ export const ModalMembers = () => {
     return (
         <>
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                <div className="relative w-full md:w-8/12 m-6 max-w-3xl border border-slate-400 rounded-lg">
+                <div className="relative w-full max-w-4xl border border-slate-400 rounded-xl">
                     {/*content*/}
                     <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-slate-100 outline-none focus:outline-none">
                         
                         {/*header*/}
-                        <div className="flex items-start justify-between p-5 border-b border-solid border-slate-400 rounded-t">
+                        <div className="flex items-start justify-between p-5 border-b border-solid border-slate-400 rounded-t-lg bg-slate-900">
                             <h3 className="text-2xl font-medium text-slate-400">
                                 Administra los participantes en: { classroom.name }
                             </h3>
                             <button className="p-1 ml-auto border-0 text-black  float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={ handleCloseModal }>
-                                <span className=" text-slate-400 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                                <span className=" text-slate-400 h-6 w-6 text-2xl block outline-none focus:outline-none font-mono">
                                 x
                                 </span>
                             </button>
                         </div>
                         
                         {/*body*/}
-                        <div className="relative p-6 flex-auto">
-                            <div className="flex items-center justify-center">
-                                { alert.msg && (
-                                    <div className="w-1/2 my-2">
-                                        <Alert alert={ alert }/>
-                                    </div>
-                                )}
+                        <div className="relative p-6 flex bg-slate-100 space-x-3">
+                            <div className='w-7/12 border border-slate-400 rounded-lg p-4'>
+                                
+                                <label className="uppercase text-slate-600 block text-sm font-semibold" htmlFor="email">Buscar usuario</label>
+                                <hr className='border border-slate-300 mb-3'/>
+                                <div className='flex mt-2'>
+                                    <input
+                                        id="email"
+                                        type="email"
+                                        placeholder="persona@mail.com"
+                                        className="w-full p-2 border rounded-md bg-slate-200 text-slate-500 border-slate-300"
+                                        name='email'
+                                        value={ email }
+                                        onChange={ onInputChange }
+                                    />
+                                    <button
+                                        className="bg-blue-700 text-slate-300 font-bold uppercase text-sm px-6 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mx-2"
+                                        type="button"
+                                        onClick={ handleSubmit }
+                                    >
+                                        Buscar
+                                    </button>
+                                </div>
+                                { loading ? <p>Estamos buscando al usuario....</p> 
+                                        :  member?.id && (
+                                                <div className='flex my-6'>
+                                                    <p className='w-3/4 border border-slate-300 text-slate-600 rounded-md p-1'>
+                                                        { member.name }
+                                                    </p>
+                                                    <button
+                                                        className="bg-blue-700 text-slate-300 font-bold uppercase text-sm px-6 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mx-2"
+                                                        type="button"
+                                                        onClick={ () => addMember(member.email) }
+                                                    >
+                                                        Agregar
+                                                    </button>
+                                                </div>
+                                            )
+                                }
+                                <div className="flex items-center justify-center">
+                                    { alert.msg && (
+                                        <div className="w-full my-4">
+                                            <Alert alert={ alert }/>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                            
-                            <label className="uppercase text-slate-500 block text-sm" htmlFor="email">Buscar participante</label>
-                            <div className='flex mt-2'>
-                                <input
-                                    id="email"
-                                    type="email"
-                                    placeholder="persona@mail.com"
-                                    className="w-full p-3 border rounded-xl bg-slate-100 text-slate-500"
-                                    name='email'
-                                    value={ email }
-                                    onChange={ onInputChange }
-                                />
-                                <button
-                                    className="bg-blue-700 text-slate-300 font-bold uppercase text-sm px-6 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none mx-2"
-                                    type="button"
-                                    onClick={ handleSubmit }
-                                >
-                                    Buscar
-                                </button>
+                            <div className='border rounded-lg border-slate-400 bg-slate-100 p-4 w-5/12 h-96'>
+                                <p className='text-center text-slate-600 uppercase text-sm font-semibold'>eliminar miembros</p>
+                                <hr className='border border-slate-300 mb-3'/>
+                                {
+                                    members?.length > 0 ? members.map( member =>  <MemberCard key={ member.id} member={ member }/> ) 
+                                                        : <p className="text-slate-500 text-center">No hay miembros</p>
+                                }
                             </div>
-                            { loading ? <p>Estamos buscando al usuario....</p> 
-                                    :  member?.id && (
-                                            <div className='flex border border-slate-300 my-6 bg-slate-200'>
-                                                <p>
-                                                    { member.name }
-                                                </p>
-                                                <button
-                                                    className="bg-blue-700 text-slate-300 font-bold uppercase text-sm px-6 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none mx-2"
-                                                    type="button"
-                                                    onClick={ () => addMember(member.email) }
-                                                >
-                                                    Agregar
-                                                </button>
-                                            </div>
-                                        )
-                            }
+
                         </div>
 
                         {/*footer*/}
-                        <div className="flex items-center justify-end p-6 border-t border-solid border-slate-400 rounded-b">
+                        <div className="flex items-center justify-end p-6 border-t border-solid border-slate-400 rounded-b bg-slate-200">
                             <button
                                 className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                 type="button"

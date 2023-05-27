@@ -29,7 +29,7 @@ export const Classroom = () => {
                         <Tab>Chat</Tab>
                         <Tab>Configuración</Tab>
                     </TabList>
-                    <hr className='border border-slate-300 mb-3'/>
+                    <hr className='border border-slate-200 mb-3'/>
 
                     <TabPanel >
                         <Summary/>

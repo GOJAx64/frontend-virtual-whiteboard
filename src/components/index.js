@@ -13,3 +13,4 @@ export * from './modals/ModalProfile';
 export * from './modals/ModalSymbols';
 
 export * from './CreateWhiteboardButton';
+export * from './MemberCard';
