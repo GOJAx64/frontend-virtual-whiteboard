@@ -15,7 +15,9 @@ export const ClassroomsProvider = ({ children }) => {
     const [showModalProfile, setShowModalProfile] = useState(false);
     const [showModalMembers, setShowModalMembers] = useState(false);
     const [member, setMember] = useState({});
+    const [members, setMembers] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [memberships, setMemberships] = useState([]);
 
     const getClassroomsFromUser = async() => {
         try {
@@ -29,7 +31,8 @@ export const ClassroomsProvider = ({ children }) => {
                 }
             };
             const { data } = await axiosClient('/classrooms', config);
-            setClassrooms(data)
+            setClassrooms(data.classrooms);
+            setMemberships(data.memberships);
         } catch (error) {
             console.log(error.response);
         }
@@ -46,7 +49,7 @@ export const ClassroomsProvider = ({ children }) => {
         try {
             const token = localStorage.getItem('token');
             if(!token) return;
-
+            console.log(token)
             const config = {
                 headers: {
                     "Content-Type": "application/json",
@@ -110,13 +113,13 @@ export const ClassroomsProvider = ({ children }) => {
 
             const { data } = await axiosClient(`/classrooms/${id}`, config)
             setClassroom(data);
+            setMembers(data.members);
         } catch (error) {
             navigate('dashboard');
             showAlert({
                 msg: error.response.data.msg,
                 error: true
             });
-            console.log(error.response);
         }
     }
 
@@ -174,11 +177,10 @@ export const ClassroomsProvider = ({ children }) => {
         }
     }
 
-    const addMember = async (email) => {
+    const addMember = async(email) => {
         try {
-           const token = localStorage.getItem('token');
+            const token = localStorage.getItem('token');
             if(!token) return;
-
             const config = {
                 headers: {
                     "Content-Type": "application/json",
@@ -186,17 +188,31 @@ export const ClassroomsProvider = ({ children }) => {
                 }
             };
             const { data } = await axiosClient.post(`/classrooms/member/${ classroom.id }`, { email }, config);
-            showAlert({
-                msg: data.msg,
-                error: false
-            });
+            setMembers([...members, member]);
+            showAlert({ msg: data.msg, error: false });
             setMember({});
         } catch (error) {
-            showAlert({
-                msg: error.response.data.msg,
-                error: true
-            });
+            showAlert({ msg: error.response.data.msg, error: true });
         }
+    }
+
+    const deleteMember = async(email) => {
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            const { data } = await axiosClient.post(`/classrooms/delete-member/${ classroom.id }`, { email }, config);
+            const updatedMembers = members.filter(stateMember => stateMember.email !== email);
+            setMembers(updatedMembers);
+            showAlert({ msg: "Participante eliminado correctamente", error: false });
+         } catch (error) {
+            showAlert({ msg: error.response.data.msg, error: true });
+         }
     }
 
     return (
@@ -212,6 +228,9 @@ export const ClassroomsProvider = ({ children }) => {
                 member,
                 setMember,
                 addMember,
+                deleteMember,
+                members,
+                memberships,
                 
                 submitMember,
                 alert,

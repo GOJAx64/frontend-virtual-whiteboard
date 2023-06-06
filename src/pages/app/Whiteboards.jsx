@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { CreateWhiteboardButton, WhiteboardList, WhiteboardSearcher } from "../../components"
+import { CreateWhiteboardButton, WhiteboardList, Searcher } from "../../components"
 
 export const Whiteboards = () => {
   useEffect(() => {
@@ -12,7 +12,7 @@ export const Whiteboards = () => {
         <p className=' text-slate-400'>Pizarrones de esta aula</p>
         <hr className='border border-slate-200'/>
         <div className="flex mt-3 mb-1">
-          <WhiteboardSearcher/>
+          <Searcher/>
           <CreateWhiteboardButton/>
         </div>
         <WhiteboardList/>

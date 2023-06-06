@@ -12,8 +12,7 @@ const formValidations = {
 
 export const ModalMembers = () => {
     const { email, isFormValid, onInputChange, onResetForm} = useForm(formData, formValidations);
-    const { alert, showAlert, loading ,submitMember, classroom, setShowModalMembers, member, setMember, addMember} = useClassrooms();
-    const { members } = classroom;
+    const { alert, showAlert, loading ,submitMember, classroom, setShowModalMembers, member, setMember, addMember, members} = useClassrooms();
 
     const handleSubmit = async(e) => {
         if( !isFormValid ) {
@@ -45,7 +44,7 @@ export const ModalMembers = () => {
                                 Administra los participantes en: { classroom.name }
                             </h3>
                             <button className="p-1 ml-auto border-0 text-black  float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={ handleCloseModal }>
-                                <span className=" text-slate-400 h-6 w-6 text-2xl block outline-none focus:outline-none font-mono">
+                                <span className=" text-slate-400 h-6 w-6 text-2xl block outline-none focus:outline-none font-mono hover:text-softRed">
                                 x
                                 </span>
                             </button>
@@ -103,7 +102,7 @@ export const ModalMembers = () => {
                                 <p className='text-center text-slate-600 uppercase text-sm font-semibold'>eliminar miembros</p>
                                 <hr className='border border-slate-300 mb-3'/>
                                 {
-                                    members?.length > 0 ? members.map( member =>  <MemberCard key={ member.id} member={ member }/> ) 
+                                    members?.length > 0 ? members.map( member =>  <MemberCard key={ member.id} member={ member } isInformative={ false }/> ) 
                                                         : <p className="text-slate-500 text-center">No hay miembros</p>
                                 }
                             </div>
@@ -113,7 +112,7 @@ export const ModalMembers = () => {
                         {/*footer*/}
                         <div className="flex items-center justify-end p-6 border-t border-solid border-slate-400 rounded-b bg-slate-200">
                             <button
-                                className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                className="text-red-500 border border-slate-400 rounded-md hover:border-softRed font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
                                 type="button"
                                 onClick={ handleCloseModal }
                             >

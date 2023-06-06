@@ -3,12 +3,13 @@ import { useParams } from "react-router-dom"
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
-import { useClassrooms } from "../../hooks"
+import { useAdmin, useClassrooms } from "../../hooks"
 import { Chat, ClassroomSettings, Summary, Whiteboards } from "./";
 
 export const Classroom = () => {
     const params = useParams();
     const { getClassroom, classroom } = useClassrooms();
+    const isAdmin = useAdmin();
 
     useEffect(() => {
       getClassroom(params.id)
@@ -27,7 +28,7 @@ export const Classroom = () => {
                         <Tab>General</Tab>
                         <Tab>Pizarrones</Tab>
                         <Tab>Chat</Tab>
-                        <Tab>Configuración</Tab>
+                        { isAdmin && <Tab>Configuración</Tab> }
                     </TabList>
                     <hr className='border border-slate-200 mb-3'/>
 
@@ -40,9 +41,11 @@ export const Classroom = () => {
                     <TabPanel>
                         <Chat/>
                     </TabPanel>
-                    <TabPanel>
-                        <ClassroomSettings/>
-                    </TabPanel>
+                    { isAdmin && 
+                        <TabPanel>
+                            <ClassroomSettings/>
+                        </TabPanel>
+                    }
                 </Tabs>
             </div>
             

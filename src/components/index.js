@@ -5,7 +5,7 @@ export * from './Sidebar';
 export * from './OptionsBar';
 export * from './Card';
 export * from './WhiteboardList';
-export * from './WhiteboardSearcher';
+export * from './Searcher';
 
 export * from './modals/ModalMembers';
 export * from './modals/ModalGestures';
