@@ -1,20 +1,20 @@
 import { useEffect } from "react";
 import { Alert } from "../../components"
 import { useClassrooms } from "../../hooks";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 
 let socket;
 
 export const Dashboard = () => {
   const { alert } = useClassrooms();
 
-  useEffect(() => {
-    socket = io(import.meta.env.VITE_BACKEND_URL);
-    socket.emit('prueba');
-    socket.on('respuesta', (person) => {
-      console.log(`Recibiendo respuesta ${ person.name }`);
-    })
-  }, []);
+  // useEffect(() => {
+  //   socket = io(import.meta.env.VITE_BACKEND_URL);
+  //   socket.emit('prueba');
+  //   socket.on('respuesta', (person) => {
+  //     console.log(`Recibiendo respuesta ${ person.name }`);
+  //   })
+  // }, []);
   
 
   return (

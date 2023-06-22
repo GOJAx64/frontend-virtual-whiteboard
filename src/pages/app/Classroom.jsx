@@ -1,20 +1,33 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import { io } from "socket.io-client";
 
-import { useAdmin, useClassrooms } from "../../hooks"
-import { Chat, ClassroomSettings, Summary, Whiteboards } from "./";
+import { useAdmin, useAuth, useClassrooms } from "../../hooks"
+import { Camera, Chat, ClassroomSettings, Summary, Whiteboards } from "./";
+
+let socket;
 
 export const Classroom = () => {
     const params = useParams();
     const { getClassroom, classroom } = useClassrooms();
     const isAdmin = useAdmin();
+    const { auth } = useAuth();
 
     useEffect(() => {
       getClassroom(params.id)
     }, [params.id]);
     
+    useEffect(() => {
+        socket = io(import.meta.env.VITE_BACKEND_URL);
+        socket.emit('join to classroom', { classroom: params.id, name: auth.name });
+    }, [params.id]);
+
+    useEffect( () => {
+        socket.on('Joined', res => { console.log( res ) })
+    });
+
     const { name, description } = classroom;
 
     return (
@@ -26,8 +39,11 @@ export const Classroom = () => {
                 <Tabs>
                     <TabList className='text-slate-500'>
                         <Tab>General</Tab>
-                        <Tab>Pizarrones</Tab>
+                        {/* <Tab>Actividades</Tab> */}
+                        <Tab>Capturas</Tab>
+                        {/* <Tab>Archivos</Tab> */}
                         <Tab>Chat</Tab>
+                        { isAdmin && <Tab>Cámara</Tab> }
                         { isAdmin && <Tab>Configuración</Tab> }
                     </TabList>
                     <hr className='border border-slate-200 mb-3'/>
@@ -41,6 +57,11 @@ export const Classroom = () => {
                     <TabPanel>
                         <Chat/>
                     </TabPanel>
+                    { isAdmin && 
+                        <TabPanel>
+                            <Camera/>
+                        </TabPanel>
+                    }
                     { isAdmin && 
                         <TabPanel>
                             <ClassroomSettings/>
