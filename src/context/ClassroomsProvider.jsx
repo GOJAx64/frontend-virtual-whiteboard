@@ -1,6 +1,7 @@
-import { useState, createContext } from "react"
-import { useNavigate } from "react-router-dom";
+import { useState, createContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axiosClient from '../config/axiosClient';
+import { useSocket } from '../hooks';
 
 const ClassroomsContext = createContext();
 
@@ -18,6 +19,7 @@ export const ClassroomsProvider = ({ children }) => {
     const [members, setMembers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [memberships, setMemberships] = useState([]);
+    const { socket, online } = useSocket(import.meta.env.VITE_BACKEND_URL);
 
     const getClassroomsFromUser = async() => {
         try {
@@ -49,7 +51,6 @@ export const ClassroomsProvider = ({ children }) => {
         try {
             const token = localStorage.getItem('token');
             if(!token) return;
-            console.log(token)
             const config = {
                 headers: {
                     "Content-Type": "application/json",
@@ -247,6 +248,9 @@ export const ClassroomsProvider = ({ children }) => {
                 setShowModalSymbols,
                 setShowModalProfile,
                 setShowModalMembers,
+
+                socket,
+                online,
             }}
         >
             { children }

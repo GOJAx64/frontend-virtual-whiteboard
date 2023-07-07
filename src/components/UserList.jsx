@@ -2,7 +2,8 @@ import { useClassrooms } from '../hooks';
 import { UserCardChat } from './UserCardChat';
 
 const group = {
-    name: 'Chat Grupal'
+    name: 'Chat Grupal',
+    online: true,
 }
 
 export const UserList = () => {

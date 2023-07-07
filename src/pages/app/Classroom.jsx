@@ -1,17 +1,14 @@
-import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom"
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { io } from "socket.io-client";
 
 import { useAdmin, useAuth, useClassrooms } from "../../hooks"
 import { Camera, Chat, ClassroomSettings, Summary, Whiteboards } from "./";
 
-let socket;
-
 export const Classroom = () => {
     const params = useParams();
-    const { getClassroom, classroom } = useClassrooms();
+    const { getClassroom, classroom, socket } = useClassrooms();
     const isAdmin = useAdmin();
     const { auth } = useAuth();
 
@@ -20,20 +17,19 @@ export const Classroom = () => {
     }, [params.id]);
     
     useEffect(() => {
-        socket = io(import.meta.env.VITE_BACKEND_URL);
-        socket.emit('join to classroom', { classroom: params.id, name: auth.name });
+        socket.emit('join to classroom', { classroom: params.id, user: auth.id });
     }, [params.id]);
 
     useEffect( () => {
         socket.on('Joined', res => { console.log( res ) })
     });
 
-    const { name, description } = classroom;
+    // const { name, description } = classroom;
 
     return (
         <div className="p-6">
-            <h1 className="inline text-xl font-semibold text-slate-600 uppercase">{ name }</h1>
-            <h3 className="text-base text-slate-400">{ description }</h3>
+            <h1 className="inline text-xl font-semibold text-slate-600 uppercase">{ classroom.name }</h1>
+            {/* <h3 className="text-base text-slate-400">{ description }</h3> */}
 
             <div className="mt-2">
                 <Tabs>

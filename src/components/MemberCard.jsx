@@ -12,7 +12,7 @@ export const MemberCard = ({member, isInformative }) => {
       }
       <div>
         <p className="text-slate-500">{ member.name }</p>
-        <p className="text-slate-400 text-xs">{ member.email}</p>
+        <p className="text-slate-400 text-xs">{ member.email }</p>
       </div>
     </div>
   )
