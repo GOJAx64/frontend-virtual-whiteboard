@@ -6,10 +6,10 @@ export const Summary = () => {
   
   return (
     <div className='flex space-x-3 h-card mt-5'>
-      <div className='w-2/3 p-4 border rounded-lg border-slate-400'>
+      <div className='w-2/3 p-4 border rounded-lg border-slate-300'>
         Resumen
       </div>
-      <div className='border rounded-lg border-slate-400 bg-slate-50 p-4 w-1/3'>
+      <div className='border rounded-lg border-slate-300 bg-slate-50 p-4 w-1/3'>
         <p className='text-center text-slate-600 uppercase text-sm font-semibold'>miembros</p>
         <hr className='border border-slate-300 mb-3'/>
         {

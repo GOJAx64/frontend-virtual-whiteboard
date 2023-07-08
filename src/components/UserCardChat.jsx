@@ -1,9 +1,12 @@
+import { useClassrooms } from '../hooks';
 import onlineIcon from '../assets/online.svg';
 import offlineIcon from '../assets/offline-2.svg';
 
 export const UserCardChat = ({ member }) => {
+  const { markActiveChat } = useClassrooms();
+
   const handleClick = () => {
-    console.log('Click en chat')
+    markActiveChat(member);
   }
 
   return (

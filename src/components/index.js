@@ -8,7 +8,10 @@ export * from './WhiteboardList';
 export * from './Searcher';
 export * from './UserSearcher';
 export * from './UserCardChat';
+export * from './UserList';
+export * from './ChatContainer';
 export * from './ChatMessages';
+export * from './SelectChat';
 
 export * from './modals/ModalMembers';
 export * from './modals/ModalGestures';

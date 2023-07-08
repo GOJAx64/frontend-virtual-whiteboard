@@ -20,6 +20,8 @@ export const ClassroomsProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [memberships, setMemberships] = useState([]);
     const { socket, online } = useSocket(import.meta.env.VITE_BACKEND_URL);
+    const [isActiveChat, setIsActiveChat] = useState(false);
+    const [currentChat, setCurrentChat] = useState({});
 
     const getClassroomsFromUser = async() => {
         try {
@@ -121,6 +123,9 @@ export const ClassroomsProvider = ({ children }) => {
                 msg: error.response.data.msg,
                 error: true
             });
+        } finally {
+            setIsActiveChat(false);
+            setCurrentChat({});
         }
     }
 
@@ -216,6 +221,11 @@ export const ClassroomsProvider = ({ children }) => {
          }
     }
 
+    const markActiveChat = (user) => {
+        setIsActiveChat(true);
+        setCurrentChat(user);
+    }
+
     return (
         <ClassroomsContext.Provider 
             value={{
@@ -251,6 +261,9 @@ export const ClassroomsProvider = ({ children }) => {
 
                 socket,
                 online,
+                isActiveChat,
+                currentChat,
+                markActiveChat
             }}
         >
             { children }
