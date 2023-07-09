@@ -1,12 +1,12 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosClient from '../config/axiosClient';
-import { useSocket } from '../hooks';
+import { useAuth, useSocket } from '../hooks';
 
 const ClassroomsContext = createContext();
 
 export const ClassroomsProvider = ({ children }) => {
-    
+    const { auth } = useAuth();
     const [classrooms, setClassrooms] = useState([]);
     const [classroom, setClassroom] = useState({});
     const [alert, setAlert] = useState({});
@@ -23,6 +23,12 @@ export const ClassroomsProvider = ({ children }) => {
     const [isActiveChat, setIsActiveChat] = useState(false);
     const [currentChat, setCurrentChat] = useState({});
 
+    useEffect(() => {
+      socket.on('get-personal-message', (message) => {
+        console.log(message);
+      })
+    }, [socket]);
+    
     const getClassroomsFromUser = async() => {
         try {
             const token = localStorage.getItem('token');
@@ -224,6 +230,7 @@ export const ClassroomsProvider = ({ children }) => {
     const markActiveChat = (user) => {
         setIsActiveChat(true);
         setCurrentChat(user);
+        socket.emit('join-to-personal-chat', { classroomId: classroom.id, userId: auth.id });
     }
 
     return (

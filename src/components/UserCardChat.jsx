@@ -4,7 +4,7 @@ import offlineIcon from '../assets/offline-2.svg';
 
 export const UserCardChat = ({ member }) => {
   const { markActiveChat } = useClassrooms();
-
+  
   const handleClick = () => {
     markActiveChat(member);
   }
