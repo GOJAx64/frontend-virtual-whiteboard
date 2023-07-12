@@ -12,6 +12,9 @@ export * from './UserList';
 export * from './ChatContainer';
 export * from './ChatMessages';
 export * from './SelectChat';
+export * from './DisplayMessages';
+export * from './IncomingMessage';
+export * from './OutgoingMessage';
 
 export * from './modals/ModalMembers';
 export * from './modals/ModalGestures';

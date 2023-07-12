@@ -5,7 +5,7 @@ export const UserSearcher = () => {
     <>
       <input 
           placeholder="Buscar a una persona" 
-          className="my-2 bg-slate-100 placeholder-slate-400 placeholder-opacity-70 border border-slate-300 w-full p-2 text-slate-500 rounded-md"
+          className="mb-2 bg-slate-200 placeholder-slate-600 placeholder-opacity-80 border border-slate-400 w-full p-2 text-slate-600 rounded-md"
           //value={ searchValue }
           //onChange={ e => setSearchValue(e.target.value) }
       />

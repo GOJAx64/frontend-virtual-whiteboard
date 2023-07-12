@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useAuth, useClassrooms } from '../hooks';
+import { IncomingMessage } from './IncomingMessage';
+import { OutgoingMessage } from './OutgoingMessage';
 
 export const ChatMessages = () => {
-  const { currentChat, socket, classroom } = useClassrooms();
+  const { currentChat, socket, classroom, messages } = useClassrooms();
   const { auth } = useAuth();
   const [message, setMessage] = useState('');
-
+  
   const onChange = ({ target }) => {
     setMessage(target.value);
   };
@@ -25,15 +27,15 @@ export const ChatMessages = () => {
   };
 
   return (
-    <div className='ml-4 border border-slate-300 w-10/12 rounded-lg'>
-      <p className='p-3 font-semibold bg-slate-300 text-slate-600 rounded-t-lg'>{ currentChat.name }</p>
-      <div className='h-4/5 bg-slate-50'>
-        {
-          currentChat.online ? <p>Conectado</p> : <p> desco</p>
-        }
-        <p className=''>
-          Hola
-        </p>
+    <div className='ml-4 border border-slate-400 w-10/12 rounded-lg'>
+      <p className='p-3 font-semibold bg-slate-100 text-slate-600 border-b rounded-t-lg  border-slate-300'>{ currentChat.name }</p>
+      <div className='h-4/5 py-2 bg-slate-50'>
+          {
+              messages?.map( item => (
+                ( item.to === auth.id ) ? <IncomingMessage key={ item.id } message={ item }/>
+                                        : <OutgoingMessage key={ item.id } message={ item }/>
+              ))
+          }
       </div>
       <hr className='border border-slate-200 mb-2'/>
       <form onSubmit={ onSubmit }>

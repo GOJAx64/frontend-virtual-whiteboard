@@ -16,15 +16,13 @@ export const Classroom = () => {
       getClassroom(params.id)
     }, [params.id]);
     
-    useEffect(() => {
-        socket.emit('join to classroom', { classroom: params.id, user: auth.id });
-    }, [params.id]);
+    // useEffect(() => {
+    //     socket.emit('join to classroom', { classroom: params.id, user: auth.id });
+    // }, [params.id]);
 
-    useEffect( () => {
-        socket.on('Joined', res => { console.log( res ) })
-    });
-
-    // const { name, description } = classroom;
+    // useEffect( () => {
+    //     socket.on('Joined', res => { console.log( res ) })
+    // });
 
     return (
         <div className="p-6">

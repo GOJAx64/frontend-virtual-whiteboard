@@ -1,4 +1,4 @@
-import { useState, createContext, useEffect } from 'react';
+import { useState, createContext, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosClient from '../config/axiosClient';
 import { useAuth, useSocket } from '../hooks';
@@ -22,13 +22,16 @@ export const ClassroomsProvider = ({ children }) => {
     const { socket, online } = useSocket(import.meta.env.VITE_BACKEND_URL);
     const [isActiveChat, setIsActiveChat] = useState(false);
     const [currentChat, setCurrentChat] = useState({});
+    const [messages, setMessages] = useState([]);
 
     useEffect(() => {
       socket.on('get-personal-message', (message) => {
-        console.log(message);
+        if(currentChat.id === message.from || currentChat.id === message.to) {
+            setMessages( messages => ([...messages, message]));
+        }
       })
-    }, [socket]);
-    
+    }, [socket, currentChat]);
+
     const getClassroomsFromUser = async() => {
         try {
             const token = localStorage.getItem('token');
@@ -119,7 +122,6 @@ export const ClassroomsProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             };
-
             const { data } = await axiosClient(`/classrooms/${id}`, config)
             setClassroom(data);
             setMembers(data.members);
@@ -132,6 +134,7 @@ export const ClassroomsProvider = ({ children }) => {
         } finally {
             setIsActiveChat(false);
             setCurrentChat({});
+            setMessages([]);
         }
     }
 
@@ -228,9 +231,13 @@ export const ClassroomsProvider = ({ children }) => {
     }
 
     const markActiveChat = (user) => {
-        setIsActiveChat(true);
-        setCurrentChat(user);
-        socket.emit('join-to-personal-chat', { classroomId: classroom.id, userId: auth.id });
+        if(!user.id === currentChat.id) {
+            setMessages([]);
+            setIsActiveChat(true);
+            setCurrentChat(user);
+            //TODO: fetch messages from DB
+            socket.emit('join-to-personal-chat', { classroomId: classroom.id, userId: auth.id });
+        }
     }
 
     return (
@@ -270,7 +277,8 @@ export const ClassroomsProvider = ({ children }) => {
                 online,
                 isActiveChat,
                 currentChat,
-                markActiveChat
+                markActiveChat,
+                messages,
             }}
         >
             { children }
