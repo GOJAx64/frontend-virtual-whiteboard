@@ -1,13 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth, useClassrooms } from '../hooks';
 import { IncomingMessage } from './IncomingMessage';
 import { OutgoingMessage } from './OutgoingMessage';
 
 export const ChatMessages = () => {
-  const { currentChat, socket, classroom, messages } = useClassrooms();
+  const { currentChat, socket, classroom, messages, setMessages } = useClassrooms();
   const { auth } = useAuth();
   const [message, setMessage] = useState('');
   
+  useEffect(() => {
+    socket.on('get-personal-message', (message) => {
+      if(currentChat.id === message.from || currentChat.id === message.to) {
+          setMessages( messages => [...messages, message] );
+      }
+    })
+
+    return () =>{
+      socket.off('get-personal-message')
+    }
+  }, [socket, currentChat]);
+
   const onChange = ({ target }) => {
     setMessage(target.value);
   };

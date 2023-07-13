@@ -24,14 +24,6 @@ export const ClassroomsProvider = ({ children }) => {
     const [currentChat, setCurrentChat] = useState({});
     const [messages, setMessages] = useState([]);
 
-    useEffect(() => {
-      socket.on('get-personal-message', (message) => {
-        if(currentChat.id === message.from || currentChat.id === message.to) {
-            setMessages( messages => ([...messages, message]));
-        }
-      })
-    }, [socket, currentChat]);
-
     const getClassroomsFromUser = async() => {
         try {
             const token = localStorage.getItem('token');
@@ -123,8 +115,12 @@ export const ClassroomsProvider = ({ children }) => {
                 }
             };
             const { data } = await axiosClient(`/classrooms/${id}`, config)
+            if(classroom.id) {
+                socket.emit('leave-personal-chat', { classroomId: classroom.id, userId: auth.id });
+            }
             setClassroom(data);
             setMembers(data.members);
+            socket.emit('join-to-personal-chat', { classroomId: data.id, userId: auth.id });
         } catch (error) {
             navigate('dashboard');
             showAlert({
@@ -231,13 +227,12 @@ export const ClassroomsProvider = ({ children }) => {
     }
 
     const markActiveChat = (user) => {
-        if(!user.id === currentChat.id) {
-            setMessages([]);
-            setIsActiveChat(true);
-            setCurrentChat(user);
-            //TODO: fetch messages from DB
-            socket.emit('join-to-personal-chat', { classroomId: classroom.id, userId: auth.id });
-        }
+        setMessages([]);
+        setIsActiveChat(true);
+        setCurrentChat(user);
+        //TODO: fetch messages from DB
+        // socket.emit('join-to-personal-chat', { classroomId: classroom.id, userId: auth.id });
+        
     }
 
     return (
@@ -279,6 +274,7 @@ export const ClassroomsProvider = ({ children }) => {
                 currentChat,
                 markActiveChat,
                 messages,
+                setMessages
             }}
         >
             { children }
