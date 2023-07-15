@@ -1,9 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
 import { useAuth } from '../hooks';
-// import useProyectos from '../hooks/useProyectos'
-// import useAuth from '../hooks/useAuth'
-// import Busqueda from './Busqueda'
 
 export const Header = () => {
     const { auth } = useAuth();
@@ -26,9 +22,8 @@ export const Header = () => {
 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-slate-900 mx-auto px-6 py-3 w-full shadow-md "> 
-        {/*dark:bg-slate-900  */}
         <div className="flex items-center flex-shrink-0 mr-6">
-            <p className="uppercase text-grayishBlue text-lg md:text-xl tracking-widest ">
+            <p className="uppercase text-grayishBlue text-xl tracking-widest ">
                 Aulas <span className='text-softRed'>Virtuales</span>
             </p>
         </div>
@@ -41,8 +36,8 @@ export const Header = () => {
 
         <div id='menuNavbar' className={ `w-full block flex-grow lg:flex lg:items-center lg:w-auto text-center lg:text-right uppercase text-grayishBlue ${ toggleMenu ? 'hidden' : '' }`}>
             <div className="lg:flex-grow lg:space-x-7">
-                <p className='lg:inline-block tracking-widest'>{ auth.name }</p>
-                <button onClick={ onClickButton } to="/login" className="uppercase w-full md:w-auto mt-4 lg:mt-0 px-7 py-2 text-white bg-softRed border-2 border-softRed rounded-lg shadow-md  hover:bg-red-400 block lg:inline-block">Cerrar Sesión</button>
+                <p className='lg:inline-block tracking-widest text-sm'>{ auth.name }</p>
+                <button onClick={ onClickButton } className="uppercase w-full md:w-auto text-sm px-4 py-1 text-white bg-softRed border-2 border-softRed rounded-lg shadow-md  hover:bg-red-400 block lg:inline-block">Salir</button>
             </div>
         </div>
     </nav>

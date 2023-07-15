@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth, useClassrooms } from '../hooks';
 import { IncomingMessage } from './IncomingMessage';
 import { OutgoingMessage } from './OutgoingMessage';
+import { scrollToBottomAnimated } from '../helpers/scrollToBottom';
 
 export const ChatMessages = () => {
   const { currentChat, socket, classroom, messages, setMessages } = useClassrooms();
@@ -12,6 +13,8 @@ export const ChatMessages = () => {
     socket.on('get-personal-message', (message) => {
       if(currentChat.id === message.from || currentChat.id === message.to) {
           setMessages( messages => [...messages, message] );
+          //TODO fix the scroll
+          scrollToBottomAnimated('messages');
       }
     })
 
@@ -40,8 +43,8 @@ export const ChatMessages = () => {
 
   return (
     <div className='ml-4 border border-slate-400 w-10/12 rounded-lg'>
-      <p className='p-3 font-semibold bg-slate-100 text-slate-600 border-b rounded-t-lg  border-slate-300'>{ currentChat.name }</p>
-      <div className='h-4/5 py-2 bg-slate-50'>
+      <p className='p-3 font-semibold bg-slate-200 text-slate-600 border-b rounded-t-lg  border-slate-400'>{ currentChat.name }</p>
+      <div className='h-4/5 py-2 bg-slate-50 overflow-y-auto scrollbar-hide' id='messages'>
           {
               messages?.map( item => (
                 ( item.to === auth.id ) ? <IncomingMessage key={ item.id } message={ item }/>
@@ -49,21 +52,23 @@ export const ChatMessages = () => {
               ))
           }
       </div>
-      <hr className='border border-slate-200 mb-2'/>
-      <form onSubmit={ onSubmit }>
-        <div className="flex justify-end">
-          <input 
-            type="text" 
-            onChange={ onChange }
-            className="placeholder-slate-500 placeholder-opacity-70 w-11/12 p-2 ml-2 rounded-lg text-slate-600 border border-slate-200 bg-slate-200" 
-            placeholder="Mensaje..." 
-            value={ message }
-          />
-          <button className="w-1/12 p-1 mx-2 border rounded-lg bg-softBlue text-slate-50 uppercase text-xs font-semibold" type="submit">
-              enviar
-          </button>
-        </div>
-      </form>
+      <div>
+        <hr className='border border-slate-200 mb-2'/>
+        <form onSubmit={ onSubmit }>
+          <div className="flex justify-end">
+            <input 
+              type="text" 
+              onChange={ onChange }
+              className="placeholder-slate-500 placeholder-opacity-70 w-11/12 p-2 ml-2 rounded-lg text-slate-600 border border-slate-200 bg-slate-200" 
+              placeholder="Mensaje..." 
+              value={ message }
+            />
+            <button className="w-1/12 p-1 mx-2 border rounded-lg bg-softBlue text-slate-50 uppercase text-xs font-semibold" type="submit">
+                enviar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

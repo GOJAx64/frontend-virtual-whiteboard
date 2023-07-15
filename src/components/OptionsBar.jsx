@@ -13,25 +13,25 @@ export const OptionsBar = () => {
   const { showModalGestures, setShowModalGestures, showModalSymbols, setShowModalSymbols, showModalProfile, setShowModalProfile } = useClassrooms();
 
   return (
-    <aside className='bg-slate-200 border-l border-slate-400 md:w-12 py-5 shadow-lg' >
+    <aside className='bg-slate-200 border-l border-slate-400 md:w-10 py-5 shadow-lg' >
         {/* dark:bg-slate-800 dark:border-slate-800 */}
         <Link to="/dashboard">
-          <img src={ Dashboard } alt='Dashboard' className='mx-auto mb-6 h-6'/>
+          <img src={ Dashboard } alt='Dashboard' className='mx-auto mb-6 h-5'/>
         </Link>
         <>
-          <img onClick={ () => setShowModalGestures(true) } src={ Gesture } alt='Gestos' className='mx-auto mb-6 h-6 hover:cursor-pointer'/>
+          <img onClick={ () => setShowModalGestures(true) } src={ Gesture } alt='Gestos' className='mx-auto mb-6 h-5 hover:cursor-pointer'/>
           { showModalGestures && createPortal( <ModalGestures/>, document.body) }
         </>
         <>
-          <img onClick={ () => setShowModalSymbols(true) } src={ Symbols } alt='Símbolos' className='mx-auto mb-6 h-6 hover:cursor-pointer'/>
+          <img onClick={ () => setShowModalSymbols(true) } src={ Symbols } alt='Símbolos' className='mx-auto mb-6 h-5 hover:cursor-pointer'/>
           { showModalSymbols && createPortal( <ModalSymbols/>, document.body) }
         </>
         <>
-          <img onClick={ () => setShowModalProfile(true) } src={ Profile } alt='Perfil' className='mx-auto mb-6 h-6 hover:cursor-pointer'/>
+          <img onClick={ () => setShowModalProfile(true) } src={ Profile } alt='Perfil' className='mx-auto mb-6 h-5 hover:cursor-pointer'/>
           { showModalProfile && createPortal( <ModalProfile/>, document.body) }
         </>
         <Link to="new_classroom">
-          <img src={ Add } alt='Add' className='mx-auto mb-6 h-6'/>
+          <img src={ Add } alt='Add' className='mx-auto mb-6 h-5'/>
         </Link>
     </aside>
   )

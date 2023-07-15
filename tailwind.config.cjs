@@ -14,8 +14,8 @@ module.exports = {
         sans: ['Rubik', 'sans-serif'],
       },
       height: {
-        app_screen: '91.2vh',//'43.9rem',
-        card: '36rem',
+        app_screen: '92.9vh',//'43.9rem',
+        card: '37.5rem',
         'fit-content': 'fit-content(20em)',
       }
     },

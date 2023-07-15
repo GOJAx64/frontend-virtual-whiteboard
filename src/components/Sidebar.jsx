@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useClassrooms } from '../hooks'
 import { Card, Searcher } from './'
 
@@ -16,16 +15,20 @@ export const Sidebar = () => {
         <Searcher/>
         <p className=' text-slate-500 text-sm mt-3'>Administras</p>
         <hr className='border border-slate-300'/>
-        {
-          classrooms.length > 0 ? classrooms.map( classroom => <Card key={ classroom.id } classroom={ classroom }/> ) 
-                                : <p>No administras ningun aula</p>
-        }
+        <div className='overflow-y-auto scrollbar-hide'>
+          {
+            classrooms.length > 0 ? classrooms.map( classroom => <Card key={ classroom.id } classroom={ classroom }/> ) 
+                                  : <p className='text-slate-400 text-sm'>No administras ningun aula</p>
+          }
+        </div>
         <p className=' text-slate-500 text-sm'>Participas</p>
         <hr className='border border-slate-300'/>
-        {
-          memberships.length > 0 ? memberships.map( membership => <Card key={ membership.id } classroom={ membership }/> ) 
-                                : <p>No participas en ningun aula</p>
-        }
+        <div className='overflow-y-auto scrollbar-hide'>
+          {
+            memberships.length > 0 ? memberships.map( membership => <Card key={ membership.id } classroom={ membership }/> ) 
+                                  : <p className='text-slate-400 text-sm'>No participas en ningun aula</p>
+          }
+        </div>
     </aside>
   )
 }

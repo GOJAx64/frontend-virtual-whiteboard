@@ -2,6 +2,7 @@ import { useState, createContext, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosClient from '../config/axiosClient';
 import { useAuth, useSocket } from '../hooks';
+import { scrollToBottom } from '../helpers/scrollToBottom';
 
 const ClassroomsContext = createContext();
 
@@ -230,10 +231,32 @@ export const ClassroomsProvider = ({ children }) => {
         setMessages([]);
         setIsActiveChat(true);
         setCurrentChat(user);
-        //TODO: fetch messages from DB
-        // socket.emit('join-to-personal-chat', { classroomId: classroom.id, userId: auth.id });
-        
+        getMessagesOfCurrentChat(user);
+        //TODO fix the scroll
+        scrollToBottom('messages');
     }
+
+    const getMessagesOfCurrentChat = async(user) => {
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            const { data } = await axiosClient.post(`/messages/${classroom.id}`, { 
+                from: auth.id, 
+                to: user.id 
+            }, config);
+            console.log(data.length)
+            setMessages(data);
+        } catch (error) {
+            showAlert({ msg: error.response.data.msg, error: true });
+        } 
+    } 
 
     return (
         <ClassroomsContext.Provider 

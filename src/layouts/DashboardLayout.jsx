@@ -25,7 +25,7 @@ export const DashboardLayout = () => {
                     <Header />
                     <div className='md:flex h-app_screen'>
                         <Sidebar />
-                        <main className='mx-3 mt-3 mb-2 border bg-slate-50 border-slate-400 flex-1 rounded-xl '>
+                        <main className=' bg-slate-50 border-slate-400 flex-1 rounded-xl '>
                             <Outlet /> 
                         </main>
                         <OptionsBar />
