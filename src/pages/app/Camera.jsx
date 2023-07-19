@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Webcam from 'react-webcam';
+import { useClassrooms } from '../../hooks';
 
 const videoConstraints = {
   width: 1136,
@@ -12,17 +13,18 @@ export const Camera = () => {
     const webcamRef = useRef(null);
     const [url, setUrl] = useState(null);
     const params = useParams();
+    const { uploadImage } = useClassrooms();
 
     const capture = useCallback(
       () => {
         const imageSrc = webcamRef.current.getScreenshot();
         setUrl(imageSrc);
+        uploadImage(imageSrc);
       },
       [webcamRef]
     );
 
     useEffect(() => {
-        console.log('Entra en useEffect de url')
         setUrl(null);
     }, [params.id])
     

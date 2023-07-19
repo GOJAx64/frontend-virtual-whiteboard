@@ -4,7 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 import { useAdmin, useAuth, useClassrooms } from "../../hooks"
-import { Camera, Chat, ClassroomSettings, Summary, Whiteboards } from "./";
+import { Camera, Chat, ClassroomSettings, Images, Summary, Whiteboards } from "./";
 
 export const Classroom = () => {
     const params = useParams();
@@ -20,22 +20,15 @@ export const Classroom = () => {
     //     socket.emit('join to classroom', { classroom: params.id, user: auth.id });
     // }, [params.id]);
 
-    // useEffect( () => {
-    //     socket.on('Joined', res => { console.log( res ) })
-    // });
-
     return (
         <div className="p-6">
             <h1 className="inline text-xl font-semibold text-slate-600 uppercase">{ classroom.name }</h1>
-            {/* <h3 className="text-base text-slate-400">{ description }</h3> */}
-
             <div className="mt-2">
                 <Tabs>
                     <TabList className='text-slate-500'>
                         <Tab>General</Tab>
-                        {/* <Tab>Actividades</Tab> */}
-                        <Tab>Capturas</Tab>
-                        {/* <Tab>Archivos</Tab> */}
+                        <Tab>Actividades</Tab>
+                        <Tab>Imagenes</Tab>
                         <Tab>Chat</Tab>
                         { isAdmin && <Tab>Cámara</Tab> }
                         { isAdmin && <Tab>Configuración</Tab> }
@@ -47,6 +40,9 @@ export const Classroom = () => {
                     </TabPanel>
                     <TabPanel>
                         <Whiteboards/>
+                    </TabPanel>
+                    <TabPanel>
+                        <Images/>
                     </TabPanel>
                     <TabPanel>
                         <Chat/>

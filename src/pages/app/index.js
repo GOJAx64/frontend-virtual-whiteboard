@@ -6,3 +6,4 @@ export * from './Whiteboards';
 export * from './Chat';
 export * from './ClassroomSettings';
 export * from './Camera';
+export * from './Images';

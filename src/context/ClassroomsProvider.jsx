@@ -1,4 +1,4 @@
-import { useState, createContext, useEffect, useCallback } from 'react';
+import { useState, createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosClient from '../config/axiosClient';
 import { useAuth, useSocket } from '../hooks';
@@ -24,6 +24,7 @@ export const ClassroomsProvider = ({ children }) => {
     const [isActiveChat, setIsActiveChat] = useState(false);
     const [currentChat, setCurrentChat] = useState({});
     const [messages, setMessages] = useState([]);
+    const [images, setImages] = useState([]);
 
     const getClassroomsFromUser = async() => {
         try {
@@ -132,9 +133,28 @@ export const ClassroomsProvider = ({ children }) => {
             setIsActiveChat(false);
             setCurrentChat({});
             setMessages([]);
+            setImages([]);
         }
     }
 
+    const getImages = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            const { data } = await axiosClient(`/images/${classroom.id}`, config);
+            setImages(data);
+        } catch (error) {
+            console.log(error)
+            showAlert({ msg: error.response.data.msg, error: true });
+        } 
+    }
     const deleteClassroom = async(id) => {
         try {
             const token = localStorage.getItem('token');
@@ -256,7 +276,29 @@ export const ClassroomsProvider = ({ children }) => {
         } catch (error) {
             showAlert({ msg: error.response.data.msg, error: true });
         } 
-    } 
+    }
+
+    const uploadImage = async(url) => {
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            const image = {
+                url,
+                classroomId: classroom.id,
+                text: 'prueba'
+            }
+            const { data } = await axiosClient.post('/images/upload', image, config);
+            console.log(data)
+         } catch (error) {
+            showAlert({ msg: error.response.data.msg, error: true });
+         }
+    }
 
     return (
         <ClassroomsContext.Provider 
@@ -297,7 +339,10 @@ export const ClassroomsProvider = ({ children }) => {
                 currentChat,
                 markActiveChat,
                 messages,
-                setMessages
+                setMessages,
+                uploadImage,
+                images,
+                getImages,
             }}
         >
             { children }
