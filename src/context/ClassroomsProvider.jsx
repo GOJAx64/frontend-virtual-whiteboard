@@ -12,7 +12,7 @@ export const ClassroomsProvider = ({ children }) => {
     const [classroom, setClassroom] = useState({});
     const [alert, setAlert] = useState({});
     const navigate = useNavigate();
-    const [showModalGestures, setShowModalGestures] = useState(false);
+    const [showModalActivity, setShowModalActivity] = useState(false);
     const [showModalSymbols, setShowModalSymbols] = useState(false);
     const [showModalProfile, setShowModalProfile] = useState(false);
     const [showModalMembers, setShowModalMembers] = useState(false);
@@ -121,7 +121,8 @@ export const ClassroomsProvider = ({ children }) => {
                 socket.emit('leave-personal-chat', { classroomId: classroom.id, userId: auth.id });
             }
             setClassroom(data);
-            setMembers(data.members);
+            const tempMembers = data.members.filter( (member) => member.id !== auth.id );
+            setMembers(tempMembers);
             socket.emit('join-to-personal-chat', { classroomId: data.id, userId: auth.id });
         } catch (error) {
             navigate('dashboard');
@@ -155,6 +156,7 @@ export const ClassroomsProvider = ({ children }) => {
             showAlert({ msg: error.response.data.msg, error: true });
         } 
     }
+
     const deleteClassroom = async(id) => {
         try {
             const token = localStorage.getItem('token');
@@ -323,12 +325,12 @@ export const ClassroomsProvider = ({ children }) => {
                 loading,
                 setLoading,
 
-                showModalGestures,
+                showModalActivity,
                 showModalSymbols,
                 showModalProfile,
                 showModalMembers,
 
-                setShowModalGestures,
+                setShowModalActivity,
                 setShowModalSymbols,
                 setShowModalProfile,
                 setShowModalMembers,

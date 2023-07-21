@@ -4,7 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 import { useAdmin, useAuth, useClassrooms } from "../../hooks"
-import { Camera, Chat, ClassroomSettings, Images, Summary, Whiteboards } from "./";
+import { Camera, Chat, ClassroomSettings, Images, Summary, Activities } from "./";
 
 export const Classroom = () => {
     const params = useParams();
@@ -39,7 +39,7 @@ export const Classroom = () => {
                         <Summary/>
                     </TabPanel>
                     <TabPanel>
-                        <Whiteboards/>
+                        <Activities/>
                     </TabPanel>
                     <TabPanel>
                         <Images/>

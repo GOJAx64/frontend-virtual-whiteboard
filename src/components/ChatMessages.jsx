@@ -42,9 +42,9 @@ export const ChatMessages = () => {
   };
 
   return (
-    <div className='ml-4 border border-slate-400 w-10/12 rounded-lg'>
+    <div className='ml-4 border border-slate-400 w-10/12 rounded-lg bg-slate-50'>
       <p className='p-3 font-semibold bg-slate-200 text-slate-600 border-b rounded-t-lg  border-slate-400'>{ currentChat.name }</p>
-      <div className='h-4/5 py-2 bg-slate-50 overflow-y-auto scrollbar-hide' id='messages'>
+      <div className='h-4/5 py-2 bg-white overflow-y-auto scrollbar-hide' id='messages'>
           {
               messages?.map( item => (
                 ( item.to === auth.id ) ? <IncomingMessage key={ item.id } message={ item }/>
@@ -52,14 +52,14 @@ export const ChatMessages = () => {
               ))
           }
       </div>
-      <div>
-        <hr className='border border-slate-200 mb-2'/>
+      <div >
+        <hr className='border border-slate-300 mb-2'/>
         <form onSubmit={ onSubmit }>
           <div className="flex justify-end">
             <input 
               type="text" 
               onChange={ onChange }
-              className="placeholder-slate-500 placeholder-opacity-70 w-11/12 p-2 ml-2 rounded-lg text-slate-600 border border-slate-200 bg-slate-200" 
+              className="placeholder-slate-500 placeholder-opacity-70 w-11/12 p-2 ml-2 rounded-lg text-slate-600 border border-slate-200 bg-slate-100" 
               placeholder="Mensaje..." 
               value={ message }
             />

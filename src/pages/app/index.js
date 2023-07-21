@@ -2,7 +2,7 @@ export * from './Dashboard';
 export * from './NewClassroom';
 export * from './Classroom';
 export * from './Summary';
-export * from './Whiteboards';
+export * from './Activities';
 export * from './Chat';
 export * from './ClassroomSettings';
 export * from './Camera';

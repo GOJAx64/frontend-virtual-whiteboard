@@ -8,8 +8,8 @@ export * from './Card';
 export * from './Searcher';
 
 // Activities
-export * from './WhiteboardList';
-export * from './CreateWhiteboardButton';
+export * from './AccordionActivities';
+export * from './CreateActivity';
 export * from './MemberCard';
 
 // Chat
@@ -28,6 +28,6 @@ export * from './ImageList';
 
 // Modals
 export * from './modals/ModalMembers';
-export * from './modals/ModalGestures';
+export * from './modals/ModalActivities';
 export * from './modals/ModalProfile';
 export * from './modals/ModalSymbols';
