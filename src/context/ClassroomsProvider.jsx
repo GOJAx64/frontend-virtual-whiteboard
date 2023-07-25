@@ -25,6 +25,7 @@ export const ClassroomsProvider = ({ children }) => {
     const [currentChat, setCurrentChat] = useState({});
     const [messages, setMessages] = useState([]);
     const [images, setImages] = useState([]);
+    const [activities, setActivities] = useState([]);
 
     const getClassroomsFromUser = async() => {
         try {
@@ -273,7 +274,6 @@ export const ClassroomsProvider = ({ children }) => {
                 from: auth.id, 
                 to: user.id 
             }, config);
-            console.log(data.length)
             setMessages(data);
         } catch (error) {
             showAlert({ msg: error.response.data.msg, error: true });
@@ -302,6 +302,81 @@ export const ClassroomsProvider = ({ children }) => {
          }
     }
 
+    const submitActivity = async(activity) => {
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
+            const { data } = await axiosClient.post(`/activities/${classroom.id}`, activity, config);
+            setActivities([...activities, data])
+            setAlert({
+                msg: "Actividad creada correctamente",
+                error: false
+            });
+            setTimeout(() => {
+                setAlert({});
+            }, 5000);
+            
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
+
+    const getActivities = async() => {
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
+            const { data } = await axiosClient(`/activities/${ classroom.id }`, config);
+            setActivities(data);
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
+
+    const updateActivity = async(activity) => {
+
+    }
+
+    const deleteActivity = async(id) => {
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
+            const { data } = await axiosClient.delete(`/activities/${id}`, config);
+            const updatedActivities = activities.filter(stateActivity => stateActivity.id !== id);
+            setActivities(updatedActivities);
+            setAlert({
+                msg: "Actividad eliminada correctamente",
+                error: false
+            });
+            setTimeout(() => {
+                setAlert({});
+                // navigate('dashboard')
+            }, 5000);
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
+
     return (
         <ClassroomsContext.Provider 
             value={{
@@ -324,6 +399,7 @@ export const ClassroomsProvider = ({ children }) => {
                 showAlert,
                 loading,
                 setLoading,
+                setAlert,
 
                 showModalActivity,
                 showModalSymbols,
@@ -342,9 +418,16 @@ export const ClassroomsProvider = ({ children }) => {
                 markActiveChat,
                 messages,
                 setMessages,
+                
                 uploadImage,
                 images,
                 getImages,
+
+                submitActivity,
+                getActivities,
+                updateActivity,
+                deleteActivity,
+                activities
             }}
         >
             { children }

@@ -8,9 +8,9 @@ export * from './Card';
 export * from './Searcher';
 
 // Activities
-export * from './AccordionActivities';
 export * from './CreateActivity';
 export * from './MemberCard';
+export * from './AccordionElement'; 
 
 // Chat
 export * from './UserSearcher';

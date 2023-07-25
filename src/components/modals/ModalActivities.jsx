@@ -1,28 +1,35 @@
 import { useClassrooms, useForm } from '../../hooks';
-import { Alert, MemberCard } from "..";
+import { Alert } from '..';
 
 const formData = {
-    email: ''
+    title: '',
+    description: '',
+    dueDate: '',
 }
 
 //? Should we use regular expressions?
 const formValidations = { 
-    email: [ (value) => value.includes('@'), 'El correo debe incluir @']
+    title: [ (value) => value.length > 2, 'El título debe ser mayor a 2 carácteres'],
+    description: [ (value) => value.length > 2, 'La descripción debe ser mayor a 2 carácteres'],
 }
 
 export const ModalActivities = () => {
-    const { email, isFormValid, onInputChange, onResetForm} = useForm(formData, formValidations);
-    const { alert, showAlert, classroom, setShowModalActivity} = useClassrooms();
+    const { formState, title, description, dueDate, isFormValid, onInputChange, onResetForm} = useForm(formData, formValidations);
+    const { alert, setAlert, classroom, setShowModalActivity, submitActivity } = useClassrooms();
 
     const handleSubmit = async(e) => {
         if( !isFormValid ) {
-            showAlert({
-                msg: 'Email no válido',
+            setAlert({
+                msg: 'Errores en los datos del formulario',
                 error: true
             })
+            setTimeout(() => {
+                setAlert({});
+            }, 5000);
             return;
         }
-        
+        console.log('entra')
+        submitActivity(formState);
         onResetForm();
     };
 
@@ -51,23 +58,49 @@ export const ModalActivities = () => {
                         
                         {/*body*/}
                         <div className="relative p-6 flex bg-slate-50 space-x-3">
-                            <div className='w-7/12 border border-slate-400 rounded-lg p-4'>
+                            <div className='w-full border border-slate-400 rounded-lg p-4'>
                                 
-                                <label className="uppercase text-slate-600 block text-sm font-semibold" htmlFor="email">Buscar usuario</label>
+                                <label className="uppercase text-slate-600 block text-sm font-semibold" htmlFor="email">Título</label>
                                 <hr className='border border-slate-300 mb-3'/>
                                 <div className='flex mt-2'>
                                     <input
-                                        id="email"
-                                        type="email"
-                                        placeholder="persona@mail.com"
+                                        id="title"
+                                        type="text"
                                         className="w-full p-2 border rounded-md bg-slate-200 text-slate-500 border-slate-300"
-                                        name='email'
-                                        value={ email }
+                                        name='title'
+                                        value={ title }
                                         onChange={ onInputChange }
                                     />
                                     
                                 </div>
                                 
+                                <label className="mt-3 uppercase text-slate-600 block text-sm font-semibold" htmlFor="email">Descripción</label>
+                                <hr className='border border-slate-300 mb-3'/>
+                                <div className='flex mt-2'>
+                                    <input
+                                        id="description"
+                                        type="text"
+                                        className="w-full p-2 border rounded-md bg-slate-200 text-slate-500 border-slate-300"
+                                        name='description'
+                                        value={ description }
+                                        onChange={ onInputChange }
+                                    />
+                                    
+                                </div>
+
+                                <label className="mt-3 uppercase text-slate-600 block text-sm font-semibold" htmlFor="email">Fecha de Entrega</label>
+                                <hr className='border border-slate-300 mb-3'/>
+                                <div className='flex mt-2'>
+                                    <input
+                                        id="dueDate"
+                                        type="date"
+                                        className="w-full p-2 border rounded-md bg-slate-200 text-slate-500 border-slate-300"
+                                        name='dueDate'
+                                        value={ dueDate }
+                                        onChange={ onInputChange }
+                                    />
+                                    
+                                </div>
                                 <div className="flex items-center justify-center">
                                     { alert.msg && (
                                         <div className="w-full my-4">

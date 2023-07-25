@@ -11,9 +11,9 @@ const formData = {
 }
 
 const formValidations = {
-    name: [ (value) => value.length > 2, 'El nombre debe contener al menos 3 caracteres'],
+    name: [ (value) => value.length > 2, 'El nombre debe contener al menos 3 carácteres'],
     email: [ (value) => value.includes('@'), 'El correo debe incluir @'],
-    password: [ (value) => value.length > 5, 'La contraseña debe contener al menos 6 caracteres']
+    password: [ (value) => value.length > 5, 'La contraseña debe contener al menos 6 carácteres']
 }
 
 export const Register = () => {
