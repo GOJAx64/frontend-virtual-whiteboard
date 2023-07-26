@@ -6,6 +6,7 @@ export * from './Sidebar';
 export * from './OptionsBar';
 export * from './Card';
 export * from './Searcher';
+export * from './Editor';
 
 // Activities
 export * from './CreateActivity';

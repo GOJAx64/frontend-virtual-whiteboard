@@ -3,6 +3,7 @@ import { useAuth, useClassrooms } from '../hooks';
 import { IncomingMessage } from './IncomingMessage';
 import { OutgoingMessage } from './OutgoingMessage';
 import { scrollToBottomAnimated } from '../helpers/scrollToBottom';
+import { Editor } from './Editor';
 
 export const ChatMessages = () => {
   const { currentChat, socket, classroom, messages, setMessages } = useClassrooms();
@@ -55,6 +56,7 @@ export const ChatMessages = () => {
       <div >
         <hr className='border border-slate-300 mb-2'/>
         <form onSubmit={ onSubmit }>
+          {/* <Editor/> */}
           <div className="flex justify-end">
             <input 
               type="text" 
@@ -63,6 +65,7 @@ export const ChatMessages = () => {
               placeholder="Mensaje..." 
               value={ message }
             />
+            
             <button className="w-1/12 p-1 mx-2 border rounded-lg bg-softBlue text-slate-50 uppercase text-xs font-semibold" type="submit">
                 enviar
             </button>

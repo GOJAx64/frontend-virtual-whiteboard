@@ -1,49 +1,39 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useClassrooms, useForm } from "../../hooks";
-import { Alert } from "../../components";
-import { ModalMembers} from '../../components';
-
-const formData = {
-    name: '',
-    description: '',
-    details: '',
-}
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { useClassrooms } from '../../hooks';
+import { ModalMembers, Alert} from '../../components';
 
 //? Should we use regular expressions?
 const formValidations = { 
     name: [ (value) => value.length > 2 && value.length < 46, 'El nombre debe contener al menos 2 caracteretes y un máximo de 45 caracteres'],
-    description: [ (value) => value.length < 255, 'La descripción debe tener un máximo de 255 caracteres'],
-    summary: [ (value) => value.length < 2000, 'El resumen debe tener un máximo de 2000 caracteres'], 
+    // description: [ (value) => value.length < 255, 'La descripción debe tener un máximo de 255 caracteres'],
+    // summary: [ (value) => value.length < 2000, 'El resumen debe tener un máximo de 2000 caracteres'], 
 }
 
 export const ClassroomSettings = () => {
     const { alert, showAlert, updateClassroom, deleteClassroom, classroom, showModalMembers, setShowModalMembers } = useClassrooms();
-    const { name, description, summary, isFormValid, onInputChange, onResetForm, setFormState } = useForm(formData. formValidations);
-    
+    const [description, setDescription] = useState('');
+    const [summary, setSummary] = useState('');
+    const [name, setName] = useState('');
+
     useEffect(() => {
-        setFormState({ 
-            name: classroom.name,
-            description: classroom.description,
-            summary: classroom.summary || '',
-        });
+        setName(classroom.name)
+        setDescription(classroom.description)
+        setSummary(classroom.summary || '');
     }, [classroom])
     
     const handleSubmit = async(e) => {
         e.preventDefault();
-        if( !isFormValid ) {
-            showAlert({
-                msg: 'Errores en los datos del formulario',
-                error: true
-            })
+        if( name.length < 2 || name.length > 255) {
+            showAlert({ msg: 'El nombre debe contener al menos 2 caracteretes y un máximo de 255 carácteres', error: true })
             return;
         }
-
         await updateClassroom({ id: classroom.id, name, description, summary });
-        onResetForm();
     }
 
-    const handleDelete = async(e) => {
+    const handleDelete = () => {
         if(confirm('¿Estás seguro de eliminar esta aula? Esta acción no se puede deshacer.')){
             deleteClassroom(classroom.id);
         }
@@ -51,77 +41,39 @@ export const ClassroomSettings = () => {
 
     return (
         <>
-            <div className="flex items-center justify-between">
-                <h3 className="inline text-base text-slate-400 ">Realiza los cambios necesarios</h3>
-                { alert.msg && (
-                <div className="w-1/3">
-                    <Alert alert={ alert }/>
+            <div className='overflow-y-auto scrollbar-hide h-accordion'>
+                <div className="mb-5 mt-1">
+                    <label className="uppercase text-slate-600 block text-sm ml-1" htmlFor="name">Nombre del Aula</label>
+                    <input id="name" type="text" placeholder="Aula" className="w-full mt-2 p-2 border border-slate-300 rounded bg-white text-slate-700 text-sm" name='name' value={ name } onChange={ (e) => setName(e.target.value) }/>
                 </div>
-                )}
+                <div className="my-5">
+                    <label className="uppercase text-slate-600 block text-sm" htmlFor="description">Descripción</label>
+                    <ReactQuill theme="snow" value={description} onChange={setDescription}/>
+                </div>
+                <div className="mt-5">
+                    <label className="uppercase text-slate-600 block text-sm" htmlFor="details">Detalles</label>
+                    <ReactQuill theme="snow" value={summary} onChange={setSummary}/>
+                </div>
+            </div>
+            <hr className='border border-slate-200 mt-2'/>
+            <div className="flex items-center justify-between mt-1">
                 <div>
-                    
-                    <button 
-                        onClick={ handleDelete }
-                        className="border border-slate-200 p-2 my-1 mx-2 text-softRed pointer text-sm uppercase font-bold rounded hover:cursor-pointer hover:border-softRed"
-                    > 
-                        Eliminar 
-                    </button>
-                </div>    
-            </div>
-            <div className="my-5">
-                <label className="uppercase text-slate-500 block text-sm" htmlFor="name">Nombre del Aula</label>
-                <input
-                    id="name"
-                    type="text"
-                    placeholder="Aula"
-                    className="w-full mt-3 p-3 border rounded-xl bg-slate-100 text-slate-500"
-                    name='name'
-                    value={ name }
-                    onChange={ onInputChange }
-                />
-            </div>
-            <div className="my-5">
-                <label className="uppercase text-slate-500 block text-sm" htmlFor="description">Descripción</label>
-                <input
-                    id="description"
-                    type="text"
-                    placeholder="Descripción del Aula"
-                    className="w-full mt-3 p-3 border rounded-xl bg-slate-100 text-slate-500"
-                    name='description'
-                    value={ description }
-                    onChange={ onInputChange }
-                />
-            </div>
-            <div className="my-5">
-                <label className="uppercase text-slate-500 block text-sm" htmlFor="details">Resumen</label>
-                <input
-                    id="summary"
-                    type="text"
-                    placeholder="Aqui puede escribir el objetivo, temas a ver, evaluación o cualquier otro tipo de dato que considere relevante."
-                    className="w-full mt-3 p-3 border rounded-xl bg-slate-100 text-slate-500"
-                    name='summary'
-                    value={ summary }
-                    onChange={ onInputChange }
-                />
-            </div>
-            <div className="flex items-center justify-between">
-                
-                <div>
-                    <button 
-                        onClick={ handleSubmit }
-                        className="bg-softBlue p-2 my-1 mx-2 text-white pointer text-sm uppercase font-bold rounded hover:cursor-pointer hover:bg-blue-800 transition-colors"
-                    >
+                    <button onClick={ handleSubmit } className="bg-softBlue p-2 my-1 mx-2 text-white pointer text-sm  font-semibold rounded hover:cursor-pointer hover:bg-blue-800 transition-colors">
                         Guardar
                     </button>
-                
-                    <button 
-                        onClick={ () => setShowModalMembers(true) }
-                        className="bg-softRed p-2 my-1 mx-2 text-white pointer text-sm uppercase font-bold rounded hover:cursor-pointer hover:bg-red-500 transition-colors"
-                    > 
+                    <button onClick={ () => setShowModalMembers(true) } className="bg-softRed p-2 my-1 mx-2 text-slate-50 pointer text-sm  font-semibold rounded hover:cursor-pointer hover:bg-red-500"> 
                         Administrar participantes 
                     </button>
                     { showModalMembers && createPortal( <ModalMembers/>, document.body) }
-                </div>    
+                </div>
+                { alert.msg && (
+                    <div>
+                        <Alert alert={ alert }/>
+                    </div>
+                )} 
+                <button onClick={ handleDelete } className="border border-slate-200 p-2 my-1 mx-2 text-softRed pointer text-sm font-semibold rounded hover:cursor-pointer hover:border-softRed"> 
+                    Eliminar 
+                </button>    
             </div>
         </>
     )

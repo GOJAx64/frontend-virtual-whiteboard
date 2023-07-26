@@ -22,11 +22,11 @@ export const Classroom = () => {
 
     return (
         <div className="p-6">
-            <h1 className="inline text-xl font-semibold text-slate-600 uppercase">{ classroom.name }</h1>
+            {/* <h1 className="inline text-xl font-semibold text-slate-600 uppercase">{ classroom.name }</h1> */}
             <div className="mt-2">
                 <Tabs>
                     <TabList className='text-slate-500'>
-                        <Tab>General</Tab>
+                        <Tab>{ classroom.name }</Tab>
                         <Tab>Actividades</Tab>
                         <Tab>Imagenes</Tab>
                         <Tab>Chat</Tab>
