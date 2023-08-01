@@ -32,3 +32,4 @@ export * from './modals/ModalMembers';
 export * from './modals/ModalActivities';
 export * from './modals/ModalProfile';
 export * from './modals/ModalSymbols';
+export * from './modals/ModalUpdateActivity';

@@ -5,13 +5,6 @@ import 'react-quill/dist/quill.snow.css';
 import { useClassrooms } from '../../hooks';
 import { ModalMembers, Alert} from '../../components';
 
-//? Should we use regular expressions?
-const formValidations = { 
-    name: [ (value) => value.length > 2 && value.length < 46, 'El nombre debe contener al menos 2 caracteretes y un máximo de 45 caracteres'],
-    // description: [ (value) => value.length < 255, 'La descripción debe tener un máximo de 255 caracteres'],
-    // summary: [ (value) => value.length < 2000, 'El resumen debe tener un máximo de 2000 caracteres'], 
-}
-
 export const ClassroomSettings = () => {
     const { alert, showAlert, updateClassroom, deleteClassroom, classroom, showModalMembers, setShowModalMembers } = useClassrooms();
     const [description, setDescription] = useState('');
@@ -27,7 +20,7 @@ export const ClassroomSettings = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         if( name.length < 2 || name.length > 255) {
-            showAlert({ msg: 'El nombre debe contener al menos 2 caracteretes y un máximo de 255 carácteres', error: true })
+            showAlert({ msg: 'El nombre debe contener al menos 2 carácteretes y un máximo de 255 carácteres', error: true })
             return;
         }
         await updateClassroom({ id: classroom.id, name, description, summary });

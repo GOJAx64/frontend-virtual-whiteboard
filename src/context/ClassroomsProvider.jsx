@@ -13,6 +13,7 @@ export const ClassroomsProvider = ({ children }) => {
     const [alert, setAlert] = useState({});
     const navigate = useNavigate();
     const [showModalActivity, setShowModalActivity] = useState(false);
+    const [showModalUpdateActivity, setShowModalUpdateActivity] = useState(false);
     const [showModalSymbols, setShowModalSymbols] = useState(false);
     const [showModalProfile, setShowModalProfile] = useState(false);
     const [showModalMembers, setShowModalMembers] = useState(false);
@@ -26,6 +27,7 @@ export const ClassroomsProvider = ({ children }) => {
     const [messages, setMessages] = useState([]);
     const [images, setImages] = useState([]);
     const [activities, setActivities] = useState([]);
+    const [activity, setActivity] = useState({});
 
     const getClassroomsFromUser = async() => {
         try {
@@ -347,7 +349,24 @@ export const ClassroomsProvider = ({ children }) => {
     }
 
     const updateActivity = async(activity) => {
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
 
+            const { data } = await axiosClient.put(`/activities/${ activity.id }`, activity, config);
+            const updatedActivities = activities.map( activityState => activityState.id === data.id ? data : activityState );
+            setActivities(updatedActivities);
+            setActivity(data)
+            showAlert({ msg: "Actividad actualizada correctamente", error: false })
+        } catch (error) {
+            console.log(error.response);
+        }
     }
 
     const deleteActivity = async(id) => {
@@ -361,17 +380,10 @@ export const ClassroomsProvider = ({ children }) => {
                 }
             };
 
-            const { data } = await axiosClient.delete(`/activities/${id}`, config);
+            await axiosClient.delete(`/activities/${id}`, config);
             const updatedActivities = activities.filter(stateActivity => stateActivity.id !== id);
             setActivities(updatedActivities);
-            setAlert({
-                msg: "Actividad eliminada correctamente",
-                error: false
-            });
-            setTimeout(() => {
-                setAlert({});
-                // navigate('dashboard')
-            }, 5000);
+            showAlert({ msg: "Actividad eliminada correctamente", error: false });
         } catch (error) {
             console.log(error.response);
         }
@@ -405,12 +417,14 @@ export const ClassroomsProvider = ({ children }) => {
                 showModalSymbols,
                 showModalProfile,
                 showModalMembers,
+                showModalUpdateActivity,
 
                 setShowModalActivity,
                 setShowModalSymbols,
                 setShowModalProfile,
                 setShowModalMembers,
-
+                setShowModalUpdateActivity,
+                
                 socket,
                 online,
                 isActiveChat,
@@ -427,7 +441,9 @@ export const ClassroomsProvider = ({ children }) => {
                 getActivities,
                 updateActivity,
                 deleteActivity,
-                activities
+                activities,
+                activity,
+                setActivity
             }}
         >
             { children }
