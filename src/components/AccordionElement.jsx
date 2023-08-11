@@ -27,9 +27,9 @@ export const AccordionElement = ({ activity }) => {
 
   return (
     <Accordion className='border border-slate-300 my-3' sx={{ boxShadow: 0}}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header" sx={{ bgcolor: 'rgb(226 232 240)' }}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header" sx={{ bgcolor: 'rgb(241 245 249)' }}>
           <Box className='flex'>
-            <h3 className='font-semibold text-sm uppercase text-slate-600'>{ activity.title }</h3>
+            <h3 className='font-semibold text-sm  text-slate-500'>{ activity.title }</h3>
             <span className='mt-1 ml-3 text-xs text-slate-400'>{activity.dueDate.split('T')[0]}</span>
           </Box>
         </AccordionSummary>

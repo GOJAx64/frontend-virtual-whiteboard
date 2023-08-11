@@ -21,10 +21,8 @@ export const DashboardLayout = () => {
     return (
         <>
             { auth.id ? (
-                <div className='bg-white'>
-                    <Header />
-                    <div className='md:flex h-app_screen'>
-                        <Sidebar />
+                <div className='bg-white h-screen'>
+                    <div className='md:flex'>
                         <main className=' bg-white border-slate-400 flex-1 rounded-xl '>
                             <Outlet /> 
                         </main>

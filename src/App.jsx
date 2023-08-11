@@ -5,7 +5,7 @@ import { AuthLayout, DashboardLayout } from "./layouts";
 
 import { Home } from './pages/home/Home';
 import { Login, Register, ForgotPassword, NewPassword, ConfirmAccount } from "./pages/auth";
-import { NewClassroom, Classroom, Dashboard } from './pages/app';
+import { NewClassroom, Dashboard, Summary, Chat, Activities, Board, Images } from './pages/app';
 
 
 function App() {
@@ -25,8 +25,13 @@ function App() {
             </Route>
 
             <Route path="/dashboard" element={ <DashboardLayout /> }>
-                <Route index                element={ <Dashboard />    } />
-                <Route path=":id"           element={ <Classroom />    } />
+                <Route index                element={ <Dashboard /> } />
+                {/* <Route path=":id"           element={ <Classroom /> } /> */}
+                <Route path="home/:id"      element={ <Summary />   } />
+                <Route path="tasks/:id"     element={ <Activities/> } />
+                <Route path="chat/:id"      element={ <Chat />      } />
+                <Route path="notes/:id"     element={ <Images />      } />
+                <Route path="board/:id"     element={ <Board />     } />
                 <Route path="new_classroom" element={ <NewClassroom /> } />
             </Route>
 

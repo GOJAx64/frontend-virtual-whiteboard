@@ -10,7 +10,7 @@ export const UserCardChat = ({ member }) => {
   }
 
   return (
-    <button className="my-2 border border-slate-300 flex rounded-lg space-x-2 p-1 w-full" onClick={ handleClick }>
+    <button className="my-1 border border-slate-200 flex rounded space-x-2 p-1 w-full" onClick={ handleClick }>
       {
         member.online ?  <img src={ onlineIcon } alt='online' className='ml-1 h-5 mt-1'/>
                       :  <img src={ offlineIcon } alt='offline' className='ml-1 h-5 mt-1'/>

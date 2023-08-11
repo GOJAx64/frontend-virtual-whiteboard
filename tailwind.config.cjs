@@ -15,8 +15,9 @@ module.exports = {
       },
       height: {
         app_screen: '92.9vh',//'43.9rem',
-        card: '37.5rem',
-        accordion: '35.6rem',
+        card: '43rem',
+        accordion: '42rem',
+        chat: '38.5rem',
         'fit-content': 'fit-content(20em)',
       }
     },

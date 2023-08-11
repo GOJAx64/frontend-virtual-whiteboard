@@ -11,7 +11,7 @@ export const MemberCard = ({member, isInformative }) => {
                       : <img src={ deleteIcon } alt='eliminar' className='h-5 mt-2 hover:cursor-pointer' onClick={ () => deleteMember(member.email) }/>
       }
       <div>
-        <p className="text-slate-600">{ member.name }</p>
+        <p className="text-slate-500">{ member.name }</p>
         <p className="text-slate-400 text-xs">{ member.email }</p>
       </div>
     </div>
