@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, Navigate, useNavigate, useLocation } from "react-router-dom";
-import { Header, OptionsBar, Sidebar } from "../components";
+import { OptionsBar } from "../components";
 import { useAuth } from "../hooks";
 
 export const DashboardLayout = () => {
