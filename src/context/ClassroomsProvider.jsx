@@ -28,6 +28,9 @@ export const ClassroomsProvider = ({ children }) => {
     const [images, setImages] = useState([]);
     const [activities, setActivities] = useState([]);
     const [activity, setActivity] = useState({});
+    const [image, setImage] = useState({})
+    const [isActiveImage, setIsActiveImage] = useState(false)
+    const [text, setText] = useState('');
 
     const getClassroomsFromUser = async() => {
         try {
@@ -138,6 +141,7 @@ export const ClassroomsProvider = ({ children }) => {
             setCurrentChat({});
             setMessages([]);
             setImages([]);
+            setIsActiveImage(false);
         }
     }
 
@@ -389,6 +393,12 @@ export const ClassroomsProvider = ({ children }) => {
         }
     }
 
+    const setCurrentImage = (image) => {
+        setImage(image);
+        setText(image.text);
+        setIsActiveImage(true);
+    }
+
     return (
         <ClassroomsContext.Provider 
             value={{
@@ -436,6 +446,10 @@ export const ClassroomsProvider = ({ children }) => {
                 uploadImage,
                 images,
                 getImages,
+                setCurrentImage,
+                image,
+                isActiveImage,
+                text,
 
                 submitActivity,
                 getActivities,
@@ -443,7 +457,7 @@ export const ClassroomsProvider = ({ children }) => {
                 deleteActivity,
                 activities,
                 activity,
-                setActivity
+                setActivity,
             }}
         >
             { children }

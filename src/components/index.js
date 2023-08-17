@@ -25,6 +25,7 @@ export * from './OutgoingMessage';
 
 // Images
 export * from './ImageList';
+export * from './ImageInfo';
 
 // Modals
 export * from './modals/ModalMembers';
