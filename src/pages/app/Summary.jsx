@@ -24,7 +24,7 @@ export const Summary = () => {
           <div className="text-slate-500 py-1 px-3 text-sm">{ ReactHtmlParser(classroom.summary) }</div>
         </div>
         <div className=' border-slate-300 p-4 w-1/3'>
-          <p className='text-center text-slate-600 uppercase text-sm font-semibold'>miembros</p>
+          <p className='text-center text-slate-500 uppercase text-sm font-semibold'>miembros</p>
           <hr className='border border-slate-200 mb-3'/>
           {
             members?.length > 0 ? members.map( member =>  <MemberCard key={ member.id} member={ member } isInformative={ true }/> ) 

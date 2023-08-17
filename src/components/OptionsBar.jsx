@@ -3,26 +3,26 @@ import { Link } from 'react-router-dom';
 import { useClassrooms } from '../hooks';
 import { ModalProfile, ModalSymbols } from './modals';
 
-import Calendar   from '../assets/calendar.svg';
+import Calendar  from '../assets/calendar.svg';
 import Symbols   from '../assets/symbol.svg';
 import Profile   from '../assets/profile.svg';
 import Add       from '../assets/add.svg';
-import Home from '../assets/home.svg';
+import Home      from '../assets/home.svg';
 import Dashboard from '../assets/dashboard.svg'
-import Task from '../assets/task.svg'
-import Message from '../assets/msg.svg'
-import Note from '../assets/note.svg'
-import Board from '../assets/board.svg'
+import Task      from '../assets/task.svg'
+import Message   from '../assets/msg.svg'
+import Note      from '../assets/note.svg'
+import Board     from '../assets/board.svg'
+import Settings  from '../assets/settings.svg'
 
 export const OptionsBar = () => {
-  const { showModalSymbols, setShowModalSymbols, showModalProfile, setShowModalProfile, classroom } = useClassrooms();
+  const { showModalSymbols, setShowModalSymbols, showModalProfile, setShowModalProfile, classroom, setClassroom } = useClassrooms();
   const { id } = classroom;
 
   return (
     <aside className='bg-slate-100 border-l border-slate-200 md:w-10 py-5 shadow-lg h-screen' >
-        {/* dark:bg-slate-800 dark:border-slate-800 */}
         <Link to="/dashboard">
-          <img src={ Dashboard } alt='Dashboard' className='mx-auto mb-6 h-5'/>
+          <img src={ Dashboard } alt='Dashboard' onClick={  () => setClassroom({}) } className='mx-auto mb-6 h-5'/>
         </Link>
         <hr className='border border-transparent my-20'/>
         { classroom.id && (
@@ -42,8 +42,11 @@ export const OptionsBar = () => {
             <Link to={`/dashboard/board/${id}`}>
               <img src={ Board } alt='Board' className='mx-auto mb-6 h-5'/>
             </Link>
-            <Link to="calendar">
+            <Link to="/dashboard/calendar">
               <img src={ Calendar } alt='Calendar' className='mx-auto mb-6 h-5'/>
+            </Link>
+            <Link to={`/dashboard/settings/${id}`}>
+              <img src={ Settings } alt='Settings' className='mx-auto mb-6 h-5'/>
             </Link>
           </div>
         )}

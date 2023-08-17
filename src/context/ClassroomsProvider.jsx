@@ -404,6 +404,7 @@ export const ClassroomsProvider = ({ children }) => {
             value={{
                 classroom,
                 classrooms,
+                setClassroom,
                 submitClassroom,
                 updateClassroom,
                 getClassroomsFromUser,
