@@ -20,7 +20,7 @@ export const Activities = () => {
     <>
       <Header />
       <div className='h-app_screen p-2'>
-        <div className={`${ isAdmin ? "h-accordion" : "h-card"} px-8 overflow-y-auto scrollbar-hide`}>
+        <div className={`${ isAdmin ? "h-accordion" : "h-activities_page"} px-8 overflow-y-auto scrollbar-hide`}>
           { activities?.length > 0 ? activities.map( activity =>  <AccordionElement key={ activity.id }  activity={ activity }/> ) 
                                   : <p className="text-slate-500 text-center">No hay actividades o anuncios guardadas</p>
           }

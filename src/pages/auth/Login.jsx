@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Alert } from '../../components';
-import axiosClient from '../../config/axiosClient';
+import { axiosClient } from '../../config/axiosClient';
 import { useAuth, useForm } from '../../hooks';
 
 const formData = {

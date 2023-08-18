@@ -43,9 +43,9 @@ export const ChatMessages = () => {
   };
 
   return (
-    <div className='ml-2 border border-slate-300 w-10/12 rounded-lg bg-slate-50'>
+    <div className='h-chat ml-2 border border-slate-300 w-10/12 rounded-lg bg-slate-50'>
       <p className='p-3 font-semibold bg-slate-100 text-slate-600 border-b rounded-t-lg  border-slate-300'>{ currentChat.name }</p>
-      <div className='h-chat py-2 bg-white overflow-y-auto scrollbar-hide' id='messages'>
+      <div className='h-5/6 py-2 bg-white overflow-y-auto scrollbar-hide' id='messages'>
           {
               messages?.map( item => (
                 ( item.to === auth.id ) ? <IncomingMessage key={ item.id } message={ item }/>

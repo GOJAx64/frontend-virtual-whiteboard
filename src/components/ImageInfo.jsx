@@ -17,7 +17,7 @@ export const ImageInfo = () => {
     
     return (
         <div>
-            <img src={image.url} alt={'Capture'} className=' mx-auto w-11/12 my-2 rounded-sm'/>
+            <img src={image.url} alt={'Capture'} className=' mx-auto w-8/12 my-2 rounded-sm'/>
             <div className="mt-5 mx-3">
                 <p className="uppercase my-1 text-slate-600 block text-sm">Texto en la imagen</p>
                 <ReactQuill theme="snow" value={text} onChange={handleText}/>

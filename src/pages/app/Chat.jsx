@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { ChatContainer, UserSearcher, UserList, Header } from '../../components';
+import { UserSearcher, UserList, Header, ChatMessages, SelectChat } from '../../components';
 import { useClassrooms } from '../../hooks';
 import { useParams } from 'react-router-dom';
 
 export const Chat = () => {
   const params = useParams();
-  const { getClassroom } = useClassrooms()
+  const { getClassroom, isActiveChat } = useClassrooms()
   
   useEffect(() => {
     getClassroom(params.id)
@@ -19,7 +19,9 @@ export const Chat = () => {
           <UserSearcher/>
           <UserList/>
         </div>
-        <ChatContainer/>
+        { 
+          isActiveChat ? <ChatMessages/> : <SelectChat/>
+        } 
       </div>
     </>
   )

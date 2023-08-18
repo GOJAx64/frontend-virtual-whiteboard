@@ -14,10 +14,12 @@ module.exports = {
         sans: ['Rubik', 'sans-serif'],
       },
       height: {
-        app_screen: '92.8vh',//'43.9rem',
-        card: '43rem',
-        accordion: '42rem',
-        chat: '38.5rem',
+        app_screen: '92vh',
+        card: '40rem',
+        accordion: '83vh',
+        chat: '90vh',
+        settings_page: '77vh',
+        activities_page: '88vh',
         'fit-content': 'fit-content(20em)',
       }
     },

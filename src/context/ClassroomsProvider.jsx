@@ -1,6 +1,6 @@
 import { useState, createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axiosClient from '../config/axiosClient';
+import { axiosClient, axiosClientFlask } from '../config/axiosClient';
 import { useAuth, useSocket } from '../hooks';
 import { scrollToBottom } from '../helpers/scrollToBottom';
 
@@ -302,10 +302,15 @@ export const ClassroomsProvider = ({ children }) => {
                 text: 'prueba'
             }
             const { data } = await axiosClient.post('/images/upload', image, config);
-            console.log(data)
+            await setCharsFromImage(data.imageId);
          } catch (error) {
             showAlert({ msg: error.response.data.msg, error: true });
          }
+    }
+
+    const setCharsFromImage = async(id) => {
+        const { data } = await axiosClientFlask.put(`get_chars_image/${ id }`);
+        console.log(data);
     }
 
     const submitActivity = async(activity) => {

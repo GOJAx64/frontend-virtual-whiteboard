@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axiosClient from '../../config/axiosClient';
+import { axiosClient } from '../../config/axiosClient';
 import { Alert } from '../../components';
 
 export const ConfirmAccount = () => {

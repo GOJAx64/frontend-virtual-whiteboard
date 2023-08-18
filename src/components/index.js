@@ -16,7 +16,6 @@ export * from './AccordionElement';
 export * from './UserSearcher';
 export * from './UserCardChat';
 export * from './UserList';
-export * from './ChatContainer';
 export * from './ChatMessages';
 export * from './SelectChat';
 export * from './DisplayMessages';
