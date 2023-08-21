@@ -3,7 +3,7 @@ import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
 import { useClassrooms } from "../../hooks";
 import { useParams } from "react-router-dom";
-import { useScreenshot, createFileName } from "use-react-screenshot";
+import { useScreenshot } from "use-react-screenshot";
 
 const generator = rough.generator();
 
@@ -304,7 +304,7 @@ export const Board = () => {
           .getElementById("canvas")
           .getContext("2d")
           .measureText(options.text).width;
-        const textHeight = 24; //24
+        const textHeight = 24;
         elementsCopy[id] = {
           ...createElement(id, x1, y1, x1 + textWidth, y1 + textHeight, type),
           text: options.text,
@@ -449,42 +449,44 @@ export const Board = () => {
 
   const getImage = async() => {
     const imgUrl = await takeScreenShot(ref.current)
+    console.log(imgUrl)
     uploadImage(imgUrl);
   }
 
   return (
     <div>
-      <div style={{ position: "fixed", zIndex: 2 }}>
+      <div style={{ position: "fixed", zIndex: 2 }} className="space-x-1">
         <input
           type="radio"
           id="selection"
+          className="ml-1"
           checked={tool === "selection"}
           onChange={() => setTool("selection")}
         />
-        <label htmlFor="selection" className="mr-2">Selección</label>
+        <label htmlFor="selection">Selección</label>
         <input type="radio" id="line" checked={tool === "line"} onChange={() => setTool("line")} />
-        <label htmlFor="line" className="mr-2">Línea</label>
+        <label htmlFor="line">Línea</label>
         <input
           type="radio"
           id="rectangle"
           checked={tool === "rectangle"}
           onChange={() => setTool("rectangle")}
         />
-        <label htmlFor="rectangle" className="mr-2">Rectángulo</label>
+        <label htmlFor="rectangle">Rectángulo</label>
         <input
           type="radio"
           id="pencil"
           checked={tool === "pencil"}
           onChange={() => setTool("pencil")}
         />
-        <label htmlFor="pencil" className="mr-2">Lápiz</label>
+        <label htmlFor="pencil">Lápiz</label>
         <input type="radio" id="text" checked={tool === "text"} onChange={() => setTool("text")} />
-        <label htmlFor="text" className="mr-2">Texto</label>
+        <label htmlFor="text">Texto</label>
       </div>
-      <div style={{ position: "fixed", zIndex: 2, bottom: 0, padding: 10 }}>
-        <button onClick={undo} className="bg-slate-200 rounded px-1  border border-slate-300">Deshacer</button>
-        <button onClick={redo} className="bg-slate-200 rounded px-1  border border-slate-300">Rehacer</button>
-        <button onClick={getImage} className="bg-slate-200 rounded px-1  border border-slate-300">Captura</button>
+      <div style={{ position: "fixed", zIndex: 2, bottom: 0, padding: 10 }} className="space-x-2">
+        <button onClick={undo} className="bg-slate-200 rounded px-1 border border-slate-300">Deshacer</button>
+        <button onClick={redo} className="bg-slate-200 rounded px-1 border border-slate-300">Rehacer</button>
+        <button onClick={getImage} className="bg-slate-200 rounded px-1 border border-slate-300">Captura</button>
       </div>
       {action === "writing" ? (
         <textarea
@@ -508,17 +510,15 @@ export const Board = () => {
         />
       ) : null}
       <canvas
-        ref={ref}
         id="canvas"
-        width={ 1380 }
-        height={ 708 }
+        width={1380}
+        height={window.innerHeight}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
-        className="border border-slate-300 mx-2 my-5 rounded-lg"
         style={{ position: "absolute", zIndex: 1 }}
+        ref={ref}
       >
-        Canvas
       </canvas>
     </div>
   );

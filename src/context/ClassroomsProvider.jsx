@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { axiosClient, axiosClientFlask } from '../config/axiosClient';
 import { useAuth, useSocket } from '../hooks';
 import { scrollToBottom } from '../helpers/scrollToBottom';
+import { CleaningServices } from '@mui/icons-material';
 
 const ClassroomsContext = createContext();
 
@@ -296,6 +297,7 @@ export const ClassroomsProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             };
+            console.log(url)
             const image = {
                 url,
                 classroomId: classroom.id,
