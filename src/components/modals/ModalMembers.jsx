@@ -61,7 +61,7 @@ export const ModalMembers = () => {
                                         id="email"
                                         type="email"
                                         placeholder="persona@mail.com"
-                                        className="w-full p-2 border rounded-md bg-slate-200 text-slate-500 border-slate-300"
+                                        className="w-full p-2 border rounded-md bg-slate-50 text-slate-500 border-slate-300"
                                         name='email'
                                         value={ email }
                                         onChange={ onInputChange }
@@ -98,8 +98,8 @@ export const ModalMembers = () => {
                                     )}
                                 </div>
                             </div>
-                            <div className='border rounded-lg border-slate-400 bg-slate-100 p-4 w-5/12 h-96'>
-                                <p className='text-center text-slate-600 uppercase text-sm font-semibold'>eliminar miembros</p>
+                            <div className='border rounded-lg border-slate-400 bg-slate-100 p-4 w-5/12 h-96 overflow-y-auto scrollbar-hide'>
+                                <p className='text-center text-slate-600 uppercase text-sm font-semibold'>miembros</p>
                                 <hr className='border border-slate-300 mb-3'/>
                                 {
                                     members?.length > 0 ? members.map( member =>  <MemberCard key={ member.id} member={ member } isInformative={ false }/> ) 
