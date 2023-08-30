@@ -60,7 +60,7 @@ export const Login = () => {
                         id="email"
                         type="email"
                         placeholder="persona@mail.com"
-                        className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+                        className="w-full mt-3 p-3 border rounded-md bg-gray-50"
                         name='email'
                         value={ email }
                         onChange={ onInputChange }
@@ -72,7 +72,7 @@ export const Login = () => {
                         id="password"
                         type="password"
                         placeholder="Contraseña de Registro"
-                        className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+                        className="w-full mt-3 p-3 border rounded-md bg-gray-50"
                         name='password'
                         value={ password }
                         onChange={ onInputChange }

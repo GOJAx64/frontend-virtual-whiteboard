@@ -66,15 +66,11 @@ export const NewPassword = () => {
     }
           
     return (
-        <>
-            <h1 className="text-sky-600 font-black text-6xl capitalize">Reestablece tu Contraseña y no pierdas acceso a tus {''}
-                <span className="text-slate-700">Pizarrones Virtuales</span>
-            </h1>
-            
+        <div className='mt-20 md:mt-10 shadow-lg px-5 py-10 rounded-md bg-slate-100'>
             { alert.msg && <Alert alert={ alert } /> }
 
             { validToken && (
-                <form className="my-10 bg-slate-200 border border-slate-300 shadow rounded-lg p-10" onSubmit={ handleSubmit }>
+                <form className="my-10 bg-slate-100 border border-slate-300 shadow rounded-md p-10" onSubmit={ handleSubmit }>
                     <div className="my-5">
                         <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password">Nueva Contraseña</label>
                         <input
@@ -90,7 +86,7 @@ export const NewPassword = () => {
                     <input 
                         type="submit"
                         value="Guardar Nueva Contraseña"
-                        className="bg-sky-700 mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-sky-800 transition-colors"
+                        className="bg-veryDarkBlue mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-slate-700 transition-colors"
                     />
                 </form>
             )}
@@ -100,6 +96,6 @@ export const NewPassword = () => {
                     Inicia Sesión
                 </Link>
             )}
-        </>
+        </div>
     )
 }

@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import { AuthProvider, ClassroomsProvider } from "./context";
 import { AuthLayout, DashboardLayout } from "./layouts";
-
 import { Home } from './pages/home/Home';
 import { Login, Register, ForgotPassword, NewPassword, ConfirmAccount } from "./pages/auth";
 import { NewClassroom, Dashboard, Summary, Chat, Activities, Board, Images, ClassroomSettings } from './pages/app';

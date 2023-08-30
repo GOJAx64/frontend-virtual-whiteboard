@@ -25,9 +25,9 @@ export const Navbar = () => {
 
             <div id='menuNavbar' className={ `w-full block flex-grow lg:flex lg:items-center lg:w-auto text-center lg:text-right uppercase text-grayishBlue ${ toggleMenu ? 'hidden' : '' }`}>
                 <div className="lg:flex-grow lg:space-x-7">
-                    <a onClick={ onClickButton } href="#features"     className="mt-4 lg:mt-0 tracking-widest hover:text-softRed block lg:inline-block">Características</a>
+                    {/* <a onClick={ onClickButton } href="#features"     className="mt-4 lg:mt-0 tracking-widest hover:text-softRed block lg:inline-block">Características</a>
                     <a onClick={ onClickButton } href="#technologies" className="mt-4 lg:mt-0 tracking-widest hover:text-softRed block lg:inline-block">Tecnologías</a>
-                    <a onClick={ onClickButton } href="#faq"          className="mt-4 lg:mt-0 tracking-widest hover:text-softRed block lg:inline-block">FAQ</a>
+                    <a onClick={ onClickButton } href="#faq"          className="mt-4 lg:mt-0 tracking-widest hover:text-softRed block lg:inline-block">FAQ</a> */}
                     <Link to="/login"    className="mt-4 lg:mt-0 px-8 py-2 text-white bg-softRed border-2 border-softRed rounded-lg shadow-md  hover:bg-red-400 block lg:inline-block">Iniciar Sesión</Link>
                     <Link to="/register" className="mt-4 lg:mt-0 px-8 py-2 text-white bg-softRed border-2 border-softRed rounded-lg shadow-md  hover:bg-red-400 block lg:inline-block">Registrarse</Link>
                 </div>

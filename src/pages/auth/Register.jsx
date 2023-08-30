@@ -50,19 +50,15 @@ export const Register = () => {
 
     return (
       <>
-        <h1 className="text-sky-600 font-black text-6xl capitalize">Crea tu Cuenta y Administra tus {''}
-            <span className="text-slate-700">Pizarrones Virtuales</span>
-        </h1>
-      
-        <form className="my-10 bg-slate-200 border border-slate-300 shadow rounded-lg p-10" onSubmit={ handleSubmit } >
+        <form className="bg-slate-100 border border-slate-100 shadow rounded-lg p-10" onSubmit={ handleSubmit } >
             { alert.msg && <Alert alert={ alert }/>}
             <div className="my-5">
-                <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="name">Nombre</label>
+                <label className="uppercase text-slate-600 block text-xl font-bold" htmlFor="name">Nombre</label>
                 <input
                     id="name"
                     type="text"
                     placeholder="Tu Nombre"
-                    className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+                    className="w-full mt-3 p-3 border rounded-md bg-gray-50"
                     name='name'
                     value={ name }
                     onChange={ onInputChange }
@@ -70,12 +66,12 @@ export const Register = () => {
             </div>
 
             <div className="my-5">
-                <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Correo electrónico</label>
+                <label className="uppercase text-slate-600 block text-xl font-bold" htmlFor="email">Correo electrónico</label>
                 <input
                     id="email"
                     type="email"
                     placeholder="persona@mail.com"
-                    className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+                    className="w-full mt-3 p-3 border rounded-md bg-gray-50"
                     name='email'
                     value={email}
                     onChange={ onInputChange }
@@ -83,12 +79,12 @@ export const Register = () => {
             </div>
             
             <div className="my-5">
-                <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password">Contraseña</label>
+                <label className="uppercase text-slate-600 block text-xl font-bold" htmlFor="password">Contraseña</label>
                 <input
                     id="password"
                     type="password"
                     placeholder="Contraseña de Registro"
-                    className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+                    className="w-full mt-3 p-3 border rounded-md bg-gray-50"
                     name='password'
                     value={ password }
                     onChange={ onInputChange }
@@ -98,7 +94,7 @@ export const Register = () => {
             <input 
                 type="submit"
                 value="Crear Cuenta"
-                className="bg-sky-700 mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-sky-800 transition-colors"
+                className="bg-veryDarkBlue mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-slate-700 transition-colors"
             />
               
         </form>
@@ -108,7 +104,7 @@ export const Register = () => {
                 ¿Ya tienes una cuenta? Inicia Sesión
             </Link>
             <Link className='block text-center my-5 text-slate-500 uppercase text-sm' to="/forgot_password">
-                Olvide Mi Password
+                Olvide mi contraseña
             </Link>
         </nav>
       

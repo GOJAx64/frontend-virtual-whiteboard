@@ -43,19 +43,15 @@ export const ForgotPassword = () => {
 
     return (
         <>
-            <h1 className="text-sky-600 font-black text-6xl capitalize">Recupera tu acceso, reestablece tu {''}
-                <span className="text-slate-700">Contraseña</span>
-            </h1>
-
-            <form className="my-10 bg-slate-200 border border-slate-300 shadow rounded-lg px-10 py-5" onSubmit={ handleSubmit }>
+            <form className="bg-slate-100 border border-slate-100 shadow rounded-lg px-10 py-5" onSubmit={ handleSubmit }>
                 { alert.msg && <Alert alert={ alert }/>}
                 <div className="my-5">
-                    <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Correo Electrónico</label>
+                    <label className="uppercase text-slate-600 block text-xl font-bold" htmlFor="email">Correo Electrónico</label>
                     <input
                         id="email"
                         type="email"
                         placeholder="Email de Registro"
-                        className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+                        className="w-full mt-3 p-3 border rounded-md bg-gray-50"
                         name='email'
                         value={ email }
                         onChange={ onInputChange }
@@ -65,7 +61,7 @@ export const ForgotPassword = () => {
                 <input 
                     type="submit"
                     value="Enviar Instrucciones"
-                    className="bg-sky-700 mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-sky-800 transition-colors"
+                    className="bg-veryDarkBlue mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-slate-700 transition-colors"
                 />
                 
             </form>
@@ -78,7 +74,6 @@ export const ForgotPassword = () => {
                   ¿No tienes una cuenta? Regístrate
                 </Link>
             </nav>
-
         </>
     )
 }
