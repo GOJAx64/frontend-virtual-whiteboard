@@ -54,7 +54,7 @@ export const ClassroomSettings = () => {
                         <ReactQuill theme="snow" value={description} onChange={setDescription}/>
                     </div>
                     <div className="mt-5">
-                        <label className="uppercase text-slate-600 block text-sm" htmlFor="details">Detalles</label>
+                        <label className="uppercase text-slate-600 block text-sm" htmlFor="summary">Detalles</label>
                         <ReactQuill theme="snow" value={summary} onChange={setSummary}/>
                     </div>
                 </div>

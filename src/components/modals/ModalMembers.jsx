@@ -51,7 +51,7 @@ export const ModalMembers = () => {
                         </div>
                         
                         {/*body*/}
-                        <div className="relative p-6 flex bg-slate-100 space-x-3">
+                        <div className="relative p-6 flex bg-white space-x-3">
                             <div className='w-7/12 border border-slate-400 rounded-lg p-4'>
                                 
                                 <label className="uppercase text-slate-600 block text-sm font-semibold" htmlFor="email">Buscar usuario</label>
@@ -61,13 +61,13 @@ export const ModalMembers = () => {
                                         id="email"
                                         type="email"
                                         placeholder="persona@mail.com"
-                                        className="w-full p-2 border rounded-md bg-slate-50 text-slate-500 border-slate-300"
+                                        className="w-full p-2 border rounded-md bg-slate-100 text-slate-500 border-slate-300"
                                         name='email'
                                         value={ email }
                                         onChange={ onInputChange }
                                     />
                                     <button
-                                        className="bg-blue-700 text-slate-300 font-bold uppercase text-sm px-6 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mx-2"
+                                        className="bg-blue-700 text-slate-100 font-bold uppercase text-sm px-6 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mx-2"
                                         type="button"
                                         onClick={ handleSubmit }
                                     >
@@ -98,13 +98,15 @@ export const ModalMembers = () => {
                                     )}
                                 </div>
                             </div>
-                            <div className='border rounded-lg border-slate-400 bg-slate-100 p-4 w-5/12 h-96 overflow-y-auto scrollbar-hide'>
+                            <div className='border rounded-lg border-slate-400 bg-white p-4 w-5/12 h-96'>
                                 <p className='text-center text-slate-600 uppercase text-sm font-semibold'>miembros</p>
                                 <hr className='border border-slate-300 mb-3'/>
-                                {
-                                    members?.length > 0 ? members.map( member =>  <MemberCard key={ member.id} member={ member } isInformative={ false }/> ) 
-                                                        : <p className="text-slate-500 text-center">No hay miembros</p>
-                                }
+                                <div className='h-80 overflow-y-auto scrollbar-hide'>
+                                    {
+                                        members?.length > 0 ? members.map( member =>  <MemberCard key={ member.id} member={ member } isInformative={ false }/> ) 
+                                                            : <p className="text-slate-500 text-center">No hay miembros</p>
+                                    }
+                                </div>
                             </div>
 
                         </div>

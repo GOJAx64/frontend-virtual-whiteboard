@@ -20,6 +20,7 @@ module.exports = {
         chat: '90vh',
         settings_page: '77vh',
         activities_page: '88vh',
+        standard_content: '83vh',
         'fit-content': 'fit-content(20em)',
       }
     },
