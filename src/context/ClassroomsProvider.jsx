@@ -33,6 +33,15 @@ export const ClassroomsProvider = ({ children }) => {
     const [isActiveImage, setIsActiveImage] = useState(false)
     const [text, setText] = useState('');
 
+    const clearAppStates = () => {
+        setClassrooms([]);
+        setClassroom({});
+        setAlert({});
+        setMember({});
+        setMembers([]);
+        setMemberships([]);
+    }
+
     const getClassroomsFromUser = async() => {
         try {
             const token = localStorage.getItem('token');
@@ -466,6 +475,7 @@ export const ClassroomsProvider = ({ children }) => {
                 activities,
                 activity,
                 setActivity,
+                clearAppStates,
             }}
         >
             { children }
