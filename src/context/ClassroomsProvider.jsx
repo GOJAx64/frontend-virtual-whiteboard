@@ -336,7 +336,25 @@ export const ClassroomsProvider = ({ children }) => {
             };
 
             const { data } = await axiosClient.post(`/activities/${classroom.id}`, activity, config);
-            setActivities([...activities, data])
+            
+            let activitiesTemp = [];
+            let i = 0
+            while(i < activities.length) {
+                if(activities[i].dueDate > data.dueDate) {
+                    activitiesTemp.push(data);
+                    break;
+                } else {
+                    activitiesTemp.push(activities[i]);
+                }
+                i++;
+            }
+            while(i < activities.length) {
+                activitiesTemp.push(activities[i]);
+                i++;
+            }
+
+            setActivities(activitiesTemp);
+            activitiesTemp = [];
             setAlert({
                 msg: "Actividad creada correctamente",
                 error: false

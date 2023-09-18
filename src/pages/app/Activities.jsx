@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
-import { CreateActivity, AccordionElement, Header } from '../../components/';
-import { useAdmin, useClassrooms } from '../../hooks';
+import { createPortal } from 'react-dom';
 import { useParams } from 'react-router-dom';
+import { CreateActivity, AccordionElement, Header, ModalUpdateActivity } from '../../components/';
+import { useAdmin, useClassrooms } from '../../hooks';
+
 
 export const Activities = () => {
   const isAdmin = useAdmin();
   const params = useParams();
-  const { getActivities, classroom, activities, getClassroom } = useClassrooms();
+  const { showModalUpdateActivity, getActivities, classroom, activities, getClassroom } = useClassrooms();
   
   useEffect(() => {
     getClassroom(params.id)
@@ -26,6 +28,7 @@ export const Activities = () => {
           }
         </div>
         { isAdmin && <CreateActivity/> }
+        { showModalUpdateActivity && createPortal( <ModalUpdateActivity/>, document.body) }
       </div>
     </>
   )

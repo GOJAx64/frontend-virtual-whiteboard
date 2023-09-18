@@ -26,16 +26,16 @@ export const ModalUpdateActivity = () => {
     return (
         <>
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                <div className="relative w-full max-w-4xl border border-slate-600 rounded-xl">
+                <div className="relative w-full max-w-4xl border border-slate-400 rounded-xl">
                     {/*content*/}
-                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-slate-100 outline-none focus:outline-none">
+                    <div className=" rounded-lg shadow-lg relative flex flex-col w-full bg-slate-100 outline-none focus:outline-none">
                         
                         {/*header*/}
-                        <div className="flex items-start justify-between p-5 border-b border-solid border-slate-400 rounded-t-lg bg-slate-900">
+                        <div className="flex items-start justify-between p-5 border-b border-solid rounded-t-lg bg-slate-900">
                             <h3 className="text-2xl font-medium text-slate-400">
                                 Actualiza una actividad en: { classroom.name }
                             </h3>
-                            <button className="p-1 ml-auto border-0 text-black  float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={ handleCloseModal }>
+                            <button className="p-1 ml-auto border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={ handleCloseModal }>
                                 <span className=" text-slate-400 h-6 w-6 text-2xl block outline-none focus:outline-none font-mono hover:text-softRed">x</span>
                             </button>
                         </div>
@@ -73,7 +73,10 @@ export const ModalUpdateActivity = () => {
                                 
                                 <label className="mt-3 uppercase text-slate-600 block text-sm font-semibold" htmlFor="email">Descripción</label>
                                 <hr className='border border-slate-300 mb-3'/>
-                                <ReactQuill theme="snow" value={description} onChange={setDescription}/>
+                                <div className='max-h-96 overflow-y-auto scrollbar-hide'>
+                                    <ReactQuill theme="snow" value={description} onChange={setDescription}/>
+                                </div>
+
                             </div>   
                         </div>
 
@@ -89,6 +92,7 @@ export const ModalUpdateActivity = () => {
                                 Cerrar
                             </button>
                         </div>
+
                     </div>
                 </div>
             </div>
