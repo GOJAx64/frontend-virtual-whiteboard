@@ -5,7 +5,6 @@ import { useClassrooms } from '../../hooks';
 import { Alert } from '..';
 
 export const ModalUpdateActivity = () => {
-    //TODO: corregir background negro
     const { alert, classroom, setShowModalUpdateActivity, updateActivity, showAlert, activity } = useClassrooms();
     const [description, setDescription] = useState(activity.description)
     const [title, setTitle] = useState(activity.title)

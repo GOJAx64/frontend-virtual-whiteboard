@@ -23,7 +23,7 @@ export const Images = () => {
                     <p className='text-slate-500 text-sm'>Capturas de pizarrones</p>
                     <ImageList/>
                 </div>
-                <div className='text-slate-500 border border-slate-300 mt-2 h-card w-10/12 mx-2 rounded items-center '>
+                <div className='text-slate-500 border border-slate-300 mt-2 h-chat w-10/12 mx-2 rounded items-center '>
                     { 
                         isActiveImage ? <ImageInfo/> : <p className='mx-auto'>Por favor selecciona alguna de las imagenes</p>
                     }  

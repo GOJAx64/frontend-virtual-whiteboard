@@ -18,6 +18,7 @@ export const ClassroomsProvider = ({ children }) => {
     const [showModalSymbols, setShowModalSymbols] = useState(false);
     const [showModalProfile, setShowModalProfile] = useState(false);
     const [showModalMembers, setShowModalMembers] = useState(false);
+    const [showModalImage, setShowModalImage] = useState(false);
     const [member, setMember] = useState({});
     const [members, setMembers] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -463,12 +464,14 @@ export const ClassroomsProvider = ({ children }) => {
                 showModalProfile,
                 showModalMembers,
                 showModalUpdateActivity,
+                showModalImage,
 
                 setShowModalActivity,
                 setShowModalSymbols,
                 setShowModalProfile,
                 setShowModalMembers,
                 setShowModalUpdateActivity,
+                setShowModalImage,
                 
                 socket,
                 online,
