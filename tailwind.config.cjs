@@ -21,6 +21,7 @@ module.exports = {
         settings_page: '77vh',
         activities_page: '88vh',
         standard_content: '83vh',
+        image_list: '80vh',
         'fit-content': 'fit-content(20em)',
       }
     },

@@ -17,7 +17,6 @@ const formValidations = {
 }
 
 export const Register = () => {
-    
     const { name, email, password, isFormValid, onInputChange, onResetForm } = useForm(formData, formValidations);
     const [alert, setAlert] = useState({});
     
@@ -25,26 +24,16 @@ export const Register = () => {
         e.preventDefault();
 
         if( !isFormValid ) {
-            setAlert({
-                msg: 'Errores en los datos del formulario',
-                error: true
-            })
+            setAlert({  msg: 'Errores en los datos del formulario', error: true });
             return;
         }
 
         try {
             const { data } = await axiosClient.post(`/auth/register`, { name, email, password });
-            console.log(data);
-            setAlert({
-                msg: data.msg,
-                error: false           
-            });
+            setAlert({ msg: data.msg, error: false });
             onResetForm();
         } catch (error) {
-            setAlert({
-                msg: error.response.data.msg,
-                error: true           
-            });
+            setAlert({ msg: error.response.data.msg, error: true });
         }
     }
 

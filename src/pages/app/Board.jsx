@@ -4,6 +4,7 @@ import getStroke from "perfect-freehand";
 import { useClassrooms } from "../../hooks";
 import { useParams } from "react-router-dom";
 import { useScreenshot } from "use-react-screenshot";
+import { Alert } from "../../components";
 
 const generator = rough.generator();
 
@@ -221,7 +222,7 @@ export const Board = () => {
   const [startPanMousePosition, setStartPanMousePosition] = React.useState({ x: 0, y: 0 });
   const textAreaRef = useRef();
   const pressedKeys = usePressedKeys();
-  const { getClassroom, uploadImage } = useClassrooms();
+  const { getClassroom, uploadImage, alert } = useClassrooms();
   const params = useParams();
   const ref = createRef(null);
   const [image, takeScreenShot] = useScreenshot();
@@ -449,13 +450,12 @@ export const Board = () => {
 
   const getImage = async() => {
     const imgUrl = await takeScreenShot(ref.current)
-    console.log(imgUrl)
     uploadImage(imgUrl);
   }
 
   return (
     <div>
-      <div style={{ position: "fixed", zIndex: 2 }} className="space-x-1">
+      <div style={{ position: "fixed", zIndex: 2 }} className="space-x-1 flex">
         <input
           type="radio"
           id="selection"
@@ -482,6 +482,11 @@ export const Board = () => {
         <label htmlFor="pencil">Lápiz</label>
         <input type="radio" id="text" checked={tool === "text"} onChange={() => setTool("text")} />
         <label htmlFor="text">Texto</label>
+        { alert.msg && (
+            <div className="w-full">
+                <Alert alert={ alert }/>
+            </div>
+        )}
       </div>
       <div style={{ position: "fixed", zIndex: 2, bottom: 0, padding: 10 }} className="space-x-2">
         <button onClick={undo} className="bg-slate-200 rounded px-1 border border-slate-300">Deshacer</button>

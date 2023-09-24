@@ -6,7 +6,7 @@ import { useClassrooms } from '../hooks';
 import { ModalImage } from './modals';
 
 export const ImageInfo = () => {
-    const { image, showModalImage, setShowModalImage } = useClassrooms();
+    const { image, showModalImage, setShowModalImage, setCharsFromImage, deleteImage } = useClassrooms();
     const [text, setText] = useState()
     
     useEffect(() => {
@@ -14,7 +14,7 @@ export const ImageInfo = () => {
     }, [image])
 
     const handleText = () => {
-        console.log(image.text);
+        //console.log(image.text);
     }
 
     const handleClick = () => {
@@ -22,7 +22,9 @@ export const ImageInfo = () => {
     }
 
     const handleDelete = () => {
-        console.log('delete');
+        if(confirm('¿Estás seguro de eliminar esta actividad? Esta acción no se puede deshacer.')){
+            deleteImage(image._id);
+        }
     }
 
     const handleSubmit = () => {
@@ -30,7 +32,7 @@ export const ImageInfo = () => {
     }
     
     const handleSyncChars = () => {
-        console.log('sync chars')
+        setCharsFromImage(image._id);
     }
 
     return (

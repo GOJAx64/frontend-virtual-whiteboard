@@ -15,7 +15,6 @@ export const ConfirmAccount = () => {
       try {
         const url = `/auth/confirm/${token}`;
         const { data } = await axiosClient(url);
-        console.log('Si llega');
         setAlert({
           msg: data.msg,
           error: false
@@ -23,7 +22,6 @@ export const ConfirmAccount = () => {
         setConfirmedAccount(true);
 
       } catch (error) {
-        console.log('entra en error')
         setAlert({
           msg: error.response.data.msg,
           error: true

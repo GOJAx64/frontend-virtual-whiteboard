@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useClassrooms } from '../../hooks';
 import { Header, ImageInfo, ImageList } from '../../components';
 import { useParams } from 'react-router-dom';
+import { Alert } from '../../components';
 
 export const Images = () => {
-    const { getImages, getClassroom, classroom, isActiveImage } = useClassrooms();
+    const { getImages, getClassroom, classroom, isActiveImage, alert } = useClassrooms();
     const params = useParams();
 
     useEffect(() => {
@@ -22,6 +23,11 @@ export const Images = () => {
                 <div className="ml-3 w-3/12">
                     <p className='text-slate-500 text-sm'>Capturas de pizarrones</p>
                     <ImageList/>
+                    { alert.msg && (
+                        <div className="w-full my-2">
+                            <Alert alert={ alert }/>
+                        </div>
+                    )}
                 </div>
                 <div className='text-slate-500 border border-slate-300 mt-2 h-chat w-10/12 mx-2 rounded items-center '>
                     { 

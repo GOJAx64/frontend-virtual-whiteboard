@@ -170,7 +170,7 @@ export const ClassroomsProvider = ({ children }) => {
             const { data } = await axiosClient(`/images/${classroom.id}`, config);
             setImages(data);
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             showAlert({ msg: error.response.data.msg, error: true });
         } 
     }
@@ -307,14 +307,15 @@ export const ClassroomsProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             };
-            console.log(url)
             const image = {
                 url,
                 classroomId: classroom.id,
                 text: 'prueba'
             }
+            showAlert({ msg: "Captura tomada", error: false });
             const { data } = await axiosClient.post('/images/upload', image, config);
             await setCharsFromImage(data.imageId);
+            showAlert({ msg: "Carácteres sincronizados", error: false });
          } catch (error) {
             showAlert({ msg: error.response.data.msg, error: true });
          }
@@ -322,7 +323,29 @@ export const ClassroomsProvider = ({ children }) => {
 
     const setCharsFromImage = async(id) => {
         const { data } = await axiosClientFlask.put(`get_chars_image/${ id }`);
-        console.log(data);
+        showAlert({ msg: "Caracteres sincronizados", error: false });
+    }
+
+    const deleteImage = async(id) => {
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
+            await axiosClient.delete(`/images/${id}`, config);
+            const updatedImages = images.filter(stateImage => stateImage._id !== id);
+            setImages(updatedImages);
+            showAlert({ msg: "Imagen eliminada correctamente", error: false });
+            setImage({});
+            setIsActiveImage(false);
+        } catch (error) {
+            console.log(error.response);
+        }
     }
 
     const submitActivity = async(activity) => {
@@ -423,6 +446,8 @@ export const ClassroomsProvider = ({ children }) => {
             const updatedActivities = activities.filter(stateActivity => stateActivity.id !== id);
             setActivities(updatedActivities);
             showAlert({ msg: "Actividad eliminada correctamente", error: false });
+            setIsActiveImage(false);
+            setImage({});
         } catch (error) {
             console.log(error.response);
         }
@@ -488,6 +513,8 @@ export const ClassroomsProvider = ({ children }) => {
                 image,
                 isActiveImage,
                 text,
+                setCharsFromImage,
+                deleteImage,
 
                 submitActivity,
                 getActivities,

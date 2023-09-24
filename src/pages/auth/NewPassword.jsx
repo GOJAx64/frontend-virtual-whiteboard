@@ -26,7 +26,6 @@ export const NewPassword = () => {
                 await axiosClient(`/auth/forgot_password/${token}`)
                 setValidToken(true)
             } catch (error) {
-                console.log('aqui mero')
                 setAlert({
                     msg: error.response.data.msg,
                     error: true
@@ -57,7 +56,6 @@ export const NewPassword = () => {
             })
             setChangedPassword(true)
         } catch (error) {
-            console.log('chance aqui tambien')
             setAlert({
                 msg: error.response.data.msg,
                 error: true
