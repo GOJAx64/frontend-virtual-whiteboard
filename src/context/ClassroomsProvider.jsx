@@ -348,6 +348,26 @@ export const ClassroomsProvider = ({ children }) => {
         }
     }
 
+    const updateImage = async(image) => {
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            console.log(image);
+            const { data } = await axiosClient.put(`/images/${ image.id }`, image, config);
+            const updatedImages = images.map( imageState => imageState._id === data._id ? imageState.text = data.text : imageState );
+            setImages(updatedImages);
+            showAlert({ msg: "Texto actualizado correctamente", error: false })
+        } catch (error) {
+            console.log(error.response);
+        }
+    } 
+
     const submitActivity = async(activity) => {
         try {
             const token = localStorage.getItem('token');
@@ -515,6 +535,7 @@ export const ClassroomsProvider = ({ children }) => {
                 text,
                 setCharsFromImage,
                 deleteImage,
+                updateImage,
 
                 submitActivity,
                 getActivities,
