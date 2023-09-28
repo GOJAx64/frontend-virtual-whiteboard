@@ -1,7 +1,17 @@
-import { useClassrooms } from "../../hooks";
+import { useState } from "react";
+import { useAuth, useClassrooms } from "../../hooks";
+import { Alert } from "../Alert";
 
 export const ModalProfile = () => {
-  const { setShowModalProfile } = useClassrooms();
+  const { setShowModalProfile, updateProfileName, alert } = useClassrooms();
+  const { auth } = useAuth();
+  const [name, setName] = useState(auth.name);
+
+
+  const handleSubmit = () => {
+    //setShowModalProfile(false);
+    updateProfileName(name);
+  };
 
   return (
     <>
@@ -11,7 +21,7 @@ export const ModalProfile = () => {
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-slate-100 outline-none focus:outline-none">
               
               {/*header*/}
-              <div className="flex items-start justify-between p-5 border-b border-solid border-slate-400 rounded-t">
+              <div className="flex items-start justify-between p-5 border-b border-solid border-slate-400 rounded-t bg-slate-900">
               <h3 className="text-2xl font-medium text-slate-400">
                   Perfil
               </h3>
@@ -24,19 +34,23 @@ export const ModalProfile = () => {
               
               {/*body*/}
               <div className="relative p-6 flex-auto">
-                  
+                <label className="uppercase text-slate-600 block text-sm font-semibold" htmlFor="email">Nombre</label>
+                <hr className='border border-slate-300 mb-3'/>
+                <input id="title" type="text" className="w-full p-2 border rounded bg-slate-50 text-slate-500 border-slate-300" name='title' value={ name } onChange={ (e) => setName(e.target.value) }/>
               </div>
 
               {/*footer*/}
               <div className="flex items-center justify-end p-6 border-t border-solid border-slate-400 rounded-b">
-              
-              <button
-                  className="bg-blue-700 text-slate-300 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                  type="button"
-                  onClick={() => setShowModalProfile(false)}
-              >
-                  OK
-              </button>
+                <div className="flex items-center justify-center">
+                    { alert.msg && (<Alert alert={ alert }/> )}
+                </div>
+                <button
+                    className="bg-blue-700 text-slate-100 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mb-1 mx-2"
+                    type="button"
+                    onClick={ handleSubmit }
+                >
+                    guardar
+                </button>
               </div>
           </div>
           </div>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { axiosClient, axiosClientFlask } from '../config/axiosClient';
 import { useAuth, useSocket } from '../hooks';
 import { scrollToBottom } from '../helpers/scrollToBottom';
-import { CleaningServices } from '@mui/icons-material';
+import { CleaningServices, Dashboard } from '@mui/icons-material';
 
 const ClassroomsContext = createContext();
 
@@ -348,7 +348,7 @@ export const ClassroomsProvider = ({ children }) => {
         }
     }
 
-    const updateImage = async(image) => {
+    const updateImage = async(img) => {
         try {
             const token = localStorage.getItem('token');
             if(!token) return;
@@ -358,9 +358,11 @@ export const ClassroomsProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             };
-            console.log(image);
-            const { data } = await axiosClient.put(`/images/${ image.id }`, image, config);
-            const updatedImages = images.map( imageState => imageState._id === data._id ? imageState.text = data.text : imageState );
+            const tempImage = image;
+            tempImage.text = img.text;
+            console.log(tempImage);
+            const { data } = await axiosClient.put(`/images/${ img.id }`, img, config);
+            const updatedImages = images.map( imageState => imageState._id === data._id ? tempImage : imageState );
             setImages(updatedImages);
             showAlert({ msg: "Texto actualizado correctamente", error: false })
         } catch (error) {
@@ -479,6 +481,23 @@ export const ClassroomsProvider = ({ children }) => {
         setIsActiveImage(true);
     }
 
+    const updateProfileName = async(name) => {
+        try {
+            const token = localStorage.getItem('token');
+            if(!token) return;
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            const { data } = await axiosClient.put(`/auth/update_profile/${ auth.id }`, { name }, config);
+            showAlert({ msg: data.msg + " - Actualice la página", error: false });
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
+
     return (
         <ClassroomsContext.Provider 
             value={{
@@ -545,6 +564,7 @@ export const ClassroomsProvider = ({ children }) => {
                 activity,
                 setActivity,
                 clearAppStates,
+                updateProfileName,
             }}
         >
             { children }

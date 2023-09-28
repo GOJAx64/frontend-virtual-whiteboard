@@ -52,9 +52,9 @@ export const OptionsBar = () => {
                 <img src={ Board } alt='Board' className='mx-auto mb-6 h-5'/>
               </Link>
             }
-            <Link to="/dashboard/calendar">
+            {/* <Link to="/dashboard/calendar">
               <img src={ Calendar } alt='Calendar' className='mx-auto mb-6 h-5'/>
-            </Link>
+            </Link> */}
             { isAdmin && 
               <Link to={`/dashboard/settings/${id}`}>
                 <img src={ Settings } alt='Settings' className='mx-auto mb-6 h-5'/>
