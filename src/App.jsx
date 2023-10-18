@@ -26,7 +26,7 @@ function App() {
                 <Route index                element={ <Dashboard />         } />
                 <Route path="settings/:id"  element={ <ClassroomSettings /> } />
                 <Route path="home/:id"      element={ <Summary />           } />
-                <Route path="tasks/:id"     element={ <Activities/>         } />
+                {/* <Route path="tasks/:id"     element={ <Activities/>         } /> */}
                 <Route path="chat/:id"      element={ <Chat />              } />
                 <Route path="notes/:id"     element={ <Images />            } />
                 <Route path="board/:id"     element={ <Board />             } />

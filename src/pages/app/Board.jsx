@@ -4,7 +4,7 @@ import getStroke from "perfect-freehand";
 import { useClassrooms } from "../../hooks";
 import { useParams } from "react-router-dom";
 import { useScreenshot } from "use-react-screenshot";
-import { Alert } from "../../components";
+import { Alert, OptionsBar } from "../../components";
 
 const generator = rough.generator();
 
@@ -454,77 +454,80 @@ export const Board = () => {
   }
 
   return (
-    <div>
-      <div style={{ position: "fixed", zIndex: 2 }} className="space-x-1 flex">
-        <input
-          type="radio"
-          id="selection"
-          className="ml-1"
-          checked={tool === "selection"}
-          onChange={() => setTool("selection")}
-        />
-        <label htmlFor="selection">Selección</label>
-        <input type="radio" id="line" checked={tool === "line"} onChange={() => setTool("line")} />
-        <label htmlFor="line">Línea</label>
-        <input
-          type="radio"
-          id="rectangle"
-          checked={tool === "rectangle"}
-          onChange={() => setTool("rectangle")}
-        />
-        <label htmlFor="rectangle">Rectángulo</label>
-        <input
-          type="radio"
-          id="pencil"
-          checked={tool === "pencil"}
-          onChange={() => setTool("pencil")}
-        />
-        <label htmlFor="pencil">Lápiz</label>
-        <input type="radio" id="text" checked={tool === "text"} onChange={() => setTool("text")} />
-        <label htmlFor="text">Texto</label>
-        { alert.msg && (
-            <div className="w-full">
-                <Alert alert={ alert }/>
-            </div>
-        )}
+    <div className="flex">
+      <div className="w-full">
+        <div style={{ position: "fixed", zIndex: 2 }} className="space-x-1 flex">
+          <input
+            type="radio"
+            id="selection"
+            className="ml-1"
+            checked={tool === "selection"}
+            onChange={() => setTool("selection")}
+          />
+          <label htmlFor="selection">Selección</label>
+          <input type="radio" id="line" checked={tool === "line"} onChange={() => setTool("line")} />
+          <label htmlFor="line">Línea</label>
+          <input
+            type="radio"
+            id="rectangle"
+            checked={tool === "rectangle"}
+            onChange={() => setTool("rectangle")}
+          />
+          <label htmlFor="rectangle">Rectángulo</label>
+          <input
+            type="radio"
+            id="pencil"
+            checked={tool === "pencil"}
+            onChange={() => setTool("pencil")}
+          />
+          <label htmlFor="pencil">Lápiz</label>
+          <input type="radio" id="text" checked={tool === "text"} onChange={() => setTool("text")} />
+          <label htmlFor="text">Texto</label>
+          { alert.msg && (
+              <div className="w-full">
+                  <Alert alert={ alert }/>
+              </div>
+          )}
+        </div>
+        <div style={{ position: "fixed", zIndex: 2, bottom: 0, padding: 10 }} className="space-x-2">
+          <button onClick={undo} className="bg-slate-200 rounded px-1 border border-slate-300">Deshacer</button>
+          <button onClick={redo} className="bg-slate-200 rounded px-1 border border-slate-300">Rehacer</button>
+          <button onClick={getImage} className="bg-slate-200 rounded px-1 border border-slate-300">Captura</button>
+        </div>
+        {action === "writing" ? (
+          <textarea
+            ref={textAreaRef}
+            onBlur={handleBlur}
+            style={{
+              position: "fixed",
+              top: selectedElement.y1 - 2 + panOffset.y,
+              left: selectedElement.x1 + panOffset.x,
+              font: "24px sans-serif",
+              margin: 0,
+              padding: 0,
+              border: 0,
+              outline: 0,
+              resize: "auto",
+              overflow: "hidden",
+              whiteSpace: "pre",
+              background: "transparent",
+              zIndex: 2,
+            }}
+          />
+        ) : null}
+        <canvas
+          id="canvas"
+          width={1380}
+          height={window.innerHeight}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          style={{ position: "absolute", zIndex: 1 }}
+          ref={ref}
+        >
+        </canvas>
       </div>
-      <div style={{ position: "fixed", zIndex: 2, bottom: 0, padding: 10 }} className="space-x-2">
-        <button onClick={undo} className="bg-slate-200 rounded px-1 border border-slate-300">Deshacer</button>
-        <button onClick={redo} className="bg-slate-200 rounded px-1 border border-slate-300">Rehacer</button>
-        <button onClick={getImage} className="bg-slate-200 rounded px-1 border border-slate-300">Captura</button>
-      </div>
-      {action === "writing" ? (
-        <textarea
-          ref={textAreaRef}
-          onBlur={handleBlur}
-          style={{
-            position: "fixed",
-            top: selectedElement.y1 - 2 + panOffset.y,
-            left: selectedElement.x1 + panOffset.x,
-            font: "24px sans-serif",
-            margin: 0,
-            padding: 0,
-            border: 0,
-            outline: 0,
-            resize: "auto",
-            overflow: "hidden",
-            whiteSpace: "pre",
-            background: "transparent",
-            zIndex: 2,
-          }}
-        />
-      ) : null}
-      <canvas
-        id="canvas"
-        width={1380}
-        height={window.innerHeight}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        style={{ position: "absolute", zIndex: 1 }}
-        ref={ref}
-      >
-      </canvas>
+      <OptionsBar/>
     </div>
   );
 };

@@ -22,6 +22,7 @@ module.exports = {
         activities_page: '88vh',
         standard_content: '83vh',
         image_list: '80vh',
+        options_bar: '92.5vh',
         'fit-content': 'fit-content(20em)',
       }
     },

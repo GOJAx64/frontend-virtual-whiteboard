@@ -24,11 +24,11 @@ export const AccordionElement = ({ activity }) => {
   }
 
   return (
-      <Accordion className='border border-slate-300 my-3' sx={{ boxShadow: 0}}>
+      <Accordion className='border border-slate-400 my-3' sx={{ boxShadow: 0}}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header" sx={{ bgcolor: 'rgb(241 245 249)' }}>
             <Box className='flex'>
               <Typography className='font-semibold text-sm  text-slate-500'>{ activity.title }</Typography>
-              <span className='mt-1 ml-3 text-xs text-slate-400'>{activity.dueDate.split('T')[0]}</span>
+              <span className='mt-1 ml-3 text-xs text-slate-500'>{activity.dueDate.split('T')[0]}</span>
             </Box>
           </AccordionSummary>
 

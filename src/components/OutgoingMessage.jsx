@@ -11,7 +11,7 @@ export const OutgoingMessage = ({ message }) => {
           { dateFormat(message.createdAt) }
         </p>
       </div>
-      <p className="bg-blue-200 border w-5/12  mr-3 my-1 p-1 rounded text-slate-600 border-softBlue shadow-sm items-end">
+      <p className="bg-blue-300 border w-5/12  mr-3 my-1 p-1 rounded text-slate-600 border-softBlue shadow-sm items-end">
         { message.message }
       </p>
     </div>

@@ -43,7 +43,7 @@ export const ImageInfo = () => {
                     <button onClick={ handleDelete } className="border border-slate-200 p-2 my-1 mx-2 text-softRed pointer text-sm font-semibold rounded hover:cursor-pointer hover:border-softRed"> 
                         Eliminar 
                     </button>
-                    <button onClick={ handleSubmit } className="bg-softBlue p-2 my-1 mx-2 text-white pointer text-sm  font-semibold rounded hover:cursor-pointer hover:bg-blue-800 transition-colors">
+                    <button onClick={ handleSubmit } className="bg-blue-600 p-2 my-1 mx-2 text-white pointer text-sm  font-semibold rounded hover:cursor-pointer hover:bg-blue-800 transition-colors">
                         Guardar
                     </button>
                     <button onClick={ handleSyncChars } className="bg-softRed p-2 my-1 mx-2 text-slate-50 pointer text-sm  font-semibold rounded hover:cursor-pointer hover:bg-red-500"> 

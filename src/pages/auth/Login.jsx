@@ -34,6 +34,7 @@ export const Login = () => {
         }
 
         try {
+            console.log('LLega al login');
             const { data } = await axiosClient.post('/auth/login', { email, password });
             setAlert({});
             localStorage.setItem('token', data.token);
@@ -49,9 +50,6 @@ export const Login = () => {
 
     return (
         <>
-            {/* <h1 className="text-veryDarkBlue font-black text-4xl mb-6 uppercase text-center">iniciar sesión
-                
-            </h1> */}
             <form className="bg-slate-100 border border-slate-100 shadow rounded-lg p-10" onSubmit={ handleSubmit } >
                 { alert.msg && <Alert alert={ alert }/>}
                 <div className="my-5">

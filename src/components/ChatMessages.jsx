@@ -43,8 +43,8 @@ export const ChatMessages = () => {
   };
 
   return (
-    <div className='h-chat ml-2 border border-slate-300 w-10/12 rounded-lg bg-slate-50'>
-      <p className='p-3 font-semibold bg-slate-100 text-slate-600 border-b rounded-t-lg  border-slate-300'>{ currentChat.name }</p>
+    <div className='h-chat ml-2 border border-slate-400 w-10/12 rounded-lg bg-slate-50'>
+      <p className='p-3 font-semibold bg-slate-800 text-slate-100 border-b rounded-t-lg  border-slate-300'>{ currentChat.name }</p>
       <div className='h-5/6 py-2 bg-white overflow-y-auto scrollbar-hide' id='messages'>
           {
               messages?.map( item => (
@@ -66,7 +66,7 @@ export const ChatMessages = () => {
               value={ message }
             />
             
-            <button className="w-1/12 p-1 mx-2 border rounded-lg bg-softBlue text-slate-50 uppercase text-xs font-semibold" type="submit">
+            <button className="w-1/12 p-1 mx-2 border rounded-lg bg-blue-600 text-slate-50 uppercase text-xs font-semibold" type="submit">
                 enviar
             </button>
           </div>

@@ -26,7 +26,7 @@ export const DashboardLayout = () => {
                         <main className=' bg-white border-slate-400 flex-1 rounded-xl '>
                             <Outlet /> 
                         </main>
-                        <OptionsBar />
+                        {/* <OptionsBar /> */}
                     </div>
                 </div>
             ) : <Navigate to='/login'/>}  

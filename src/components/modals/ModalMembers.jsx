@@ -41,7 +41,7 @@ export const ModalMembers = () => {
                         {/*header*/}
                         <div className="flex items-start justify-between p-5 border-b border-solid border-slate-400 rounded-t-lg bg-slate-900">
                             <h3 className="text-2xl font-medium text-slate-400">
-                                Administra los participantes en: { classroom.name }
+                                Administra los participantes en: <span className='text-blue-700'>{ classroom.name }</span>
                             </h3>
                             <button className="p-1 ml-auto border-0 text-black  float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={ handleCloseModal }>
                                 <span className=" text-slate-400 h-6 w-6 text-2xl block outline-none focus:outline-none font-mono hover:text-softRed">
