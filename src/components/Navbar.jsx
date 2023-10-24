@@ -13,7 +13,7 @@ export const Navbar = () => {
             
             <div className="flex items-center flex-shrink-0 mr-6">
                 <p className="uppercase text-grayishBlue text-lg md:text-xl tracking-widest ">
-                    Aulas <span className='text-softRed'>Virtuales</span>
+                    Aulas <span className='text-blue-700'>Virtuales</span>
                 </p>
             </div>
 

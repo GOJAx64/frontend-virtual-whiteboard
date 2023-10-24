@@ -6,6 +6,7 @@ export * from './OptionsBar';
 export * from './Card';
 export * from './Editor';
 export * from './Searcher';
+export * from './ShowInfoClassroom';
 
 // Activities
 export * from './CreateActivity';
@@ -30,5 +31,5 @@ export * from './ImageInfo';
 export * from './modals/ModalMembers';
 export * from './modals/ModalActivities';
 export * from './modals/ModalProfile';
-export * from './modals/ModalSymbols';
+export * from './modals/ModalInfoClassroom';
 export * from './modals/ModalUpdateActivity';

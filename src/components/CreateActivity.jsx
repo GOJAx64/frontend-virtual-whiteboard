@@ -8,7 +8,7 @@ export const CreateActivity = () => {
 
     return (
         <>
-            <button onClick={ () => setShowModalActivity(true) } className="mt-2 w-10 h-10 rounded-full bg-softRed hover:bg-red-400 text-white">
+            <button onClick={ () => setShowModalActivity(true) } className="ml-4 px-4 rounded bg-blue-700 hover:bg-softBlue text-white">
                 +
             </button>
             { showModalActivity && createPortal( <ModalActivities/>, document.body) }

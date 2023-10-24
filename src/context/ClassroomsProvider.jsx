@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { axiosClient, axiosClientFlask } from '../config/axiosClient';
 import { useAuth, useSocket } from '../hooks';
 import { scrollToBottom } from '../helpers/scrollToBottom';
-import { CleaningServices, Dashboard } from '@mui/icons-material';
 
 const ClassroomsContext = createContext();
 
@@ -15,7 +14,7 @@ export const ClassroomsProvider = ({ children }) => {
     const navigate = useNavigate();
     const [showModalActivity, setShowModalActivity] = useState(false);
     const [showModalUpdateActivity, setShowModalUpdateActivity] = useState(false);
-    const [showModalSymbols, setShowModalSymbols] = useState(false);
+    const [showModalInfoClassroom, setShowModalInfoClassroom] = useState(false);
     const [showModalProfile, setShowModalProfile] = useState(false);
     const [showModalMembers, setShowModalMembers] = useState(false);
     const [showModalImage, setShowModalImage] = useState(false);
@@ -382,30 +381,7 @@ export const ClassroomsProvider = ({ children }) => {
             };
 
             const { data } = await axiosClient.post(`/activities/${classroom.id}`, activity, config);
-            
-            if(activities.length === 0) {
-                setActivities([data]);
-            } else {
-                let activitiesTemp = [];
-                let i = 0
-
-                while(i < activities.length) {
-                    if(activities[i].dueDate > data.dueDate) {
-                        activitiesTemp.push(data);
-                        break;
-                    } else {
-                        activitiesTemp.push(activities[i]);
-                    }
-                    i++;
-                }
-                while(i < activities.length) {
-                    activitiesTemp.push(activities[i]);
-                    i++;
-                }
-
-                setActivities(activitiesTemp);
-                activitiesTemp = [];
-            }
+            saveNewactivityInState(data);
             
             setAlert({
                 msg: "Actividad creada correctamente",
@@ -419,6 +395,37 @@ export const ClassroomsProvider = ({ children }) => {
             console.log(error.response);
         }
     }
+
+    const saveNewactivityInState = (data) => {
+        let activityWasSaved = false;
+        let activitiesTemp = [];
+        let i = 0;
+
+        if(activities.length === 0) {
+            setActivities([data]);
+            activityWasSaved = true;
+        } else {
+            console.log(activitiesTemp)
+            while(i < activities.length) {
+                if(activities[i].dueDate > data.dueDate) {
+                    activitiesTemp.push(data);
+                    activityWasSaved = true;
+                    break;
+                } else {
+                    activitiesTemp.push(activities[i]);
+                }
+                i++;
+            }
+            while(i < activities.length) {
+                activitiesTemp.push(activities[i]);
+                i++;
+            }
+            if(!activityWasSaved) {
+                activitiesTemp.push(data);
+            }
+            setActivities(activitiesTemp);
+        }
+    };
 
     const getActivities = async() => {
         try {
@@ -530,14 +537,14 @@ export const ClassroomsProvider = ({ children }) => {
                 setAlert,
 
                 showModalActivity,
-                showModalSymbols,
+                showModalInfoClassroom,
                 showModalProfile,
                 showModalMembers,
                 showModalUpdateActivity,
                 showModalImage,
 
                 setShowModalActivity,
-                setShowModalSymbols,
+                setShowModalInfoClassroom,
                 setShowModalProfile,
                 setShowModalMembers,
                 setShowModalUpdateActivity,
