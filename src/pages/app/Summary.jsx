@@ -37,8 +37,6 @@ export const Summary = () => {
             <hr className='border border-slate-200 my-2'/>
             <div className="h-standard_content overflow-y-auto scrollbar-hide">
               <div className="mb-2 p-3 text-slate-500 text-sm">{ ReactHtmlParser(classroom.description) }</div>
-              {/* <hr className='border border-slate-200 mb-3'/>
-              <div className="text-slate-500 py-1 px-3 text-sm">{ ReactHtmlParser(classroom.summary) }</div> */}
               <Activities/>
             </div>
           </div>

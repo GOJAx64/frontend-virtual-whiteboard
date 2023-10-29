@@ -1,12 +1,13 @@
 import { useClassrooms } from "../../hooks";
+import ReactHtmlParser from 'react-html-parser';
 
 export const ModalInfoClassroom = () => {
-  const { setShowModalInfoClassroom } = useClassrooms();
+  const { setShowModalInfoClassroom, classroom } = useClassrooms();
   
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-          <div className="relative w-full md:w-5/12 m-6 max-w-3xl border border-slate-400 rounded-lg">
+          <div className="relative w-full md:w-10/12 m-6 max-w-5xl border border-slate-400 rounded-lg">
           {/*content*/}
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-slate-100 outline-none focus:outline-none">
               
@@ -24,7 +25,7 @@ export const ModalInfoClassroom = () => {
               
               {/*body*/}
               <div className="relative p-6 flex-auto">
-                  
+                <div className="text-slate-500 py-1 px-3 text-sm overflow-y-auto scrollbar-hide">{ ReactHtmlParser(classroom.summary) }</div> 
               </div>
 
               {/*footer*/}
