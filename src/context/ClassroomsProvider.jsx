@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axiosClient, axiosClientFlask } from '../config/axiosClient';
 import { useAuth, useSocket } from '../hooks';
@@ -22,7 +22,7 @@ export const ClassroomsProvider = ({ children }) => {
     const [members, setMembers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [memberships, setMemberships] = useState([]);
-    const { socket, online } = useSocket(import.meta.env.VITE_BACKEND_URL);
+    const { socket, online, conectarSocket, desconectarSocket } = useSocket(import.meta.env.VITE_BACKEND_URL);
     const [isActiveChat, setIsActiveChat] = useState(false);
     const [currentChat, setCurrentChat] = useState({});
     const [messages, setMessages] = useState([]);
@@ -32,6 +32,18 @@ export const ClassroomsProvider = ({ children }) => {
     const [image, setImage] = useState({})
     const [isActiveImage, setIsActiveImage] = useState(false)
     const [text, setText] = useState('');
+
+    useEffect(() => {
+        if ( auth.id ) {
+            conectarSocket();
+        }
+    }, [ auth, conectarSocket ]);
+
+    useEffect(() => {
+        if ( !auth.id ) {
+            desconectarSocket();
+        }
+    }, [ auth, desconectarSocket ]);
 
     const clearAppStates = () => {
         setClassrooms([]);
