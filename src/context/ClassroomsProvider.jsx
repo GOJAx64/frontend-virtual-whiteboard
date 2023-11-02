@@ -45,6 +45,19 @@ export const ClassroomsProvider = ({ children }) => {
         }
     }, [ auth, desconectarSocket ]);
 
+    useEffect(() => {
+        socket?.on( 'status-user', ({ id, status }) => {
+            const updatedMembers =  members.map( (memberState) => {
+                if(memberState.id === id) {
+                    memberState.online = status;
+                }
+                return memberState;
+            });
+            setMembers(updatedMembers);
+        })
+    }, [ socket, classroom ]);
+
+
     const clearAppStates = () => {
         setClassrooms([]);
         setClassroom({});
@@ -144,6 +157,7 @@ export const ClassroomsProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             };
+            
             const { data } = await axiosClient(`/classrooms/${id}`, config)
             if(classroom.id) {
                 socket.emit('leave-personal-chat', { classroomId: classroom.id, userId: auth.id });
@@ -153,7 +167,6 @@ export const ClassroomsProvider = ({ children }) => {
             setMembers(tempMembers);
             socket.emit('join-to-personal-chat', { classroomId: data.id, userId: auth.id });
         } catch (error) {
-            navigate('dashboard');
             showAlert({
                 msg: error.response.data.msg,
                 error: true

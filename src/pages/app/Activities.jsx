@@ -9,9 +9,9 @@ export const Activities = () => {
   const params = useParams();
   const { getActivities, classroom, activities, getClassroom } = useClassrooms();
   
-  useEffect(() => {
-    getClassroom(params.id)
-  }, [params.id]);
+  // useEffect(() => {
+  //   getClassroom(params.id)
+  // }, [params.id]);
 
   useEffect(() => {
     getActivities();
