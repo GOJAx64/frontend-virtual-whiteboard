@@ -34,7 +34,6 @@ export const Login = () => {
         }
 
         try {
-            console.log('LLega al login');
             const { data } = await axiosClient.post('/auth/login', { email, password });
             setAlert({});
             localStorage.setItem('token', data.token);

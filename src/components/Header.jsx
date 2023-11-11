@@ -3,7 +3,7 @@ import { useAuth, useClassrooms } from '../hooks';
 
 export const Header = () => {
     const { auth, logoutAuth } = useAuth();
-    const { clearAppStates } = useClassrooms();
+    const { clearAppStates, classroom } = useClassrooms();
     const [toggleMenu, setToggleMenu] = useState(true);
 
     const onClickButton = () => setToggleMenu(!toggleMenu);
@@ -18,8 +18,9 @@ export const Header = () => {
         <nav className="flex items-center justify-between flex-wrap bg-slate-900 mx-auto px-6 py-3 w-full  "> 
             <div className="flex items-center flex-shrink-0 mr-6">
                 <p className="uppercase text-slate-50 text-xl tracking-widest ">
-                    Aulas <span className='text-blue-600'>Virtuales</span>
+                    Aulas <span className='text-blue-600'>Virtuales </span>
                 </p>
+                {classroom.id && ( <p className='text-slate-300 ml-4 uppercase'>{ classroom.name }</p> )}
             </div>
             <div className="block lg:hidden">
                 <button onClick={ onClickButton } className="flex items-center px-3 py-2 border border-blue-500 rounded text-white hover:text-white hover:border-blue-500">

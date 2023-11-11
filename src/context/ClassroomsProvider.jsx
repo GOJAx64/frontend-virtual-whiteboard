@@ -32,6 +32,49 @@ export const ClassroomsProvider = ({ children }) => {
     const [image, setImage] = useState({})
     const [isActiveImage, setIsActiveImage] = useState(false)
     const [text, setText] = useState('');
+    const [searchValueMember, setSearchValueMember] = useState('');
+    const [searchValueClass, setSearchValueClass] = useState('');
+
+    let searchedMembers = [];
+    if(searchValueMember.length < 1) {
+        searchedMembers = members;
+    } else {
+        searchedMembers = members.filter( (memberState) => {
+            const memberStateText = memberState.name.toLowerCase();
+            const searchedMemberText = searchValueMember.toLowerCase();
+            return memberStateText.includes(searchedMemberText);
+        });
+    }
+
+    let searchedClasses = {};
+    let managedClasses = [];
+    let membershipClasses = [];
+
+    if(searchValueClass.length < 1) {
+        managedClasses = classrooms;
+        membershipClasses = memberships;
+        searchedClasses = {
+            managedClasses,
+            membershipClasses,
+        }
+    } else {
+        const searchedClassText = searchValueClass.toLowerCase();
+        managedClasses = classrooms.filter( (classroomState) => {
+            const classroomStateText = classroomState.name.toLowerCase();
+            return classroomStateText.includes(searchedClassText);
+        });
+
+        const searchedMembershipText = searchValueClass.toLowerCase();
+        membershipClasses = memberships.filter( (membershipState) => {
+            const membershipStateText = membershipState.name.toLowerCase();
+            return membershipStateText.includes(searchedMembershipText);
+        });
+
+        searchedClasses = {
+            managedClasses,
+            membershipClasses,
+        }
+    }
 
     useEffect(() => {
         if ( auth.id ) {
@@ -168,7 +211,7 @@ export const ClassroomsProvider = ({ children }) => {
             socket.emit('join-to-personal-chat', { classroomId: data.id, userId: auth.id });
         } catch (error) {
             showAlert({
-                msg: error.response.data.msg,
+                msg: error,
                 error: true
             });
         } finally {
@@ -194,7 +237,7 @@ export const ClassroomsProvider = ({ children }) => {
             const { data } = await axiosClient(`/images/${classroom.id}`, config);
             setImages(data);
         } catch (error) {
-            // console.log(error)
+            console.log(error.response);
             showAlert({ msg: error.response.data.msg, error: true });
         } 
     }
@@ -384,7 +427,6 @@ export const ClassroomsProvider = ({ children }) => {
             };
             const tempImage = image;
             tempImage.text = img.text;
-            console.log(tempImage);
             const { data } = await axiosClient.put(`/images/${ img.id }`, img, config);
             const updatedImages = images.map( imageState => imageState._id === data._id ? tempImage : imageState );
             setImages(updatedImages);
@@ -430,7 +472,6 @@ export const ClassroomsProvider = ({ children }) => {
             setActivities([data]);
             activityWasSaved = true;
         } else {
-            console.log(activitiesTemp)
             while(i < activities.length) {
                 if(activities[i].dueDate > data.dueDate) {
                     activitiesTemp.push(data);
@@ -553,6 +594,13 @@ export const ClassroomsProvider = ({ children }) => {
                 deleteMember,
                 members,
                 memberships,
+                
+                searchValueMember, 
+                setSearchValueMember,
+                searchedMembers,
+                searchValueClass, 
+                setSearchValueClass,
+                searchedClasses,
                 
                 submitMember,
                 alert,

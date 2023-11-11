@@ -3,8 +3,9 @@ import { Alert, Card, Header, OptionsBar, Searcher } from "../../components"
 import { useClassrooms } from "../../hooks";
 
 export const Dashboard = () => {
-  const { alert, getClassroomsFromUser, classrooms, memberships } = useClassrooms();
-  
+  const { alert, getClassroomsFromUser, searchedClasses } = useClassrooms();
+  const { managedClasses, membershipClasses } = searchedClasses;
+
   useEffect(() => {
     getClassroomsFromUser()
   }, [])
@@ -28,7 +29,7 @@ export const Dashboard = () => {
           <hr className='border border-slate-200'/>
           <div className='overflow-y-auto scrollbar-hide grid grid-cols-4 space-x-1'>
             {
-              classrooms.length > 0 ? classrooms.map( classroom => <Card key={ classroom.id } classroom={ classroom }/> ) 
+              managedClasses.length > 0 ? managedClasses.map( classroom => <Card key={ classroom.id } classroom={ classroom }/> ) 
                                     : <p className='text-slate-400 text-sm'>No administras ningun aula</p>
             }
           </div>
@@ -36,7 +37,7 @@ export const Dashboard = () => {
           <hr className='border border-slate-200'/>
           <div className='overflow-y-auto scrollbar-hide grid grid-cols-4 space-x-1'>
             {
-              memberships.length > 0 ? memberships.map( membership => <Card key={ membership.id } classroom={ membership }/> ) 
+              membershipClasses.length > 0 ? membershipClasses.map( membership => <Card key={ membership.id } classroom={ membership }/> ) 
                                     : <p className='text-slate-400 text-sm'>No participas en ningun aula</p>
             }
           </div>

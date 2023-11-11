@@ -3,7 +3,6 @@ import { useAuth, useClassrooms } from '../hooks';
 import { IncomingMessage } from './IncomingMessage';
 import { OutgoingMessage } from './OutgoingMessage';
 import { scrollToBottomAnimated } from '../helpers/scrollToBottom';
-import { Editor } from './Editor';
 
 export const ChatMessages = () => {
   const { currentChat, socket, classroom, messages, setMessages } = useClassrooms();
@@ -38,7 +37,6 @@ export const ChatMessages = () => {
       classroomId: classroom.id,
       message: message.trim()
     });
-
     setMessage('');
   };
 
@@ -56,7 +54,6 @@ export const ChatMessages = () => {
       <div >
         <hr className='border border-slate-200 mb-2'/>
         <form onSubmit={ onSubmit }>
-          {/* <Editor/> */}
           <div className="flex justify-end">
             <input 
               type="text" 
