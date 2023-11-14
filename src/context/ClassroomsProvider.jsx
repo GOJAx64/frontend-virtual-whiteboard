@@ -124,6 +124,7 @@ export const ClassroomsProvider = ({ children }) => {
             const { data } = await axiosClient('/classrooms', config);
             setClassrooms(data.classrooms);
             setMemberships(data.memberships);
+            console.log('change')
         } catch (error) {
             console.log(error.response);
         }
